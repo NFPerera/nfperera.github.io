@@ -33,6 +33,7 @@ function type() {
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
         typingSpeed = 500;
+    
     }
 
     setTimeout(type, typingSpeed);
