@@ -1,19 +1,13 @@
-// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        
-        targetSection.scrollIntoView({
-            behavior: 'smooth'
-        });
+        const targetSection = document.querySelector(this.getAttribute('href'));
+        targetSection.scrollIntoView({ behavior: 'smooth' });
     });
 });
 
-// Typing Effect for Hero Section
 const typingText = document.getElementById('typing-text');
-const phrases = ["Software & Gameplay Programmer", "Unity Developer", "System Architecture Enthusiast"];
+const phrases = ["Software Developer", "Gameplay Programmer", "Unity Expert"];
 let phraseIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -25,26 +19,25 @@ function type() {
     if (isDeleting) {
         typingText.innerText = currentPhrase.substring(0, charIndex - 1);
         charIndex--;
-        typingSpeed = 50; // Faster when deleting
+        typingSpeed = 50;
     } else {
         typingText.innerText = currentPhrase.substring(0, charIndex + 1);
         charIndex++;
-        typingSpeed = 100; // Normal typing speed
+        typingSpeed = 100;
     }
 
     if (!isDeleting && charIndex === currentPhrase.length) {
         isDeleting = true;
-        typingSpeed = 1500; // Pause at the end of phrase
+        typingSpeed = 2000; // Pause at end
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
-        typingSpeed = 500; // Pause before typing next phrase
+        typingSpeed = 500;
     }
 
     setTimeout(type, typingSpeed);
 }
 
-// Start typing effect when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(type, 1000);
+    if(typingText) setTimeout(type, 1000);
 });

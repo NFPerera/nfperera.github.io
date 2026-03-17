@@ -1,9 +1,9 @@
 :root {
-    --bg-color: #0d1117;
-    --text-color: #c9d1d9;
-    --accent-color: #58a6ff;
-    --card-bg: #161b22;
-    --border-color: #30363d;
+    --header-bg: #0B7FC2;
+    --main-bg: #EBA075;
+    --text-color: #1a1a1a;
+    --card-bg: rgba(255, 255, 255, 0.2);
+    --nav-bg: rgba(0, 0, 0, 0.8);
 }
 
 * {
@@ -14,152 +14,137 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: var(--main-bg);
     color: var(--text-color);
     line-height: 1.6;
 }
 
-/* Navbar */
+/* Navbar Horizontal */
 #navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(13, 17, 23, 0.9);
+    background: var(--nav-bg);
     padding: 1rem 0;
-    border-bottom: 1px solid var(--border-color);
     z-index: 1000;
 }
 
 #navbar ul {
     display: flex;
+    flex-direction: row; /* Horizontal */
     justify-content: center;
     list-style: none;
-    gap: 2rem;
+    width: 100%;
+    gap: 3rem;
 }
 
 #navbar a {
-    color: var(--text-color);
+    color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
 }
 
 #navbar a:hover {
-    color: var(--accent-color);
+    color: #ffd700;
 }
 
-/* Hero Section */
+/* Hero Section Centered with Blue Background */
 #hero {
-    height: 100vh;
+    height: 60vh;
+    background-color: var(--header-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 0 20px;
+    color: white;
+    padding-top: 60px;
 }
 
 #hero h1 {
-    font-size: 4rem;
-    color: #ffffff;
-    margin-bottom: 10px;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
 }
 
-#hero h2 {
-    color: var(--accent-color);
-    margin-bottom: 20px;
-    min-height: 35px; /* Keeps layout stable during typing effect */
+/* Fix for the layout jumping bug */
+.subtitle-container {
+    min-height: 2.5rem; /* Reserverd space for the typing text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
-/* Containers & Layout */
+#typing-text {
+    font-size: 1.8rem;
+    color: #ffd700;
+    font-weight: 400;
+}
+
+/* Content Sections */
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 80px 20px;
-    border-bottom: 1px solid var(--border-color);
+    padding: 60px 20px;
 }
 
 h2 {
-    font-size: 2rem;
-    color: #ffffff;
+    font-size: 2.2rem;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
-/* Experience */
-.job {
-    margin-bottom: 30px;
+.company a {
+    color: #004d7a;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-.job h3 {
-    color: var(--accent-color);
+.company a:hover {
+    text-decoration: underline;
 }
 
-.company {
-    font-style: italic;
-    color: #8b949e;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.job ul {
-    margin-left: 20px;
-}
-
-/* Projects */
+/* Project Cards */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
 .project-card {
     background-color: var(--card-bg);
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    transition: transform 0.3s, border-color 0.3s;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: transform 0.2s;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
-}
-
-.project-card h3 {
-    color: #ffffff;
-    margin-bottom: 10px;
-}
-
-/* Contact & Footer */
-#contact {
-    text-align: center;
-    border-bottom: none;
-}
-
-.social-links {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+    transform: scale(1.02);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .social-links a {
-    background-color: var(--accent-color);
-    color: #ffffff;
-    padding: 10px 20px;
+    display: inline-block;
+    background: #1a1a1a;
+    color: white;
+    padding: 10px 25px;
+    margin: 10px;
     text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    border-radius: 30px;
+    transition: opacity 0.3s;
 }
 
 .social-links a:hover {
-    background-color: #3182ce;
+    opacity: 0.8;
 }
 
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: var(--card-bg);
-    font-size: 0.9rem;
-    color: #8b949e;
+    padding: 40px;
+    background: rgba(0,0,0,0.05);
 }
