@@ -42,3 +42,25 @@ function type() {
 document.addEventListener('DOMContentLoaded', () => {
     if(typingText) setTimeout(type, 1000);
 });
+
+const emailBtn = document.getElementById('email-btn');
+const myEmail = "tu-email@ejemplo.com"; // REEMPLAZA ESTO CON TU EMAIL REAL
+
+if (emailBtn) {
+    emailBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(myEmail).then(() => {
+            // Feedback visual: cambia el texto del botón
+            const originalText = emailBtn.innerText;
+            emailBtn.innerText = "Copied!";
+            emailBtn.style.backgroundColor = "#2ea44f"; // Cambia a verde éxito
+
+            // Revierte el cambio después de 2 segundos
+            setTimeout(() => {
+                emailBtn.innerText = originalText;
+                emailBtn.style.backgroundColor = ""; // Vuelve al color original del CSS
+            }, 2000);
+        }).catch(err => {
+            console.error('Error copying email: ', err);
+        });
+    });
+}
