@@ -1,0 +1,165 @@
+:root {
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --accent-color: #58a6ff;
+    --card-bg: #161b22;
+    --border-color: #30363d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Navbar */
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(13, 17, 23, 0.9);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+#navbar ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 2rem;
+}
+
+#navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+#navbar a:hover {
+    color: var(--accent-color);
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+#hero h1 {
+    font-size: 4rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+#hero h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    min-height: 35px; /* Keeps layout stable during typing effect */
+}
+
+/* Containers & Layout */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Experience */
+.job {
+    margin-bottom: 30px;
+}
+
+.job h3 {
+    color: var(--accent-color);
+}
+
+.company {
+    font-style: italic;
+    color: #8b949e;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.job ul {
+    margin-left: 20px;
+}
+
+/* Projects */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.project-card h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+/* Contact & Footer */
+#contact {
+    text-align: center;
+    border-bottom: none;
+}
+
+.social-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.social-links a:hover {
+    background-color: #3182ce;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--card-bg);
+    font-size: 0.9rem;
+    color: #8b949e;
+}
