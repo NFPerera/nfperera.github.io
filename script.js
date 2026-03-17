@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const emailBtn = document.getElementById('email-btn');
-const myEmail = "tu-email@ejemplo.com"; // REEMPLAZA ESTO CON TU EMAIL REAL
+const myEmail = "nfperera02@gmail.com";
 
 if (emailBtn) {
     emailBtn.addEventListener('click', () => {
