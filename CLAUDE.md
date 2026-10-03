@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a static single-page personal portfolio site for Nicolás Fernández Perera (NFPerera / Monarch Wing Studios), deployed via GitHub Pages at `MonarchWingStudios.github.io`. There is no build system, package manager, or framework — just three files served directly:
 
-- [index.html](index.html) — all page content and structure, organized as sections (`#hero`, `#about`, `#experience`, `#projects`, `#contact`) inside `<main id="main-content">`
-- [style.css](style.css) — all styling, theme colors defined as CSS custom properties in `:root` (`--header-bg`, `--main-bg`, `--text-color`, `--card-bg`, `--nav-bg`)
-- [script.js](script.js) — all behavior: smooth-scroll for in-page nav links, a typewriter effect cycling through role titles in `#typing-text`, and a click-to-copy handler on the email link (`#email-btn`)
+- [index.html](index.html) — all page content and structure, `#hero` followed by sections (`#about`, `#skills`, `#experience`, `#projects`, `#contact`) inside `<main id="main-content">`. Project cards carry `data-category` (`game` / `tool` / `ai`) matching the filter buttons' `data-filter`
+- [style.css](style.css) — all styling, theme colors defined as CSS custom properties in `:root` (`--bg`, `--bg-alt`, `--card-bg`, `--border`, `--text-color`, `--text-muted`, `--accent-*`). Cards pick their accent via `.accent-blue` / `.accent-green` / `.accent-terracotta`, which set `--accent`
+- [script.js](script.js) — all behavior: mobile nav toggle, typewriter effect in `#typing-text`, project filtering, IntersectionObserver scroll-reveal (`.reveal`) and nav highlighting, and click-to-copy on `#email-btn`. Smooth scrolling is pure CSS (`scroll-behavior`)
 
 ## Development
 
@@ -17,7 +17,7 @@ There is no build, lint, or test tooling. Open [index.html](index.html) directly
 ## Working conventions
 
 - Keep everything in the three existing files (`index.html`, `style.css`, `script.js`) rather than introducing a build step, bundler, or framework — this site is intentionally dependency-free.
-- New sections should follow the existing pattern: a `<section id="...">` with class `container` inside `#main-content`, linked from the `#navbar` list.
+- New sections should follow the existing pattern: a `<section id="...">` with class `container` inside `#main-content`, linked from the `#nav-links` list. Add class `reveal` to fade it in on scroll.
 - Theme colors should be changed via the CSS custom properties in `style.css`'s `:root` block, not hardcoded inline.
 - `script.js` attaches all behavior via `document.addEventListener('DOMContentLoaded', ...)` / direct `querySelector` calls at the bottom of the file — no modules or imports are used.
 

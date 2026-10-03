@@ -3,101 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFPerera</title>
+    <title>NFPerera · Game & Software Developer</title>
+    <meta name="description" content="Nicolás Fernández Perera — game and software developer building gameplay systems, editor tools, AI experiments and scalable software.">
+    <meta name="theme-color" content="#14181a">
     <link rel="icon" type="image/png" href="MonarchWingStudiosImage.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav id="navbar">
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <header id="hero">
-        <div class="hero-content">
-            <h1>NFPerera</h1>
-            <div class="subtitle-container">
-                <h2 id="typing-text"></h2>
-            </div>
-            <h2>Nicolás Fernández Perera</h2>
-            <p>Crafting robust system architectures, custom tools, and engaging gameplay mechanics.</p>
-        </div>
+    <header id="site-header">
+        <nav id="navbar" class="nav-inner" aria-label="Main">
+            <a href="#hero" class="brand">
+                <img src="MonarchWingStudiosImage.png" alt="" width="32" height="32">
+                <span>NFPerera</span>
+            </a>
+            <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact" class="nav-cta">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main id="main-content">
-        <section id="about" class="container">
-            <h2>About Me</h2>
-            <p>I am a Software and Video Game Developer. My core focus is on system architecture, object-oriented programming, editor tool development, and creating scalable, maintainable code.</p>
-            <p><strong>Core Tech Stack:</strong> C#, C++, Python, .NET, Unity, Unreal Engine</p>
-            <p><strong>Version Control:</strong> Advanced Git (LFS, submodules, subtrees)</p>
-        </section>
+    <section id="hero">
+        <div class="hero-content">
+            <p class="eyebrow">Hi, I'm</p>
+            <h1>Nicolás Fernández Perera</h1>
+            <p class="hero-role"><span class="prompt">&gt;</span> <span id="typing-text">Software Developer</span><span class="caret" aria-hidden="true"></span></p>
+            <p class="hero-tagline">I build gameplay systems, editor tools, AI experiments and the architecture that holds them together. Games are where I started, but I care about good software everywhere.</p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">See my work</a>
+                <a href="#contact" class="btn btn-ghost">Get in touch</a>
+            </div>
+        </div>
+    </section>
 
-        <section id="experience" class="container">
-            <h2>Experience</h2>
-            <div class="job">
-                <h3>Unity Developer</h3>
-                <span class="company">
-                    <a href="https://fernobite.com/" target="_blank">Fernobite</a> | Oct 2024 - Present
-                </span>
-                <ul>
-                    <li>Integration of core gameplay features for <strong>online and offline</strong> games.</li>
-                    <li>Development of <strong>internal optimization tools</strong> for the Unity Editor.</li>
+    <main id="main-content">
+        <section id="about" class="container reveal">
+            <h2 class="section-title"><span>01.</span> About Me</h2>
+            <div class="about-grid">
+                <div>
+                    <p>I'm a software and video game developer focused on <strong>system architecture</strong>, <strong>object-oriented design</strong> and <strong>tooling</strong>. I like code that is scalable, maintainable, and pleasant for the next person to work in.</p>
+                    <p>Most of my day-to-day happens in Unity and C#, but I'm curious about the whole stack: engines and gameplay, editor and developer tools, AI and machine learning, and general-purpose software. If it's an interesting problem, I want to build it.</p>
+                </div>
+                <ul class="interest-list">
+                    <li class="accent-blue"><strong>Gameplay</strong><span>Mechanics, feel, online &amp; offline features</span></li>
+                    <li class="accent-green"><strong>Tools</strong><span>Editor extensions that speed teams up</span></li>
+                    <li class="accent-terracotta"><strong>AI</strong><span>Perception, agents and neural networks</span></li>
+                    <li class="accent-blue"><strong>Architecture</strong><span>Clean, modular, extensible systems</span></li>
                 </ul>
             </div>
-    
         </section>
 
-        <section id="projects" class="container">
-            <h2>Featured Projects</h2>
-            <div class="project-grid">
-                <div class="project-card accent-blue">
-                    <h3>Visual FSM Editor</h3>
-                    <p>A custom <strong>Finite State Machine tool</strong> for Unity. Includes real-time node-based editing, bezier curve rendering, and optimized state connections.</p>
+        <section id="skills" class="container reveal">
+            <h2 class="section-title"><span>02.</span> Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h3>Languages</h3>
+                    <ul class="tags"><li>C#</li><li>C++</li><li>Python</li></ul>
                 </div>
-                <div class="project-card accent-green">
-                    <h3>Wizard's Nightmare</h3>
-                    <p>Roguelike game we made as our final year project. You can play it for free on <a href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank">itch.io</a>!</p>
+                <div class="skill-group">
+                    <h3>Engines &amp; Frameworks</h3>
+                    <ul class="tags"><li>Unity</li><li>Unreal Engine</li><li>.NET</li></ul>
                 </div>
-                <div class="project-card accent-terracotta">
-                    <h3>Monarch Wing Studios</h3>
-                    <p>Independent development and publication of scalable game assets and custom Editor tools for the Unity Asset Store.</p>
+                <div class="skill-group">
+                    <h3>Version Control</h3>
+                    <ul class="tags"><li>Git</li><li>Git LFS</li><li>Submodules</li><li>Subtrees</li></ul>
                 </div>
-                <div class="project-card accent-green">
-                    <h3>RealShooter</h3>
-                    <p>A realistic FPS mechanics framework for Unity: modular weapon systems, ballistics and recoil, and hit-detection built for extensibility across projects.</p>
-                </div>
-                <div class="project-card accent-blue">
-                    <h3>Perception Toolkit</h3>
-                    <p>A sensory perception system for AI agents &mdash; configurable sight and hearing detection used to drive stealth, alert, and combat behaviors.</p>
-                </div>
-                <div class="project-card accent-terracotta">
-                    <h3>Neuronal AI Plane</h3>
-                    <p>A neural-network-driven flight agent that learns to pilot a plane through reinforcement, exploring evolving AI decision-making in a physics-based environment.</p>
-                </div>
-                <div class="project-card accent-green">
-                    <h3>Scriptable Object Factory</h3>
-                    <p>A Unity Editor tool that streamlines creating, organizing, and managing ScriptableObject assets through a factory-driven, data-oriented workflow.</p>
+                <div class="skill-group">
+                    <h3>Focus Areas</h3>
+                    <ul class="tags"><li>System architecture</li><li>OOP</li><li>Editor tooling</li><li>Game AI</li><li>Optimization</li></ul>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="container">
-            <h2>Let's Connect</h2>
-            <p>Currently seeking Gameplay Programmer opportunities.</p>
-            <div class="social-links">
-                <a href="https://github.com/NFPerera" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/nfperera/" target="_blank">LinkedIn</a>
-                <a href="javascript:void(0)" id="email-btn">nfperera02@gmail.com</a>
+        <section id="experience" class="container reveal">
+            <h2 class="section-title"><span>03.</span> Experience</h2>
+            <ol class="timeline">
+                <li class="job">
+                    <div class="job-header">
+                        <h3>Unity Developer · <a href="https://fernobite.com/" target="_blank" rel="noopener">Fernobite</a></h3>
+                        <span class="job-date">Oct 2024 – Present</span>
+                    </div>
+                    <ul>
+                        <li>Integrate core gameplay features for <strong>online and offline</strong> games.</li>
+                        <li>Develop <strong>internal optimization tools</strong> for the Unity Editor.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <section id="projects" class="container reveal">
+            <h2 class="section-title"><span>04.</span> Projects</h2>
+            <div class="filters" role="group" aria-label="Filter projects">
+                <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+                <button class="filter" data-filter="game" aria-pressed="false">Games</button>
+                <button class="filter" data-filter="tool" aria-pressed="false">Tools</button>
+                <button class="filter" data-filter="ai" aria-pressed="false">AI</button>
+            </div>
+            <div class="project-grid">
+                <article class="project-card accent-green" data-category="game">
+                    <p class="project-kind">Game</p>
+                    <h3>Wizard's Nightmare</h3>
+                    <p>A roguelike made as our final-year project. Free to play in the browser.</p>
+                    <a class="project-link" href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">Play on itch.io →</a>
+                </article>
+                <article class="project-card accent-blue" data-category="tool">
+                    <p class="project-kind">Editor Tool</p>
+                    <h3>Visual FSM Editor</h3>
+                    <p>A custom finite state machine tool for Unity with real-time node-based editing, bezier curve rendering and optimized state connections.</p>
+                    <ul class="tags small"><li>Unity</li><li>C#</li><li>Editor</li></ul>
+                </article>
+                <article class="project-card accent-terracotta" data-category="tool">
+                    <p class="project-kind">Studio</p>
+                    <h3>Monarch Wing Studios</h3>
+                    <p>My independent label for developing and publishing scalable game assets and custom editor tools for the Unity Asset Store.</p>
+                    <ul class="tags small"><li>Asset Store</li><li>Tools</li></ul>
+                </article>
+                <article class="project-card accent-green" data-category="game">
+                    <p class="project-kind">Framework</p>
+                    <h3>RealShooter</h3>
+                    <p>A realistic FPS mechanics framework for Unity: modular weapon systems, ballistics and recoil, and hit detection built to be reused across projects.</p>
+                    <ul class="tags small"><li>Gameplay</li><li>Physics</li></ul>
+                </article>
+                <article class="project-card accent-blue" data-category="ai">
+                    <p class="project-kind">Game AI</p>
+                    <h3>Perception Toolkit</h3>
+                    <p>A sensory perception system for AI agents. Configurable sight and hearing detection drives stealth, alert and combat behaviors.</p>
+                    <ul class="tags small"><li>AI</li><li>Systems</li></ul>
+                </article>
+                <article class="project-card accent-terracotta" data-category="ai">
+                    <p class="project-kind">Machine Learning</p>
+                    <h3>Neuronal AI Plane</h3>
+                    <p>A neural-network flight agent that learns to pilot a plane through reinforcement, exploring evolving decision-making in a physics-based environment.</p>
+                    <ul class="tags small"><li>Neural nets</li><li>RL</li></ul>
+                </article>
+                <article class="project-card accent-green" data-category="tool">
+                    <p class="project-kind">Editor Tool</p>
+                    <h3>Scriptable Object Factory</h3>
+                    <p>A Unity Editor tool that streamlines creating, organizing and managing ScriptableObject assets through a factory-driven, data-oriented workflow.</p>
+                    <ul class="tags small"><li>Unity</li><li>Data-oriented</li></ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact" class="container reveal">
+            <h2 class="section-title"><span>05.</span> Let's Connect</h2>
+            <div class="contact-card">
+                <p>I'm open to gameplay, tools and software engineering opportunities. Whether it's a role, a collaboration or just a chat about tech, my inbox is open.</p>
+                <button type="button" id="email-btn" class="btn btn-primary" data-email="nfperera02@gmail.com">nfperera02@gmail.com</button>
+                <p class="hint" aria-live="polite" id="email-status">Click to copy</p>
+                <div class="social-links">
+                    <a href="https://github.com/NFPerera" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/nfperera/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:nfperera02@gmail.com">Email</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 NFPerera. All rights reserved.</p>
+        <p>&copy; <span id="year">2026</span> Nicolás Fernández Perera · Monarch Wing Studios</p>
     </footer>
 
     <script src="script.js"></script>
