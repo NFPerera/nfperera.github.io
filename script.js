@@ -1,96 +1,66 @@
-document.documentElement.classList.add('js');
-
-// Mobile nav toggle
-const navToggle = document.getElementById('nav-toggle');
-const navLinks = document.getElementById('nav-links');
-
-navToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('is-open');
-    navToggle.setAttribute('aria-expanded', open);
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetSection = document.querySelector(this.getAttribute('href'));
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+    });
 });
 
-navLinks.addEventListener('click', e => {
-    if (e.target.closest('a')) {
-        navLinks.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-    }
-});
-
-// Typewriter effect
 const typingText = document.getElementById('typing-text');
-const phrases = ["Software Developer", "Gameplay Programmer", "Tools Engineer", "AI Tinkerer", "Systems Architect"];
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phrases = ["Software Developer", "Gameplay Programmer", "Unity Expert"];
 let phraseIndex = 0;
-let charIndex = phrases[0].length;
-let isDeleting = true;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
 
 function type() {
     const currentPhrase = phrases[phraseIndex];
-    charIndex += isDeleting ? -1 : 1;
-    typingText.textContent = currentPhrase.substring(0, charIndex);
+    
+    if (isDeleting) {
+        typingText.innerText = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+    } else {
+        typingText.innerText = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+    }
 
-    let delay = isDeleting ? 50 : 100;
     if (!isDeleting && charIndex === currentPhrase.length) {
         isDeleting = true;
-        delay = 2000; // Pause at end
+        typingSpeed = 2000; // Pause at end
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
-        delay = 500;
+        typingSpeed = 500;
+    
     }
-    setTimeout(type, delay);
+
+    setTimeout(type, typingSpeed);
 }
 
-if (!reducedMotion) setTimeout(type, 2000);
-
-// Project filters
-const filters = document.querySelectorAll('.filter');
-const cards = document.querySelectorAll('.project-card');
-
-filters.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        filters.forEach(b => {
-            b.classList.toggle('is-active', b === btn);
-            b.setAttribute('aria-pressed', b === btn);
-        });
-        cards.forEach(card => {
-            card.hidden = filter !== 'all' && card.dataset.category !== filter;
-        });
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    if(typingText) setTimeout(type, 1000);
 });
 
-// Scroll reveal + current-section highlight in nav
-const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-const navAnchors = navLinks.querySelectorAll('a');
-const navObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        navAnchors.forEach(a => a.classList.toggle('is-current', a.getAttribute('href') === '#' + entry.target.id));
-    });
-}, { rootMargin: '-45% 0px -50% 0px' });
-document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s));
-
-// Click-to-copy email
 const emailBtn = document.getElementById('email-btn');
-const emailStatus = document.getElementById('email-status');
+const myEmail = "nfperera02@gmail.com";
 
-emailBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(emailBtn.dataset.email).then(() => {
-        emailStatus.textContent = 'Copied to clipboard!';
-    }).catch(() => {
-        window.location.href = 'mailto:' + emailBtn.dataset.email;
+if (emailBtn) {
+    emailBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(myEmail).then(() => {
+            // Feedback visual: cambia el texto del botón
+            const originalText = emailBtn.innerText;
+            emailBtn.innerText = "Copied!";
+            emailBtn.style.backgroundColor = "#2ea44f"; // Cambia a verde éxito
+
+            // Revierte el cambio después de 2 segundos
+            setTimeout(() => {
+                emailBtn.innerText = originalText;
+                emailBtn.style.backgroundColor = ""; // Vuelve al color original del CSS
+            }, 2000);
+        }).catch(err => {
+            console.error('Error copying email: ', err);
+        });
     });
-    setTimeout(() => { emailStatus.textContent = 'Click to copy'; }, 2000);
-});
-
-document.getElementById('year').textContent = new Date().getFullYear();
+}
