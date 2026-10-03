@@ -34,10 +34,11 @@ Object.entries(folders).forEach(([category, label]) => {
 
 const assetGrid = document.getElementById('asset-grid');
 projects.forEach((p, i) => {
+    const icon = p.querySelector('template.asset-icon');
     const initials = p.dataset.title.split(' ').map(w => w[0]).join('').slice(0, 2);
     assetGrid.insertAdjacentHTML('beforeend',
         `<a class="asset ${accentOf(p)}" href="#/${p.dataset.route}">
-            <span class="asset-icon">${initials}</span>
+            <span class="asset-icon">${icon ? icon.innerHTML : initials}</span>
             <span class="asset-name">${p.dataset.title}</span>
             <span class="asset-kind">${p.dataset.kind}</span>
         </a>`);

@@ -129,9 +129,15 @@
                 Gallery: replace a .slot with <img src="..." alt="...">
                 The <template class="inspector"> fills the Inspector panel when the project is open.
                 Code inside <pre><code> must be HTML-escaped (&lt; &gt; &amp;).
+                <template class="asset-icon"> holds the home-grid icon (100x100 line-art SVG); initials are used if absent.
             -->
 
             <article class="view project accent-blue" data-route="projects/visual-fsm-editor" data-title="Visual FSM Editor" data-kind="Editor Tool" data-category="tool" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="fill" x="6" y="41" width="28" height="16" rx="4"/>
+<rect x="64" y="14" width="30" height="16" rx="4"/>
+<rect x="64" y="70" width="30" height="16" rx="4"/>
+<path d="M34 49 C50 49 46 22 62 22"/><path d="M34 49 C50 49 46 78 62 78"/><path class="muted" d="M79 68 V34"/>
+<path d="M57 18 L62 22 L57 26"/><path d="M57 74 L62 78 L57 82"/><path class="muted" d="M75 38 L79 32 L83 38"/></svg></template>
                 <header class="banner">
                     <p class="banner-kind">Editor Tool · Unity Asset Store</p>
                     <h1>Visual FSM Graph Editor</h1>
@@ -230,6 +236,10 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
             </article>
 
             <article class="view project accent-green" data-route="projects/perception-toolkit" data-title="Perception Toolkit" data-kind="Game AI" data-category="ai" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="muted dash" cx="46" cy="54" r="30"/>
+<path class="fill soft" d="M46 54 L84 32 A44 44 0 0 1 84 76 Z"/>
+<circle cx="46" cy="54" r="11"/><circle class="fill" cx="46" cy="54" r="5"/>
+<circle class="fill muted" cx="18" cy="24" r="4"/></svg></template>
                 <header class="banner">
                     <p class="banner-kind">Game AI · Unity 6</p>
                     <h1>Perception Toolkit</h1>
@@ -323,6 +333,11 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
             </article>
 
             <article class="view project accent-terracotta" data-route="projects/realshooter" data-title="RealShooter" data-kind="Ballistics Sim" data-category="sim" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="muted dash" d="M8 40 H92"/>
+<path class="soft dash" d="M8 40 Q60 38 90 26"/>
+<path d="M8 44 Q48 30 88 76"/>
+<circle class="fill" cx="27" cy="40" r="3.5"/>
+<circle class="muted" cx="88" cy="76" r="9"/><circle class="muted" cx="88" cy="76" r="3"/></svg></template>
                 <header class="banner">
                     <p class="banner-kind">Simulation · Unity 6</p>
                     <h1>RealShooter</h1>
@@ -422,6 +437,10 @@ CheckImpact(projectile, stepStartPosition, projectile.Position);</code></pre>
             </article>
 
             <article class="view project accent-blue" data-route="projects/neuronal-ai-plane" data-title="Neuronal AI Plane" data-kind="Neuroevolution" data-category="ai" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="fill muted" d="M38 6 h10 v26 h-10z M38 62 h10 v32 h-10z M68 6 h10 v46 h-10z M68 80 h10 v14 h-10z"/>
+<path class="dash soft" d="M8 58 C26 58 30 47 43 47 S60 66 73 66 L86 60"/>
+<polygon class="fill" points="0,0 -9,-5 -6,0 -9,5" transform="translate(90 58) rotate(-22) scale(1.7)"/>
+<g class="soft"><polygon class="fill" points="0,0 -9,-5 -6,0 -9,5" transform="translate(33 26) rotate(-40) scale(1.7)"/><polygon class="fill" points="0,0 -9,-5 -6,0 -9,5" transform="translate(33 78) rotate(35) scale(1.7)"/></g></svg></template>
                 <header class="banner">
                     <p class="banner-kind">Machine Learning · Unity 6</p>
                     <h1>Neuronal AI Plane</h1>
@@ -501,6 +520,9 @@ public static List&lt;NeuralNetwork&gt; Evolve(List&lt;PlaneGenome&gt; genomes, 
             </article>
 
             <article class="view project accent-green" data-route="projects/wizards-nightmare" data-title="Wizard's Nightmare" data-kind="Game" data-category="game" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><g class="muted"><rect x="8" y="58" width="28" height="28" rx="3"/><rect x="40" y="58" width="28" height="28" rx="3"/><rect x="40" y="24" width="28" height="28" rx="3"/><rect x="72" y="24" width="22" height="28" rx="3"/></g>
+<path class="dash" d="M58 34 L48 64 L22 74"/>
+<circle class="fill enemy" cx="58" cy="34" r="5"/><circle class="fill" cx="22" cy="74" r="5"/></svg></template>
                 <header class="banner">
                     <p class="banner-kind">Game · Roguelike · Team project</p>
                     <h1>Wizard's Nightmare</h1>
@@ -571,6 +593,12 @@ private static IGameService Get(Type p_type)
             </article>
 
             <article class="view project accent-terracotta" data-route="projects/scriptable-object-factory" data-title="Scriptable Object Factory" data-kind="Editor Tool" data-category="tool" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="muted" x="8" y="12" width="84" height="72" rx="6"/><path class="muted" d="M8 26 H92"/>
+<rect class="fill soft" x="14" y="44" width="72" height="13" rx="3"/>
+<rect class="fill" x="18" y="34" width="7" height="7" rx="1.5"/><path class="muted" d="M31 37.5 H66"/>
+<rect class="fill" x="18" y="47" width="7" height="7" rx="1.5"/><path d="M31 50.5 H70"/>
+<rect class="fill" x="18" y="60" width="7" height="7" rx="1.5"/><path class="muted" d="M31 63.5 H60"/>
+<circle class="fill" cx="80" cy="76" r="10"/><path class="plus" d="M80 71 V81 M75 76 H85"/></svg></template>
                 <header class="banner">
                     <p class="banner-kind">Editor Tool · Unity 6</p>
                     <h1>SO Factory</h1>
@@ -646,7 +674,7 @@ public static string ToProjectRelativePath(string p_absoluteFolderPath)
                 <dl class="fields"><dt>Name</dt><dd>Nicolás Fernández Perera</dd><dt>Alias</dt><dd>NFPerera</dd><dt>Role</dt><dd>Unity Developer</dd><dt>Company</dt><dd>Fernobite</dd></dl>
             </details>
             <details class="component" open><summary>Now (Script)</summary>
-                <dl class="fields"><dt>Working on</dt><dd>Gameplay &amp; editor tools</dd><dt>Playing</dt><dd class="none">Metal Gear Solid, complete saga</dd><dt>Learning</dt><dd class="none"> Automatizations, Chat Bots and Agro Culture</dd></dl>
+                <dl class="fields"><dt>Working on</dt><dd>Gameplay &amp; editor tools</dd><dt>Playing</dt><dd>Metal Gear Solid, complete saga</dd><dt>Learning</dt><dd>Automations, chatbots and agriculture</dd></dl>
             </details>
         </template>
     </aside>
