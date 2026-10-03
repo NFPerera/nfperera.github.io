@@ -3,102 +3,480 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFPerera</title>
+    <title>NFPerera · Game & Software Developer</title>
+    <meta name="description" content="Nicolás Fernández Perera — game and software developer. Gameplay systems, editor tools, game AI and software architecture.">
     <link rel="icon" type="image/png" href="MonarchWingStudiosImage.png">
     <link rel="stylesheet" href="style.css">
+    <!-- Apply saved day/night theme before first paint to avoid a flash -->
+    <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body>
-    <nav id="navbar">
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <header id="hero">
-        <div class="hero-content">
-            <h1>NFPerera</h1>
-            <div class="subtitle-container">
-                <h2 id="typing-text"></h2>
-            </div>
-            <h2>Nicolás Fernández Perera</h2>
-            <p>Crafting robust system architectures, custom tools, and engaging gameplay mechanics.</p>
+    <header class="toolbar">
+        <div class="toolbar-left">
+            <button id="hier-toggle" class="icon-btn mobile-only" aria-label="Open hierarchy" aria-expanded="false" aria-controls="hierarchy">☰</button>
+            <a href="#/" class="brand">
+                <img src="MonarchWingStudiosImage.png" alt="" width="26" height="26">
+                <span>NFPerera</span><small>Editor</small>
+            </a>
+        </div>
+        <button id="play-btn" class="icon-btn play-btn" aria-pressed="false" title="Play">▶</button>
+        <div class="toolbar-right">
+            <button id="theme-toggle" class="tool-btn" aria-label="Toggle day/night theme"></button>
         </div>
     </header>
 
-    <main id="main-content">
-        <section id="about" class="container">
-            <h2>About Me</h2>
-            <p>I am a Software and Video Game Developer. My core focus is on system architecture, object-oriented programming, editor tool development, and creating scalable, maintainable code.</p>
-            <p><strong>Core Tech Stack:</strong> C#, C++, Python, .NET, Unity, Unreal Engine</p>
-            <p><strong>Version Control:</strong> Advanced Git (LFS, submodules, subtrees)</p>
-        </section>
+    <!-- HIERARCHY: section links are static, project links are generated from the project articles -->
+    <nav id="hierarchy" class="panel" aria-label="Hierarchy">
+        <div class="panel-tabs"><span class="tab">Hierarchy</span></div>
+        <div class="panel-body">
+            <ul class="tree">
+                <li>
+                    <details open>
+                        <summary class="tree-root">NFPerera</summary>
+                        <ul>
+                            <li><a href="#/" class="item-home">Home</a></li>
+                            <li><a href="#/about" class="item-about">About</a></li>
+                            <li><a href="#/experience" class="item-experience">Experience</a></li>
+                            <li>
+                                <details open>
+                                    <summary>Projects</summary>
+                                    <ul id="tree-projects"></ul>
+                                </details>
+                            </li>
+                            <li><a href="#/contact" class="item-contact">Contact</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-        <section id="experience" class="container">
-            <h2>Experience</h2>
-            <div class="job">
-                <h3>Unity Developer</h3>
-                <span class="company">
-                    <a href="https://fernobite.com/" target="_blank">Fernobite</a> | Oct 2024 - Present
-                </span>
-                <ul>
-                    <li>Integration of core gameplay features for <strong>online and offline</strong> games.</li>
-                    <li>Development of <strong>internal optimization tools</strong> for the Unity Editor.</li>
-                </ul>
-            </div>
-    
-        </section>
+    <!-- SCENE: one .view per page. data-route is the URL after "#/" -->
+    <main id="scene" class="panel">
+        <div class="panel-tabs"><span class="tab"># <span id="scene-tab">Home</span></span></div>
+        <div id="scene-body" class="panel-body scene-body">
 
-        <section id="projects" class="container">
-            <h2>Featured Projects</h2>
-            <div class="project-grid">
-                <div class="project-card accent-blue">
-                    <h3>Visual FSM Editor</h3>
-                    <p>A custom <strong>Finite State Machine tool</strong> for Unity. Includes real-time node-based editing, bezier curve rendering, and optimized state connections.</p>
+            <!-- HOME -->
+            <article class="view" data-route="" data-title="Home">
+                <section class="hero">
+                    <p class="eyebrow">Hi, I'm</p>
+                    <h1>Nicolás Fernández Perera</h1>
+                    <p class="hero-role"><span class="prompt">&gt;</span> <span id="typing-text">Software Developer</span><span class="caret" aria-hidden="true"></span></p>
+                    <p class="hero-tagline">Crafting robust system architectures, custom tools, and engaging gameplay mechanics.</p>
+                    <div class="hero-actions">
+                        <a href="#/about" class="btn btn-primary">About me</a>
+                        <a href="#/contact" class="btn btn-ghost">Get in touch</a>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="path">Assets <span>/</span> Projects</h2>
+                    <div id="asset-grid" class="asset-grid"></div>
+                </section>
+            </article>
+
+            <!-- ABOUT -->
+            <article class="view page" data-route="about" data-title="About" hidden>
+                <h1>About Me</h1>
+                <p>I am a Software and Video Game Developer. My core focus is on system architecture, object-oriented programming, editor tool development, and creating scalable, maintainable code.</p>
+                <div class="interest-list">
+                    <div class="accent-blue"><strong>Gameplay</strong><span>Mechanics for online &amp; offline games</span></div>
+                    <div class="accent-green"><strong>Tools</strong><span>Editor extensions that speed teams up</span></div>
+                    <div class="accent-terracotta"><strong>Game AI</strong><span>Perception, agents, neural networks</span></div>
+                    <div class="accent-blue"><strong>Architecture</strong><span>Scalable, maintainable systems</span></div>
                 </div>
-                <div class="project-card accent-green">
-                    <h3>Wizard's Nightmare</h3>
-                    <p>Roguelike game we made as our final year project. You can play it for free on <a href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank">itch.io</a>!</p>
+                <h2>Skills</h2>
+                <div class="component-list">
+                    <details class="component" open><summary>Languages</summary><ul class="tags"><li>C#</li><li>C++</li><li>Python</li></ul></details>
+                    <details class="component" open><summary>Engines &amp; Frameworks</summary><ul class="tags"><li>Unity</li><li>Unreal Engine</li><li>.NET</li></ul></details>
+                    <details class="component" open><summary>Version Control</summary><ul class="tags"><li>Git</li><li>LFS</li><li>Submodules</li><li>Subtrees</li></ul></details>
                 </div>
-                <div class="project-card accent-terracotta">
-                    <h3>Monarch Wing Studios</h3>
+            </article>
+
+            <!-- EXPERIENCE -->
+            <article class="view page" data-route="experience" data-title="Experience" hidden>
+                <h1>Experience</h1>
+                <ol class="timeline">
+                    <li>
+                        <div class="job-header">
+                            <h3>Unity Developer · <a href="https://fernobite.com/" target="_blank" rel="noopener">Fernobite</a></h3>
+                            <span class="job-date">Oct 2024 – Present</span>
+                        </div>
+                        <ul>
+                            <li>Integration of core gameplay features for <strong>online and offline</strong> games.</li>
+                            <li>Development of <strong>internal optimization tools</strong> for the Unity Editor.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </article>
+
+            <!-- CONTACT -->
+            <article class="view page" data-route="contact" data-title="Contact" hidden>
+                <h1>Let's Connect</h1>
+                <p>Currently seeking Gameplay Programmer opportunities.</p>
+                <button type="button" id="email-btn" class="btn btn-primary mono" data-email="nfperera02@gmail.com">nfperera02@gmail.com</button>
+                <p id="email-status" class="hint" aria-live="polite">Click to copy</p>
+                <div class="social-links">
+                    <a href="https://github.com/NFPerera" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/nfperera/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:nfperera02@gmail.com">Email</a>
+                </div>
+            </article>
+
+            <!--
+                PROJECTS — one <article class="view project"> each. Order here = order in the grid and prev/next.
+                data-category: game | tool | ai  (Hierarchy folder)
+                Banner image: add <img class="banner-media" src="..." alt=""> inside .banner
+                Gallery: replace a .slot with <img src="..." alt="...">
+                The <template class="inspector"> fills the Inspector panel when the project is open.
+            -->
+
+            <article class="view project accent-blue" data-route="projects/visual-fsm-editor" data-title="Visual FSM Editor" data-kind="Editor Tool" data-category="tool" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Editor Tool · Unity</p>
+                    <h1>Visual FSM Editor</h1>
+                    <p class="banner-pitch">A node-based finite state machine editor that lives inside Unity.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>State machines are everywhere in games: AI, player controllers, UI flows. Written by hand they turn into a tangle of flags and switch statements that is hard to read and risky to change.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A custom Finite State Machine tool for Unity with real-time node-based editing, where states are nodes and transitions are curves you can see and rewire.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <ul class="steps">
+                        <li><strong>Node canvas</strong>States are edited in real time as nodes inside a custom editor window.</li>
+                        <li><strong>Bezier connections</strong>Transitions are rendered as bezier curves between states.</li>
+                        <li><strong>Optimized connections</strong><span class="todo">// TODO: how are state connections stored and evaluated?</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Try it</h2>
+                    <div class="demo">
+                        <svg class="fsm-demo" data-demo="fsm" viewBox="0 0 640 300" role="img" aria-label="Interactive state machine: drag the states around">
+                            <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow-head" d="M0 0L10 5L0 10z"/></marker></defs>
+                            <path class="edge" data-from="idle" data-to="patrol" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="patrol" data-to="chase" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="chase" data-to="search" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="search" data-to="patrol" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="search" data-to="idle" marker-end="url(#arrow)"/>
+                            <g class="node" data-id="idle" data-x="30" data-y="128"><rect width="120" height="44" rx="8"/><text x="60" y="27">Idle</text></g>
+                            <g class="node" data-id="patrol" data-x="200" data-y="40"><rect width="120" height="44" rx="8"/><text x="60" y="27">Patrol</text></g>
+                            <g class="node" data-id="chase" data-x="470" data-y="70"><rect width="120" height="44" rx="8"/><text x="60" y="27">Chase</text></g>
+                            <g class="node" data-id="search" data-x="320" data-y="215"><rect width="120" height="44" rx="8"/><text x="60" y="27">Search</text></g>
+                        </svg>
+                        <p class="demo-caption">Drag the states around. The machine picks a random transition every couple of seconds.</p>
+                    </div>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <ul>
+                        <li>Real-time node-based editing in a custom Unity Editor window</li>
+                        <li>Bezier curve rendering for transitions</li>
+                        <li>Optimized state connections</li>
+                    </ul>
+                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity</dd><dt>Language</dt><dd>C#</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                </template>
+            </article>
+
+            <article class="view project accent-green" data-route="projects/wizards-nightmare" data-title="Wizard's Nightmare" data-kind="Game" data-category="game" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Game · Roguelike</p>
+                    <h1>Wizard's Nightmare</h1>
+                    <p class="banner-pitch">A roguelike we made as our final-year project. Free to play.</p>
+                    <a class="btn btn-primary" href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">Play on itch.io</a>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p class="todo">// TODO: what was the brief or goal of the final-year project?</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A complete roguelike built as a team for our final-year project and published for free on itch.io.</p>
+                    <p class="todo">// TODO: what was your role on the team?</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <p class="todo">// TODO: core loop, systems you built</p>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Game</dd><dt>Genre</dt><dd>Roguelike</dd><dt>Team</dt><dd>Team project</dd><dt>Engine</dt><dd class="none">None (Engine)</dd><dt>Role</dt><dd class="none">None (Role)</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Links</summary><a href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">itch.io page</a></details>
+                </template>
+            </article>
+
+            <article class="view project accent-terracotta" data-route="projects/monarch-wing-studios" data-title="Monarch Wing Studios" data-kind="Studio" data-category="tool" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Studio · Unity Asset Store</p>
+                    <h1>Monarch Wing Studios</h1>
+                    <p class="banner-pitch">My independent label for game assets and Unity Editor tools.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Every project re-solves the same problems. Packaging those solutions as reusable, documented assets saves other developers that time.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
                     <p>Independent development and publication of scalable game assets and custom Editor tools for the Unity Asset Store.</p>
-                </div>
-                <div class="project-card accent-green">
-                    <h3>RealShooter</h3>
-                    <p>A realistic FPS mechanics framework for Unity: modular weapon systems, ballistics and recoil, and hit-detection built for extensibility across projects.</p>
-                </div>
-                <div class="project-card accent-blue">
-                    <h3>Perception Toolkit</h3>
-                    <p>A sensory perception system for AI agents &mdash; configurable sight and hearing detection used to drive stealth, alert, and combat behaviors.</p>
-                </div>
-                <div class="project-card accent-terracotta">
-                    <h3>Neuronal AI Plane</h3>
-                    <p>A neural-network-driven flight agent that learns to pilot a plane through reinforcement, exploring evolving AI decision-making in a physics-based environment.</p>
-                </div>
-                <div class="project-card accent-green">
-                    <h3>Scriptable Object Factory</h3>
-                    <p>A Unity Editor tool that streamlines creating, organizing, and managing ScriptableObject assets through a factory-driven, data-oriented workflow.</p>
-                </div>
-            </div>
-        </section>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <p class="todo">// TODO: published assets, development and release workflow</p>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Studio</dd><dt>Platform</dt><dd>Unity Asset Store</dd><dt>Team</dt><dd>Independent</dd><dt>Since</dt><dd class="none">None (Year)</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                </template>
+            </article>
 
-        <section id="contact" class="container">
-            <h2>Let's Connect</h2>
-            <p>Currently seeking Gameplay Programmer opportunities.</p>
-            <div class="social-links">
-                <a href="https://github.com/NFPerera" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/nfperera/" target="_blank">LinkedIn</a>
-                <a href="javascript:void(0)" id="email-btn">nfperera02@gmail.com</a>
-            </div>
-        </section>
+            <article class="view project accent-green" data-route="projects/realshooter" data-title="RealShooter" data-kind="Framework" data-category="game" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Framework · Unity</p>
+                    <h1>RealShooter</h1>
+                    <p class="banner-pitch">A realistic FPS mechanics framework for Unity.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Shooter mechanics tend to get rewritten for every prototype, with weapon behaviour, ballistics and hit detection tangled together.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A framework of modular weapon systems, ballistics and recoil, and hit detection, built for extensibility across projects.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <ul class="steps">
+                        <li><strong>Modular weapons</strong><span class="todo">// TODO: how weapons are composed</span></li>
+                        <li><strong>Ballistics &amp; recoil</strong><span class="todo">// TODO: projectile and recoil model</span></li>
+                        <li><strong>Hit detection</strong><span class="todo">// TODO: how hits are resolved</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Framework</dd><dt>Engine</dt><dd>Unity</dd><dt>Genre</dt><dd>FPS</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                </template>
+            </article>
+
+            <article class="view project accent-blue" data-route="projects/perception-toolkit" data-title="Perception Toolkit" data-kind="Game AI" data-category="ai" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Game AI · Systems</p>
+                    <h1>Perception Toolkit</h1>
+                    <p class="banner-pitch">Configurable sight and hearing for AI agents.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Stealth and combat AI only feel fair when enemies react to what they could plausibly see and hear.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A sensory perception system for AI agents: configurable sight and hearing detection used to drive stealth, alert, and combat behaviors.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <ul class="steps">
+                        <li><strong>Sight</strong><span class="todo">// TODO: view cone, range, occlusion?</span></li>
+                        <li><strong>Hearing</strong><span class="todo">// TODO: how noise is emitted and detected</span></li>
+                        <li><strong>Behaviors</strong><span class="todo">// TODO: how stimuli drive stealth / alert / combat</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Try it</h2>
+                    <div class="demo">
+                        <svg class="perception-demo" data-demo="perception" viewBox="0 0 640 320" role="img" aria-label="Interactive perception demo: move your pointer to sneak past the agent">
+                            <circle class="hearing" cx="320" cy="170" r="110"/>
+                            <path class="cone"/>
+                            <circle class="agent" cx="320" cy="170" r="12"/>
+                            <circle class="player" cx="-50" cy="-50" r="8"/>
+                        </svg>
+                        <p class="demo-caption">You're the dot. Stay out of the cone, and move slowly inside the dashed circle or it will hear you. <strong class="demo-status">Unaware</strong></p>
+                    </div>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Game AI</dd><dt>Senses</dt><dd>Sight, Hearing</dd><dt>Engine</dt><dd class="none">None (Engine)</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                </template>
+            </article>
+
+            <article class="view project accent-terracotta" data-route="projects/neuronal-ai-plane" data-title="Neuronal AI Plane" data-kind="Machine Learning" data-category="ai" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Machine Learning · Physics</p>
+                    <h1>Neuronal AI Plane</h1>
+                    <p class="banner-pitch">A neural network that learns to fly.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Hand-authored flight AI is brittle. Can an agent learn to pilot a plane on its own?</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A neural-network-driven flight agent that learns to pilot a plane through reinforcement, exploring evolving AI decision-making in a physics-based environment.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <p class="todo">// TODO: network inputs/outputs, reward, training setup</p>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Machine Learning</dd><dt>Approach</dt><dd>Reinforcement</dd><dt>Engine</dt><dd class="none">None (Engine)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                </template>
+            </article>
+
+            <article class="view project accent-green" data-route="projects/scriptable-object-factory" data-title="Scriptable Object Factory" data-kind="Editor Tool" data-category="tool" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Editor Tool · Unity</p>
+                    <h1>Scriptable Object Factory</h1>
+                    <p class="banner-pitch">A faster ScriptableObject workflow for Unity.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Data-driven Unity projects pile up ScriptableObject assets, and creating and organizing them by hand is slow.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A Unity Editor tool that streamlines creating, organizing, and managing ScriptableObject assets through a factory-driven, data-oriented workflow.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <p class="todo">// TODO: how the factory workflow works</p>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity</dd><dt>Language</dt><dd>C#</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                </template>
+            </article>
+
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 NFPerera. All rights reserved.</p>
-    </footer>
+    <!-- INSPECTOR: filled from the open view's <template class="inspector">, or this default -->
+    <aside id="inspector" class="panel" aria-label="Inspector">
+        <div class="panel-tabs"><span class="tab">Inspector</span></div>
+        <div id="inspector-body" class="panel-body"></div>
+        <template id="inspector-default">
+            <details class="component" open><summary>Profile</summary>
+                <dl class="fields"><dt>Name</dt><dd>Nicolás Fernández Perera</dd><dt>Alias</dt><dd>NFPerera</dd><dt>Role</dt><dd>Unity Developer</dd><dt>Company</dt><dd>Fernobite</dd></dl>
+            </details>
+            <details class="component" open><summary>Now (Script)</summary>
+                <dl class="fields"><dt>Working on</dt><dd>Gameplay &amp; editor tools</dd><dt>Playing</dt><dd class="none">None (Game)</dd><dt>Learning</dt><dd class="none">None (Skill)</dd></dl>
+            </details>
+        </template>
+    </aside>
+
+    <section id="console" class="panel" aria-label="Console">
+        <div class="panel-tabs"><span class="tab">Console</span></div>
+        <ol id="console-log" class="panel-body" aria-live="polite"></ol>
+        <form id="console-form" class="console-input">
+            <label for="console-input">&gt;</label>
+            <input id="console-input" autocomplete="off" spellcheck="false" placeholder="Type 'help'">
+        </form>
+    </section>
 
     <script src="script.js"></script>
 </body>
