@@ -1,9 +1,15 @@
 :root {
-    --header-bg: #0B7FC2;
-    --main-bg: #EBA075;
-    --text-color: #1a1a1a;
-    --card-bg: rgba(255, 255, 255, 0.2);
-    --nav-bg: rgba(0, 0, 0, 0.8);
+    --header-bg: #58A5BF;
+    --main-bg: #BF7B58;
+    --text-color: #363D40;
+    --card-bg: #FBF3EC;
+    --nav-bg: rgba(64, 57, 54, 0.92);
+
+    --accent-blue: #58A5BF;
+    --accent-green: #58BF95;
+    --accent-terracotta: #BF7B58;
+    --dark-brown: #403936;
+    --dark-slate: #363D40;
 }
 
 * {
@@ -48,7 +54,7 @@ body {
 }
 
 #navbar a:hover {
-    color: #ffd700;
+    color: var(--accent-green);
 }
 
 /* Hero Section Centered with Blue Background */
@@ -80,7 +86,7 @@ body {
 
 #typing-text {
     font-size: 1.8rem;
-    color: #ffd700;
+    color: var(--accent-green);
     font-weight: 400;
 }
 
@@ -93,19 +99,21 @@ body {
 
 h2 {
     font-size: 2.2rem;
-    border-bottom: 2px solid rgba(0,0,0,0.1);
+    color: var(--dark-brown);
+    border-bottom: 2px solid rgba(64, 57, 54, 0.2);
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
 .company a {
-    color: #004d7a;
+    color: var(--dark-brown);
     font-weight: bold;
     text-decoration: none;
 }
 
 .company a:hover {
     text-decoration: underline;
+    color: var(--accent-blue);
 }
 
 /* Project Cards */
@@ -116,21 +124,40 @@ h2 {
 }
 
 .project-card {
-    background-color: #3CA6E3;
+    background-color: var(--card-bg);
     padding: 25px;
     border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
-    transition: transform 0.2s;
+    border-top: 4px solid var(--accent-blue);
+    box-shadow: 0 4px 12px rgba(64, 57, 54, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card h3 {
+    color: var(--dark-brown);
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    color: var(--dark-slate);
+}
+
+.project-card a {
+    color: var(--accent-blue);
+    font-weight: bold;
 }
 
 .project-card:hover {
-    transform: scale(1.02);
-    background-color: #3CA6E3;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(64, 57, 54, 0.25);
 }
+
+.project-card.accent-blue { border-top-color: var(--accent-blue); }
+.project-card.accent-green { border-top-color: var(--accent-green); }
+.project-card.accent-terracotta { border-top-color: var(--accent-terracotta); }
 
 .social-links a {
     display: inline-block;
-    background: #1a1a1a;
+    background: var(--dark-brown);
     color: white;
     padding: 10px 25px;
     margin: 10px;
@@ -140,11 +167,14 @@ h2 {
 }
 
 .social-links a:hover {
-    opacity: 0.8;
+    background: var(--accent-green);
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 footer {
     text-align: center;
     padding: 40px;
-    background: rgba(0,0,0,0.05);
+    color: white;
+    background: var(--dark-brown);
 }
