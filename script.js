@@ -17,7 +17,7 @@ function log(message, type = '') {
 const views = [...document.querySelectorAll('.view')];
 const projects = views.filter(v => v.classList.contains('project'));
 const accentOf = el => [...el.classList].find(c => c.startsWith('accent-')) || '';
-const folders = { game: 'Games', tool: 'Tools', ai: 'AI' };
+const folders = { game: 'Games', tool: 'Tools', ai: 'AI', sim: 'Simulation' };
 
 const treeProjects = document.getElementById('tree-projects');
 Object.entries(folders).forEach(([category, label]) => {
@@ -55,7 +55,7 @@ const sceneBody = document.getElementById('scene-body');
 const sceneTab = document.getElementById('scene-tab');
 const inspectorBody = document.getElementById('inspector-body');
 const defaultInspector = document.getElementById('inspector-default');
-const demos = { fsm: fsmDemo, perception: perceptionDemo };
+const demos = { fsm: fsmDemo, perception: perceptionDemo, neuro: neuroDemo, ballistics: ballisticsDemo };
 let firstRoute = true;
 
 function route() {
@@ -295,17 +295,21 @@ function fsmDemo(svg) {
     }, 1800);
 }
 
-// Perception demo: the pointer is the player; the agent sees in a cone and hears fast movement nearby
+// Perception demo: the pointer is the player. Mirrors the toolkit's detection tick:
+// found -> confirm timer fills (Suspicious) until Aware; lost -> lose timer back to Unaware.
 function perceptionDemo(svg) {
     if (svg.startDemo) return svg.startDemo();
 
     const agent = { x: 320, y: 170 };
-    const RANGE = 230, HALF_ANGLE = Math.PI / 6, HEARING = 110, NOISE_THRESHOLD = 6;
+    const RANGE = 230, HALF_ANGLE = Math.PI / 6, INNER = 45, HEARING = 130;
+    const DETECTION_TIME = 0.8, LOSE_TIME = 1.2, MIN_AUDIBLE = 0.15, INSTANT_LOUDNESS = 0.85;
     const cone = svg.querySelector('.cone');
     const player = svg.querySelector('.player');
-    const status = svg.closest('.demo').querySelector('.demo-status');
+    const root = svg.closest('.demo');
+    const status = root.querySelector('.demo-status');
+    const meter = root.querySelector('.meter span');
     let target = { x: -100, y: -100 }, last = { ...target };
-    let angle = 0, noise = 0, state = '', running = false;
+    let angle = 0, noise = 0, awareness = 'unaware', confirm = 0, lose = 0, prevTime = 0, running = false;
 
     svg.addEventListener('pointermove', e => {
         const p = svgPoint(svg, e);
@@ -313,41 +317,329 @@ function perceptionDemo(svg) {
     });
     svg.addEventListener('pointerleave', () => { target = { x: -100, y: -100 }; last = { ...target }; });
 
-    function frame() {
+    function setAwareness(level) {
+        if (level === awareness) return;
+        awareness = level;
+        svg.classList.toggle('suspicious', level === 'suspicious');
+        svg.classList.toggle('aware', level === 'aware');
+        status.textContent = { unaware: 'Unaware', suspicious: 'Suspicious...', aware: 'Aware!' }[level];
+    }
+
+    function frame(now) {
         if (svg.closest('[hidden]')) { running = false; return; }
+        const dt = prevTime ? Math.min((now - prevTime) / 1000, 0.05) : 0;
+        prevTime = now;
 
         const dx = target.x - agent.x, dy = target.y - agent.y;
         const dist = Math.hypot(dx, dy);
-        const diff = Math.atan2(Math.sin(Math.atan2(dy, dx) - angle), Math.cos(Math.atan2(dy, dx) - angle));
+        const toTarget = Math.atan2(dy, dx);
+        const diff = Math.atan2(Math.sin(toTarget - angle), Math.cos(toTarget - angle));
         noise = Math.max(noise * 0.9, Math.hypot(target.x - last.x, target.y - last.y));
         last = { ...target };
 
-        const seen = dist < RANGE && Math.abs(diff) < HALF_ANGLE;
-        const heard = !seen && dist < HEARING && noise > NOISE_THRESHOLD;
-        if (seen) angle += diff * 0.15;
-        else if (heard) angle += diff * 0.06;
-        else if (!reducedMotion) angle += 0.008;
+        // Senses: inner radius sees instantly, the cone needs the confirm timer, noise falls off with distance
+        const inner = dist < INNER;
+        const seen = inner || (dist < RANGE && Math.abs(diff) < HALF_ANGLE);
+        const loudness = Math.min(noise / 12, 1) * Math.max(1 - dist / HEARING, 0);
+        const heard = loudness >= MIN_AUDIBLE;
+        const found = seen || heard;
+        const instant = inner || loudness >= INSTANT_LOUDNESS;
+
+        if (found) {
+            lose = 0;
+            confirm = instant ? DETECTION_TIME : confirm + dt;
+            if (confirm >= DETECTION_TIME) setAwareness('aware');
+            else if (confirm > 0 && awareness === 'unaware') setAwareness('suspicious');
+        } else {
+            if (awareness !== 'unaware') lose += dt;
+            if (lose > LOSE_TIME) {
+                setAwareness('unaware');
+                confirm = 0;
+                lose = 0;
+            }
+        }
+
+        if (found) angle += diff * (awareness === 'aware' ? 0.15 : 0.04);
+        else if (awareness === 'unaware' && !reducedMotion) angle += 0.008;
 
         const a1 = angle - HALF_ANGLE, a2 = angle + HALF_ANGLE;
         cone.setAttribute('d', `M${agent.x} ${agent.y} L${agent.x + RANGE * Math.cos(a1)} ${agent.y + RANGE * Math.sin(a1)} ` +
             `A${RANGE} ${RANGE} 0 0 1 ${agent.x + RANGE * Math.cos(a2)} ${agent.y + RANGE * Math.sin(a2)} Z`);
         player.setAttribute('cx', target.x);
         player.setAttribute('cy', target.y);
-
-        const next = seen ? 'seen' : heard ? 'heard' : '';
-        if (next !== state) {
-            state = next;
-            svg.classList.toggle('seen', seen);
-            svg.classList.toggle('heard', heard);
-            status.textContent = seen ? 'Spotted!' : heard ? 'Heard something...' : 'Unaware';
-        }
+        meter.style.width = Math.min(confirm / DETECTION_TIME, 1) * 100 + '%';
         requestAnimationFrame(frame);
     }
 
     svg.startDemo = () => {
-        if (!running) { running = true; requestAnimationFrame(frame); }
+        if (!running) { running = true; prevTime = 0; requestAnimationFrame(frame); }
     };
     svg.startDemo();
+}
+
+// Neuroevolution demo: a 2D take on the plane project. Each plane has a tiny tanh network;
+// generations evolve with elitism + tournament selection + uniform crossover + mutation.
+function neuroDemo(canvas) {
+    if (canvas.startDemo) return canvas.startDemo();
+
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const root = canvas.closest('.demo');
+    const stat = name => root.querySelector(`[data-stat="${name}"]`);
+    const speedSelect = root.querySelector('[data-control="speed"]');
+
+    const POPULATION = 40, ELITE = 3, TOURNAMENT = 4, MUTATION_RATE = 0.1, MUTATION_STRENGTH = 0.5;
+    const LAYERS = [6, 6, 1];
+    const RAYS = [-0.9, -0.45, 0, 0.45, 0.9], RAY_LENGTH = 120;
+    const SPEED = 2, MAX_TURN = 0.08, MAX_STEPS = 700, FINISH_X = W - 12;
+    const pillars = [[150, 90], [260, 215], [370, 115], [480, 205], [575, 120]]
+        .map(([x, gapY]) => ({ x, w: 22, top: gapY - 45, bottom: gapY + 45 }));
+
+    const blocked = (x, y) => y < 0 || y > H || x < 0 ||
+        pillars.some(p => x > p.x && x < p.x + p.w && (y < p.top || y > p.bottom));
+
+    // Brain = layers of neurons; each neuron is an array of weights with the bias last
+    const randomBrain = () => LAYERS.slice(1).map((size, l) =>
+        Array.from({ length: size }, () => Array.from({ length: LAYERS[l] + 1 }, () => Math.random() * 2 - 1)));
+    const mapBrain = (brain, f) => brain.map((layer, l) => layer.map((w, n) => w.map((v, i) => f(v, l, n, i))));
+    const think = (brain, inputs) => brain.reduce((a, layer) =>
+        layer.map(w => Math.tanh(w.reduce((sum, wi, i) => sum + wi * (i < a.length ? a[i] : 1), 0))), inputs);
+    const crossover = (a, b) => mapBrain(a, (v, l, n, i) => (Math.random() < 0.5 ? v : b[l][n][i]));
+    const mutate = brain => mapBrain(brain, v =>
+        Math.random() < MUTATION_RATE ? v + (Math.random() * 2 - 1) * MUTATION_STRENGTH : v);
+
+    function tournament(ranked) {
+        let best = null;
+        for (let i = 0; i < TOURNAMENT; i++) {
+            const candidate = ranked[Math.floor(Math.random() * ranked.length)];
+            if (!best || candidate.fitness > best.fitness) best = candidate;
+        }
+        return best.brain;
+    }
+
+    function evolve() {
+        const ranked = [...planes].sort((a, b) => b.fitness - a.fitness);
+        const next = ranked.slice(0, ELITE).map(p => p.brain);
+        while (next.length < POPULATION) next.push(mutate(crossover(tournament(ranked), tournament(ranked))));
+        return next;
+    }
+
+    const spawn = brain => ({ brain, x: 20, y: H / 2, a: 0, alive: true, fitness: 0 });
+    let planes, generation, best, steps, running = false;
+
+    function reset() {
+        planes = Array.from({ length: POPULATION }, () => spawn(randomBrain()));
+        generation = 1;
+        best = 0;
+        steps = 0;
+    }
+
+    function sense(p, offset) {
+        for (let d = 0; d < RAY_LENGTH; d += 6) {
+            if (blocked(p.x + Math.cos(p.a + offset) * d, p.y + Math.sin(p.a + offset) * d)) return 1 - d / RAY_LENGTH;
+        }
+        return 0;
+    }
+
+    function step() {
+        steps++;
+        planes.forEach(p => {
+            if (!p.alive) return;
+            const steer = think(p.brain, [...RAYS.map(r => sense(p, r)), p.a])[0];
+            p.a = Math.max(-1.4, Math.min(1.4, p.a + steer * MAX_TURN));
+            p.x += Math.cos(p.a) * SPEED;
+            p.y += Math.sin(p.a) * SPEED;
+            const passed = pillars.filter(q => p.x > q.x + q.w).length;
+            p.fitness = p.x + passed * 100;
+            if (p.x >= FINISH_X) { p.fitness += 500; p.alive = false; }
+            else if (blocked(p.x, p.y)) p.alive = false;
+        });
+
+        if (steps >= MAX_STEPS || planes.every(p => !p.alive)) {
+            best = Math.max(best, ...planes.map(p => p.fitness));
+            planes = evolve().map(spawn);
+            generation++;
+            steps = 0;
+        }
+    }
+
+    function draw() {
+        const css = getComputedStyle(canvas);
+        ctx.fillStyle = css.getPropertyValue('--field');
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = css.getPropertyValue('--border');
+        pillars.forEach(p => {
+            ctx.fillRect(p.x, 0, p.w, p.top);
+            ctx.fillRect(p.x, p.bottom, p.w, H - p.bottom);
+        });
+        ctx.strokeStyle = css.getPropertyValue('--accent-green');
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(FINISH_X, 0);
+        ctx.lineTo(FINISH_X, H);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const accent = css.getPropertyValue('--accent');
+        planes.forEach(p => {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.a);
+            ctx.globalAlpha = p.alive ? 0.9 : 0.15;
+            ctx.fillStyle = accent;
+            ctx.beginPath();
+            ctx.moveTo(8, 0);
+            ctx.lineTo(-6, -5);
+            ctx.lineTo(-3, 0);
+            ctx.lineTo(-6, 5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        });
+
+        stat('gen').textContent = generation;
+        stat('alive').textContent = planes.filter(p => p.alive).length;
+        stat('best').textContent = Math.round(best);
+    }
+
+    function frame() {
+        if (canvas.closest('[hidden]')) { running = false; return; }
+        const speed = Number(speedSelect.value);
+        for (let i = 0; i < speed; i++) step();
+        draw();
+        requestAnimationFrame(frame);
+    }
+
+    root.querySelector('[data-control="reset"]').addEventListener('click', () => {
+        reset();
+        log('Neuroevolution demo reset to generation 1.');
+    });
+
+    reset();
+    canvas.startDemo = () => {
+        if (!running) { running = true; requestAnimationFrame(frame); }
+    };
+    canvas.startDemo();
+}
+
+// Ballistics demo: RealShooter's G7 drag model + RK4, ported to JS. Recomputes on slider input.
+const G7_MACH = [0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.725, 0.75,
+    0.775, 0.80, 0.825, 0.85, 0.875, 0.90, 0.925, 0.95, 0.975, 1.00, 1.025, 1.05, 1.075, 1.10, 1.15, 1.20, 1.25, 1.30,
+    1.35, 1.40, 1.50, 1.60, 1.70, 1.80, 1.90, 2.00, 2.20, 2.40, 2.60, 2.80, 3.00, 3.50, 4.00, 4.50, 5.00];
+const G7_CD = [0.1198, 0.1197, 0.1196, 0.1194, 0.1193, 0.1194, 0.1194, 0.1194, 0.1193, 0.1193, 0.1194, 0.1194, 0.1194,
+    0.1197, 0.1202, 0.1207, 0.1215, 0.1226, 0.1242, 0.1266, 0.1306, 0.1368, 0.1464, 0.1660, 0.2054, 0.2993, 0.3803,
+    0.4015, 0.4043, 0.4034, 0.4014, 0.3955, 0.3884, 0.3810, 0.3732, 0.3657, 0.3580, 0.3440, 0.3315, 0.3209, 0.3117,
+    0.3042, 0.2980, 0.2864, 0.2752, 0.2640, 0.2547, 0.2470, 0.2338, 0.2177, 0.2088, 0.1974];
+
+function g7Cd(mach) {
+    if (mach <= G7_MACH[0]) return G7_CD[0];
+    const i = G7_MACH.findIndex(m => m >= mach);
+    if (i === -1) return G7_CD[G7_CD.length - 1];
+    const t = (mach - G7_MACH[i - 1]) / (G7_MACH[i] - G7_MACH[i - 1]);
+    return G7_CD[i - 1] + (G7_CD[i] - G7_CD[i - 1]) * t;
+}
+
+function ballisticsDemo(root) {
+    if (root.dataset.ready) return;
+    root.dataset.ready = 'true';
+
+    // .308 Win 175 gr, the same defaults as RealShooter's BulletData
+    const MASS = 175 * 0.00006479891, DIAMETER = 0.00782;
+    const AREA = Math.PI * (DIAMETER / 2) ** 2;
+    const SECTIONAL_DENSITY = (175 / 7000) / (7.82 / 25.4) ** 2;
+    const AIR_DENSITY = 1.225, SPEED_OF_SOUND = 340.3, GRAVITY = 9.80665;
+    const SIGHT_HEIGHT = 0.05, DT = 0.001, MAX_RANGE = 1000, ROWS = [100, 300, 600, 900];
+    const inputs = {};
+    root.querySelectorAll('[data-input]').forEach(el => { inputs[el.dataset.input] = el; });
+    const svg = root.querySelector('svg');
+    const tbody = root.querySelector('tbody');
+
+    // State: [x (downrange), y (up), z (right), vx, vy, vz]. Wind blows toward +z.
+    function flight(angle, v0, wind, formFactor, untilX, sampleEvery) {
+        const derivative = s => {
+            const rx = s[3], ry = s[4], rz = s[5] - wind;
+            const speed = Math.hypot(rx, ry, rz);
+            const k = 0.5 * AIR_DENSITY * speed * g7Cd(speed / SPEED_OF_SOUND) * formFactor * AREA / MASS;
+            return [s[3], s[4], s[5], -k * rx, -k * ry - GRAVITY, -k * rz];
+        };
+        const add = (s, d, h) => s.map((v, i) => v + d[i] * h);
+        let s = [0, -SIGHT_HEIGHT, 0, v0 * Math.cos(angle), v0 * Math.sin(angle), 0];
+        let t = 0, nextSample = sampleEvery;
+        const samples = [];
+        while (s[0] < untilX && t < 6) {
+            const k1 = derivative(s), k2 = derivative(add(s, k1, DT / 2));
+            const k3 = derivative(add(s, k2, DT / 2)), k4 = derivative(add(s, k3, DT));
+            s = s.map((v, i) => v + DT / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]));
+            t += DT;
+            if (s[0] >= nextSample) {
+                samples.push({ x: nextSample, y: s[1], z: s[2], t, v: Math.hypot(s[3], s[4], s[5]) });
+                nextSample += sampleEvery;
+            }
+        }
+        return samples;
+    }
+
+    // Bisect the launch angle so the bullet crosses the line of sight at the zero range
+    function zeroAngle(v0, formFactor, zero) {
+        let lo = -0.01, hi = 0.03;
+        for (let i = 0; i < 24; i++) {
+            const mid = (lo + hi) / 2;
+            const samples = flight(mid, v0, 0, formFactor, zero, zero);
+            if (samples.length && samples[samples.length - 1].y > 0) hi = mid; else lo = mid;
+        }
+        return (lo + hi) / 2;
+    }
+
+    const fmtMil = (meters, range) => {
+        const mil = meters / range * 1000;
+        return `${Math.abs(mil).toFixed(1)} mil <small>${Math.round(Math.abs(mil) / 0.1)} clicks</small>`;
+    };
+
+    function render() {
+        Object.values(inputs).forEach(el => { el.closest('label').querySelector('output').textContent = el.value; });
+        const v0 = Number(inputs.v0.value), wind = Number(inputs.wind.value), zero = Number(inputs.zero.value);
+        const formFactor = SECTIONAL_DENSITY / Number(inputs.bc.value);
+        const samples = flight(zeroAngle(v0, formFactor, zero), v0, wind, formFactor, MAX_RANGE, 10);
+
+        // Chart: drop and drift in cm over range
+        const left = 70, right = 605, top = 14, bottom = 228;
+        const values = samples.flatMap(p => [p.y * 100, p.z * 100]).concat(0);
+        const rawStep = (Math.max(...values) - Math.min(...values)) / 4;
+        const magnitude = 10 ** Math.floor(Math.log10(rawStep));
+        const tick = [1, 2, 5, 10].map(m => m * magnitude).find(t => t >= rawStep);
+        const minY = Math.floor(Math.min(...values) / tick) * tick, maxY = Math.ceil(Math.max(...values) / tick) * tick;
+        const px = x => left + (x / MAX_RANGE) * (right - left);
+        const py = cm => top + (maxY - cm) / (maxY - minY || 1) * (bottom - top);
+        const line = key => 'M' + px(0) + ' ' + py(-SIGHT_HEIGHT * (key === 'y' ? 100 : 0)) + samples.map(p => ` L${px(p.x)} ${py(p[key] * 100)}`).join('');
+
+        let grid = '';
+        for (let x = 0; x <= MAX_RANGE; x += 100) {
+            grid += `<line class="grid" x1="${px(x)}" y1="${top}" x2="${px(x)}" y2="${bottom}"/>` +
+                (x % 200 === 0 ? `<text x="${px(x)}" y="${bottom + 18}" text-anchor="middle">${x} m</text>` : '');
+        }
+        for (let cm = minY; cm <= maxY; cm += tick) {
+            grid += `<line class="grid" x1="${left}" y1="${py(cm)}" x2="${right}" y2="${py(cm)}"/>` +
+                `<text x="${left - 8}" y="${py(cm) + 4}" text-anchor="end">${cm} cm</text>`;
+        }
+        svg.innerHTML = grid +
+            `<line class="los" x1="${left}" y1="${py(0)}" x2="${right}" y2="${py(0)}"/>` +
+            `<path class="drift" d="${line('z')}"/><path class="drop" d="${line('y')}"/>` +
+            `<circle class="zero-mark" cx="${px(zero)}" cy="${py(0)}" r="4"/>` +
+            `<text class="drop-label" x="${left + 12}" y="${bottom - 26}">— drop</text>` +
+            `<text class="drift-label" x="${left + 12}" y="${bottom - 10}">- - wind drift</text>`;
+
+        tbody.innerHTML = ROWS.map(range => {
+            const p = samples.find(s => s.x >= range);
+            if (!p) return '';
+            const cm = meters => Math.round(meters * 100) || 0; // avoid "-0"
+            return `<tr><td>${range} m</td><td>${cm(p.y)} cm</td><td>${fmtMil(p.y, range)}</td>` +
+                `<td>${cm(p.z)} cm</td><td>${fmtMil(p.z, range)}</td>` +
+                `<td>${p.t.toFixed(2)} s</td><td>${Math.round(p.v)} m/s</td></tr>`;
+        }).join('');
+    }
+
+    Object.values(inputs).forEach(el => el.addEventListener('input', render));
+    render();
 }
 
 // ---------- Init ----------

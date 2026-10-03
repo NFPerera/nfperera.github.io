@@ -124,32 +124,37 @@
 
             <!--
                 PROJECTS — one <article class="view project"> each. Order here = order in the grid and prev/next.
-                data-category: game | tool | ai  (Hierarchy folder)
+                data-category: game | tool | ai | sim  (Hierarchy folder)
                 Banner image: add <img class="banner-media" src="..." alt=""> inside .banner
                 Gallery: replace a .slot with <img src="..." alt="...">
                 The <template class="inspector"> fills the Inspector panel when the project is open.
+                Code inside <pre><code> must be HTML-escaped (&lt; &gt; &amp;).
             -->
 
             <article class="view project accent-blue" data-route="projects/visual-fsm-editor" data-title="Visual FSM Editor" data-kind="Editor Tool" data-category="tool" hidden>
                 <header class="banner">
-                    <p class="banner-kind">Editor Tool · Unity</p>
-                    <h1>Visual FSM Editor</h1>
-                    <p class="banner-pitch">A node-based finite state machine editor that lives inside Unity.</p>
+                    <p class="banner-kind">Editor Tool · Unity Asset Store</p>
+                    <h1>Visual FSM Graph Editor</h1>
+                    <p class="banner-pitch">A node-based state machine editor for Unity AI, published on the Asset Store.</p>
+                    <a class="btn btn-primary" href="https://assetstore.unity.com/packages/tools/behavior-ai/visual-fsm-graph-editor-ai-state-machine-tool-367524" target="_blank" rel="noopener">View on the Asset Store</a>
                 </header>
                 <section>
                     <h2>The problem</h2>
-                    <p>State machines are everywhere in games: AI, player controllers, UI flows. Written by hand they turn into a tangle of flags and switch statements that is hard to read and risky to change.</p>
+                    <p>AI behaviors like patrol, chase and attack are naturally state machines, but written by hand they become a tangle of flags and switch statements. They are hard to read, hard to debug at runtime, and every new transition means touching code.</p>
                 </section>
                 <section>
                     <h2>What I built</h2>
-                    <p>A custom Finite State Machine tool for Unity with real-time node-based editing, where states are nodes and transitions are curves you can see and rewire.</p>
+                    <p>A complete, commercial Unity Editor tool for designing finite state machines visually. States and conditions are ScriptableObject assets wired together on a GraphView canvas, and the runtime has no dependency on the editor, so the same graphs run in builds. I took it from first commit to a published Asset Store product, including documentation, example scenes and post-release updates.</p>
                 </section>
                 <section>
                     <h2>How it works</h2>
                     <ul class="steps">
-                        <li><strong>Node canvas</strong>States are edited in real time as nodes inside a custom editor window.</li>
-                        <li><strong>Bezier connections</strong>Transitions are rendered as bezier curves between states.</li>
-                        <li><strong>Optimized connections</strong><span class="todo">// TODO: how are state connections stored and evaluated?</span></li>
+                        <li><strong>Runtime layer</strong>The FSM, its states and conditions are ScriptableObjects. Each entity clones the FSM asset on Awake, so many entities can share one graph without sharing runtime state.</li>
+                        <li><strong>Editor layer</strong>A GraphView window edits a GUI model of the graph and only commits back to the assets on save or autosave, with full Undo support.</li>
+                        <li><strong>Live debugging</strong>In Play mode, selecting an entity loads its running FSM: the active state pulses and a trail marks the last few states visited.</li>
+                        <li><strong>Logic gates</strong>And / Or / Negate conditions let designers build compound transitions from existing conditions without writing new code.</li>
+                        <li><strong>Readable graphs</strong>Reroute points, "Go To State" markers instead of canvas-wide wires, shared condition boxes, and direction arrows on every curve.</li>
+                        <li><strong>Production polish</strong>Descriptive validation errors, a Preferences page, orphan-asset cleanup, URP and Built-in support, and a full PDF manual.</li>
                     </ul>
                 </section>
                 <section>
@@ -167,17 +172,44 @@
                             <g class="node" data-id="chase" data-x="470" data-y="70"><rect width="120" height="44" rx="8"/><text x="60" y="27">Chase</text></g>
                             <g class="node" data-id="search" data-x="320" data-y="215"><rect width="120" height="44" rx="8"/><text x="60" y="27">Search</text></g>
                         </svg>
-                        <p class="demo-caption">Drag the states around. The machine picks a random transition every couple of seconds.</p>
+                        <p class="demo-caption">Drag the states around. Like the tool's Play-mode view, the active state lights up as the machine takes random transitions.</p>
                     </div>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
-                    <ul>
-                        <li>Real-time node-based editing in a custom Unity Editor window</li>
-                        <li>Bezier curve rendering for transitions</li>
-                        <li>Optimized state connections</li>
-                    </ul>
-                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                    <p>The runtime loop is deliberately tiny: poll the current state's conditions in order, take the first one that passes, otherwise keep executing the state.</p>
+                    <p class="code-title">MonarchFsm.cs</p>
+<pre><code>public void RunStateMachine()
+{
+    if (m_currentState == null) return;
+
+    for (var l_i = 0; l_i &lt; m_currentStateConditionsAmount; l_i++)
+    {
+        if (!m_currentState.StateConditions[l_i].CompleteCondition(m_model))
+            continue;
+
+        ChangeState(m_currentState.ExitStates[l_i]);
+        return;
+    }
+
+    m_currentState.fsmState.ExecuteState(m_model);
+}</code></pre>
+                    <p>GraphView edges don't show direction, so a custom edge samples its own bezier with De Casteljau's algorithm and draws an arrowhead at the true midpoint, following bends around reroute points.</p>
+                    <p class="code-title">FsmEdge.cs</p>
+<pre><code>// Repeatedly lerp adjacent points until one remains, giving the curve's
+// actual position (and, via two nearby samples, tangent) at parameter t.
+private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
+{
+    var l_working = (Vector2[])p_points.Clone();
+    int l_count = l_working.Length;
+    while (l_count &gt; 1)
+    {
+        for (int l_i = 0; l_i &lt; l_count - 1; l_i++)
+            l_working[l_i] = Vector2.Lerp(l_working[l_i], l_working[l_i + 1], p_t);
+        l_count--;
+    }
+    return l_working[0];
+}</code></pre>
                 </section>
                 <section>
                     <h2>Media</h2>
@@ -190,172 +222,89 @@
                 <nav class="pager" aria-label="More projects"></nav>
                 <template class="inspector">
                     <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity</dd><dt>Language</dt><dd>C#</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity 2022.3</dd><dt>UI</dt><dd>GraphView / UI Toolkit</dd><dt>Language</dt><dd>C#</dd><dt>Team</dt><dd>Solo</dd><dt>Years</dt><dd>2025 – 2026</dd><dt>Status</dt><dd>Live · v1.2.0</dd></dl>
                     </details>
-                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                    <details class="component" open><summary>Publisher</summary><p>Monarch Wing Studios</p></details>
+                    <details class="component" open><summary>Links</summary><a href="https://assetstore.unity.com/packages/tools/behavior-ai/visual-fsm-graph-editor-ai-state-machine-tool-367524" target="_blank" rel="noopener">Unity Asset Store</a></details>
                 </template>
             </article>
 
-            <article class="view project accent-green" data-route="projects/wizards-nightmare" data-title="Wizard's Nightmare" data-kind="Game" data-category="game" hidden>
+            <article class="view project accent-green" data-route="projects/perception-toolkit" data-title="Perception Toolkit" data-kind="Game AI" data-category="ai" hidden>
                 <header class="banner">
-                    <p class="banner-kind">Game · Roguelike</p>
-                    <h1>Wizard's Nightmare</h1>
-                    <p class="banner-pitch">A roguelike we made as our final-year project. Free to play.</p>
-                    <a class="btn btn-primary" href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">Play on itch.io</a>
-                </header>
-                <section>
-                    <h2>The problem</h2>
-                    <p class="todo">// TODO: what was the brief or goal of the final-year project?</p>
-                </section>
-                <section>
-                    <h2>What I built</h2>
-                    <p>A complete roguelike built as a team for our final-year project and published for free on itch.io.</p>
-                    <p class="todo">// TODO: what was your role on the team?</p>
-                </section>
-                <section>
-                    <h2>How it works</h2>
-                    <p class="todo">// TODO: core loop, systems you built</p>
-                </section>
-                <section>
-                    <h2>Technical highlights</h2>
-                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
-                </section>
-                <section>
-                    <h2>Media</h2>
-                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
-                </section>
-                <section>
-                    <h2>What I learned</h2>
-                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
-                </section>
-                <nav class="pager" aria-label="More projects"></nav>
-                <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Game</dd><dt>Genre</dt><dd>Roguelike</dd><dt>Team</dt><dd>Team project</dd><dt>Engine</dt><dd class="none">None (Engine)</dd><dt>Role</dt><dd class="none">None (Role)</dd></dl>
-                    </details>
-                    <details class="component" open><summary>Links</summary><a href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">itch.io page</a></details>
-                </template>
-            </article>
-
-            <article class="view project accent-terracotta" data-route="projects/monarch-wing-studios" data-title="Monarch Wing Studios" data-kind="Studio" data-category="tool" hidden>
-                <header class="banner">
-                    <p class="banner-kind">Studio · Unity Asset Store</p>
-                    <h1>Monarch Wing Studios</h1>
-                    <p class="banner-pitch">My independent label for game assets and Unity Editor tools.</p>
-                </header>
-                <section>
-                    <h2>The problem</h2>
-                    <p>Every project re-solves the same problems. Packaging those solutions as reusable, documented assets saves other developers that time.</p>
-                </section>
-                <section>
-                    <h2>What I built</h2>
-                    <p>Independent development and publication of scalable game assets and custom Editor tools for the Unity Asset Store.</p>
-                </section>
-                <section>
-                    <h2>How it works</h2>
-                    <p class="todo">// TODO: published assets, development and release workflow</p>
-                </section>
-                <section>
-                    <h2>Technical highlights</h2>
-                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
-                </section>
-                <section>
-                    <h2>Media</h2>
-                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
-                </section>
-                <section>
-                    <h2>What I learned</h2>
-                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
-                </section>
-                <nav class="pager" aria-label="More projects"></nav>
-                <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Studio</dd><dt>Platform</dt><dd>Unity Asset Store</dd><dt>Team</dt><dd>Independent</dd><dt>Since</dt><dd class="none">None (Year)</dd></dl>
-                    </details>
-                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
-                </template>
-            </article>
-
-            <article class="view project accent-green" data-route="projects/realshooter" data-title="RealShooter" data-kind="Framework" data-category="game" hidden>
-                <header class="banner">
-                    <p class="banner-kind">Framework · Unity</p>
-                    <h1>RealShooter</h1>
-                    <p class="banner-pitch">A realistic FPS mechanics framework for Unity.</p>
-                </header>
-                <section>
-                    <h2>The problem</h2>
-                    <p>Shooter mechanics tend to get rewritten for every prototype, with weapon behaviour, ballistics and hit detection tangled together.</p>
-                </section>
-                <section>
-                    <h2>What I built</h2>
-                    <p>A framework of modular weapon systems, ballistics and recoil, and hit detection, built for extensibility across projects.</p>
-                </section>
-                <section>
-                    <h2>How it works</h2>
-                    <ul class="steps">
-                        <li><strong>Modular weapons</strong><span class="todo">// TODO: how weapons are composed</span></li>
-                        <li><strong>Ballistics &amp; recoil</strong><span class="todo">// TODO: projectile and recoil model</span></li>
-                        <li><strong>Hit detection</strong><span class="todo">// TODO: how hits are resolved</span></li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Technical highlights</h2>
-                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
-                </section>
-                <section>
-                    <h2>Media</h2>
-                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
-                </section>
-                <section>
-                    <h2>What I learned</h2>
-                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
-                </section>
-                <nav class="pager" aria-label="More projects"></nav>
-                <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Framework</dd><dt>Engine</dt><dd>Unity</dd><dt>Genre</dt><dd>FPS</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
-                    </details>
-                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
-                </template>
-            </article>
-
-            <article class="view project accent-blue" data-route="projects/perception-toolkit" data-title="Perception Toolkit" data-kind="Game AI" data-category="ai" hidden>
-                <header class="banner">
-                    <p class="banner-kind">Game AI · Systems</p>
+                    <p class="banner-kind">Game AI · Unity 6</p>
                     <h1>Perception Toolkit</h1>
-                    <p class="banner-pitch">Configurable sight and hearing for AI agents.</p>
+                    <p class="banner-pitch">Sight and hearing for AI agents, in 2D and 3D.</p>
                 </header>
                 <section>
                     <h2>The problem</h2>
-                    <p>Stealth and combat AI only feel fair when enemies react to what they could plausibly see and hear.</p>
+                    <p>Stealth and combat AI only feel fair when enemies react to what they could plausibly see and hear, and give the player a moment of warning before they commit. A raw "is the player in range" check gives neither.</p>
                 </section>
                 <section>
                     <h2>What I built</h2>
-                    <p>A sensory perception system for AI agents: configurable sight and hearing detection used to drive stealth, alert, and combat behaviors.</p>
+                    <p>A modular perception package: drop-in sense components (2D field of view, 3D field of view, hearing) that each track their own awareness, plus an agent component that aggregates every sense into one state an FSM or behavior tree can react to through C# or UnityEvents.</p>
                 </section>
                 <section>
                     <h2>How it works</h2>
                     <ul class="steps">
-                        <li><strong>Sight</strong><span class="todo">// TODO: view cone, range, occlusion?</span></li>
-                        <li><strong>Hearing</strong><span class="todo">// TODO: how noise is emitted and detected</span></li>
-                        <li><strong>Behaviors</strong><span class="todo">// TODO: how stimuli drive stealth / alert / combat</span></li>
+                        <li><strong>Vision</strong>A view cone with range and angle, plus an omnidirectional inner radius that detects instantly. Candidates come from a non-allocating overlap query, then a raycast checks line of sight against an obstacle mask.</li>
+                        <li><strong>Hearing</strong>Noise emitters and noise zones broadcast events. Each listener applies distance falloff, ignores anything below an audible threshold and remembers the last noise briefly.</li>
+                        <li><strong>Awareness</strong>Unaware → Suspicious → Aware. A target must be detected for a confirm time before it's spotted, and a lose timer keeps agents from forgetting instantly.</li>
+                        <li><strong>Editor tooling</strong>Custom Scene-view handles to drag the cone's angle and radii, and gizmos tinted by the current awareness level.</li>
                     </ul>
                 </section>
                 <section>
                     <h2>Try it</h2>
                     <div class="demo">
                         <svg class="perception-demo" data-demo="perception" viewBox="0 0 640 320" role="img" aria-label="Interactive perception demo: move your pointer to sneak past the agent">
-                            <circle class="hearing" cx="320" cy="170" r="110"/>
+                            <circle class="hearing" cx="320" cy="170" r="130"/>
                             <path class="cone"/>
+                            <circle class="inner" cx="320" cy="170" r="45"/>
                             <circle class="agent" cx="320" cy="170" r="12"/>
                             <circle class="player" cx="-50" cy="-50" r="8"/>
                         </svg>
-                        <p class="demo-caption">You're the dot. Stay out of the cone, and move slowly inside the dashed circle or it will hear you. <strong class="demo-status">Unaware</strong></p>
+                        <div class="demo-controls">
+                            <span>Awareness <b class="demo-status">Unaware</b></span>
+                            <span class="meter" aria-hidden="true"><span></span></span>
+                        </div>
+                        <p class="demo-caption">You're the dot. The cone and the small inner circle are sight; moving fast inside the dashed circle makes noise. Linger and the confirm meter fills from Suspicious to Aware, just like the toolkit's timers.</p>
                     </div>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
-                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                    <p>Every sense shares the same detection tick, so awareness behaves consistently whether it came from sight or sound. Detection runs on an interval rather than every frame.</p>
+                    <p class="code-title">PerceptionSenseBase.cs</p>
+<pre><code>private void RunDetectionTick(float elapsed)
+{
+    bool found = TryDetect(out IPerceivable detected, out bool instantDetect);
+    if (found)
+    {
+        loseTimer = 0f;
+        confirmTimer = instantDetect ? detectionTime : confirmTimer + elapsed;
+        if (confirmTimer &gt;= detectionTime &amp;&amp; Awareness != AwarenessLevel.Aware)
+        {
+            Awareness = AwarenessLevel.Aware;
+            CurrentTarget = detected;
+            RaiseSpotted(detected);
+        }
+        else if (confirmTimer &gt; 0f &amp;&amp; Awareness == AwarenessLevel.Unaware)
+        {
+            Awareness = AwarenessLevel.Suspicious;
+            RaiseSuspicious(detected);
+        }
+    }
+    else
+    {
+        if (Awareness != AwarenessLevel.Unaware) loseTimer += elapsed;
+        if (loseTimer &gt; loseTime)
+        {
+            if (Awareness == AwarenessLevel.Aware) RaiseLost(CurrentTarget);
+            Awareness = AwarenessLevel.Unaware;
+            CurrentTarget = null;
+            confirmTimer = 0f;
+            loseTimer = 0f;
+        }
+    }
+}</code></pre>
                 </section>
                 <section>
                     <h2>Media</h2>
@@ -368,33 +317,172 @@
                 <nav class="pager" aria-label="More projects"></nav>
                 <template class="inspector">
                     <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Game AI</dd><dt>Senses</dt><dd>Sight, Hearing</dd><dt>Engine</dt><dd class="none">None (Engine)</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                        <dl class="fields"><dt>Type</dt><dd>Game AI</dd><dt>Engine</dt><dd>Unity 6</dd><dt>Language</dt><dd>C#</dd><dt>Senses</dt><dd>Sight 2D/3D, Hearing</dd><dt>States</dt><dd>Unaware, Suspicious, Aware</dd></dl>
                     </details>
-                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
                 </template>
             </article>
 
-            <article class="view project accent-terracotta" data-route="projects/neuronal-ai-plane" data-title="Neuronal AI Plane" data-kind="Machine Learning" data-category="ai" hidden>
+            <article class="view project accent-terracotta" data-route="projects/realshooter" data-title="RealShooter" data-kind="Ballistics Sim" data-category="sim" hidden>
                 <header class="banner">
-                    <p class="banner-kind">Machine Learning · Physics</p>
+                    <p class="banner-kind">Simulation · Unity 6</p>
+                    <h1>RealShooter</h1>
+                    <p class="banner-pitch">A long-range rifle simulator built on real external ballistics, not hitscan.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Most shooters fake bullets with a raycast or a simple projectile. At 600 m and beyond that falls apart: real bullets slow down along a Mach-dependent drag curve, drift with the wind, and even feel the Earth's rotation. Unity's PhysX can't represent any of that.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A custom ballistics simulation with physically based drag, wind, Coriolis and spin drift, driven by real ammunition data, plus a scoped rifle whose elevation and windage turrets click in 0.1 mil steps like the real thing.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <ul class="steps">
+                        <li><strong>Real drag data</strong>Standard G1/G7 Mach→Cd tables, scaled by each bullet's form factor (sectional density / BC), so published ballistic coefficients plug straight in.</li>
+                        <li><strong>RK4 integration</strong>Projectiles are plain C# objects integrated with Runge-Kutta 4 and substeps in FixedUpdate, with gravity, drag and Coriolis as continuous forces.</li>
+                        <li><strong>Atmosphere</strong>A weather system derives air density and speed of sound from temperature, pressure and humidity; gravity varies with latitude and altitude.</li>
+                        <li><strong>Spin drift</strong>Miller's gyroscopic stability factor and Litz's spin-drift formula, with a warning when a barrel's twist rate can't stabilize the bullet.</li>
+                        <li><strong>No tunneling</strong>Each substep sweeps a raycast from the previous position, so fast bullets can't skip through thin targets.</li>
+                        <li><strong>Test range tooling</strong>One menu command rebuilds a test scene with targets at 100, 300, 600 and 900 m, fully wired.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Try it</h2>
+                    <div class="demo ballistics" data-demo="ballistics">
+                        <div class="demo-controls sliders">
+                            <label>Muzzle velocity <output>800</output> m/s <input type="range" data-input="v0" min="700" max="950" step="5" value="800"></label>
+                            <label>G7 BC <output>0.223</output> <input type="range" data-input="bc" min="0.15" max="0.35" step="0.001" value="0.223"></label>
+                            <label>Crosswind <output>4</output> m/s <input type="range" data-input="wind" min="0" max="10" step="0.5" value="4"></label>
+                            <label>Zero <output>100</output> m <input type="range" data-input="zero" min="100" max="300" step="50" value="100"></label>
+                        </div>
+                        <svg class="trajectory" viewBox="0 0 640 260" role="img" aria-label="Bullet drop and wind drift over range"></svg>
+                        <div class="dope-wrap">
+                            <table class="dope">
+                                <thead><tr><th>Range</th><th>Drop</th><th>Elevation</th><th>Wind drift</th><th>Windage</th><th>Time</th><th>Velocity</th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <p class="demo-caption">A .308 175 gr bullet using RealShooter's own G7 drag table, form-factor formula and RK4 integrator, ported to JavaScript. Turret corrections are in 0.1 mil clicks. Simplified: standard atmosphere, no Coriolis or spin drift.</p>
+                    </div>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <p>One RK4 step over (position, velocity). Every acceleration evaluation samples drag at the current Mach number, gravity and Coriolis; spin drift is applied afterwards as an empirical correction so it isn't double-counted with a Magnus force.</p>
+                    <p class="code-title">PhysicsManager.cs</p>
+<pre><code>Vector3 a1 = ComputeAcceleration(p0, v0, projectile);
+Vector3 v1 = v0 + a1 * (dt * 0.5f);
+Vector3 p1 = p0 + v0 * (dt * 0.5f);
+
+Vector3 a2 = ComputeAcceleration(p1, v1, projectile);
+Vector3 v2 = v0 + a2 * (dt * 0.5f);
+Vector3 p2 = p0 + v1 * (dt * 0.5f);
+
+Vector3 a3 = ComputeAcceleration(p2, v2, projectile);
+Vector3 v3 = v0 + a3 * dt;
+Vector3 p3 = p0 + v2 * dt;
+
+Vector3 a4 = ComputeAcceleration(p3, v3, projectile);
+
+projectile.Velocity = v0 + (dt / 6f) * (a1 + 2f * a2 + 2f * a3 + a4);
+projectile.Position = p0 + (dt / 6f) * (v0 + 2f * v1 + 2f * v2 + v3);
+projectile.TimeOfFlight += dt;
+
+ApplySpinDrift(projectile);
+CheckImpact(projectile, stepStartPosition, projectile.Position);</code></pre>
+                    <p class="code-title">BallisticsMath.cs</p>
+<pre><code>public static Vector3 GetDragAcceleration(Vector3 velocityRelativeToAir, BulletData bullet,
+                                          float airDensity, float speedOfSound)
+{
+    float speed = velocityRelativeToAir.magnitude;
+    if (speed &lt; 0.01f) return Vector3.zero;
+
+    float mach = speed / speedOfSound;
+    float standardCd = DragTables.GetStandardCd(bullet.dragModel, mach);
+    float actualCd = standardCd * bullet.FormFactor;
+
+    float dragForce = 0.5f * airDensity * speed * speed * actualCd * bullet.CrossSectionalAreaM2;
+    return -velocityRelativeToAir.normalized * (dragForce / bullet.MassKg);
+}</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Ballistics simulator</dd><dt>Engine</dt><dd>Unity 6 · URP</dd><dt>Language</dt><dd>C#</dd><dt>Integrator</dt><dd>RK4 + substeps</dd><dt>Drag</dt><dd>G1 / G7 tables</dd><dt>Year</dt><dd>2026</dd></dl>
+                    </details>
+                </template>
+            </article>
+
+            <article class="view project accent-blue" data-route="projects/neuronal-ai-plane" data-title="Neuronal AI Plane" data-kind="Neuroevolution" data-category="ai" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Machine Learning · Unity 6</p>
                     <h1>Neuronal AI Plane</h1>
-                    <p class="banner-pitch">A neural network that learns to fly.</p>
+                    <p class="banner-pitch">Planes that learn to fly through evolution, with no training data and no backpropagation.</p>
                 </header>
                 <section>
                     <h2>The problem</h2>
-                    <p>Hand-authored flight AI is brittle. Can an agent learn to pilot a plane on its own?</p>
+                    <p>Hand-tuning a flight controller to dodge obstacles and hit checkpoints is brittle. Could a population of planes discover how to fly the course on their own, just by being rewarded for getting further?</p>
                 </section>
                 <section>
                     <h2>What I built</h2>
-                    <p>A neural-network-driven flight agent that learns to pilot a plane through reinforcement, exploring evolving AI decision-making in a physics-based environment.</p>
+                    <p>A neuroevolution sandbox written from scratch in plain C#: a feedforward neural network and a genetic algorithm, with no ML libraries. Fifty planes fly at once; when the whole generation has crashed or timed out, the best brains are bred into the next one.</p>
                 </section>
                 <section>
                     <h2>How it works</h2>
-                    <p class="todo">// TODO: network inputs/outputs, reward, training setup</p>
+                    <ul class="steps">
+                        <li><strong>Sensors</strong>14 inputs: 8 obstacle rays across a 120° view, the local direction to the next ring, speed, bank and pitch.</li>
+                        <li><strong>Brain</strong>A 14 → 16 → 8 → 5 tanh network outputs throttle, brake, pitch, roll and yaw every physics step.</li>
+                        <li><strong>Fitness</strong>Distance flown, plus a bonus for every checkpoint ring passed in order. Crashing or dropping too low ends the episode.</li>
+                        <li><strong>Evolution</strong>Elitism keeps the top 4 untouched; the rest come from tournament selection, uniform crossover and 5% mutation.</li>
+                        <li><strong>Architecture</strong>Clean Model / View / Controller split, hyperparameters in a ScriptableObject, and editor scripts that build the test scene.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Try it</h2>
+                    <div class="demo">
+                        <canvas class="neuro-demo" data-demo="neuro" width="640" height="300" role="img" aria-label="A population of planes evolving to fly through gaps"></canvas>
+                        <div class="demo-controls">
+                            <span>Generation <b data-stat="gen">1</b></span>
+                            <span>Alive <b data-stat="alive">0</b></span>
+                            <span>Best <b data-stat="best">0</b></span>
+                            <label>Speed <select data-control="speed"><option value="1">1×</option><option value="4" selected>4×</option><option value="16">16×</option></select></label>
+                            <button type="button" class="tool-btn" data-control="reset">Reset</button>
+                        </div>
+                        <p class="demo-caption">A 2D version of the same idea: 40 planes, each flown by its own small network (5 rays + heading → 6 → steering). Nobody tells them how to fly. After each generation the elite survive and the rest are bred with tournament selection, crossover and mutation.</p>
+                    </div>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
-                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                    <p>The whole genetic algorithm fits on one screen and is pure C#, so it's independent of Unity and easy to test.</p>
+                    <p class="code-title">GeneticAlgorithm.cs</p>
+<pre><code>// Elitism + tournament selection + uniform crossover + mutation.
+public static List&lt;NeuralNetwork&gt; Evolve(List&lt;PlaneGenome&gt; genomes, TrainingConfig config)
+{
+    List&lt;PlaneGenome&gt; ranked = genomes.OrderByDescending(g =&gt; g.Fitness).ToList();
+    var nextGeneration = new List&lt;NeuralNetwork&gt;(config.populationSize);
+
+    int eliteCount = Mathf.Min(config.elitismCount, ranked.Count);
+    for (int i = 0; i &lt; eliteCount; i++)
+        nextGeneration.Add(ranked[i].Brain.Clone());
+
+    while (nextGeneration.Count &lt; config.populationSize)
+    {
+        NeuralNetwork parentA = TournamentSelect(ranked, config.tournamentSize);
+        NeuralNetwork parentB = TournamentSelect(ranked, config.tournamentSize);
+        NeuralNetwork child = NeuralNetwork.Crossover(parentA, parentB);
+        child.Mutate(config.mutationRate, config.mutationStrength);
+        nextGeneration.Add(child);
+    }
+    return nextGeneration;
+}</code></pre>
                 </section>
                 <section>
                     <h2>Media</h2>
@@ -407,33 +495,63 @@
                 <nav class="pager" aria-label="More projects"></nav>
                 <template class="inspector">
                     <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Machine Learning</dd><dt>Approach</dt><dd>Reinforcement</dd><dt>Engine</dt><dd class="none">None (Engine)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                        <dl class="fields"><dt>Type</dt><dd>Neuroevolution</dd><dt>Engine</dt><dd>Unity 6</dd><dt>Language</dt><dd>C# (no ML libs)</dd><dt>Network</dt><dd>14 → 16 → 8 → 5</dd><dt>Population</dt><dd>50 planes</dd></dl>
                     </details>
-                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
                 </template>
             </article>
 
-            <article class="view project accent-green" data-route="projects/scriptable-object-factory" data-title="Scriptable Object Factory" data-kind="Editor Tool" data-category="tool" hidden>
+            <article class="view project accent-green" data-route="projects/wizards-nightmare" data-title="Wizard's Nightmare" data-kind="Game" data-category="game" hidden>
                 <header class="banner">
-                    <p class="banner-kind">Editor Tool · Unity</p>
-                    <h1>Scriptable Object Factory</h1>
-                    <p class="banner-pitch">A faster ScriptableObject workflow for Unity.</p>
+                    <p class="banner-kind">Game · Roguelike · Team project</p>
+                    <h1>Wizard's Nightmare</h1>
+                    <p class="banner-pitch">A roguelike we built and shipped as our final-year thesis project. Free to play.</p>
+                    <a class="btn btn-primary" href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">Play on itch.io</a>
                 </header>
                 <section>
                     <h2>The problem</h2>
-                    <p>Data-driven Unity projects pile up ScriptableObject assets, and creating and organizing them by hand is slow.</p>
+                    <p>Our final-year thesis: design, build and ship a complete roguelike as a team of four in about eight months, with procedurally assembled rooms, a roster of enemies and bosses, and upgrades and progression between runs.</p>
                 </section>
                 <section>
                     <h2>What I built</h2>
-                    <p>A Unity Editor tool that streamlines creating, organizing, and managing ScriptableObject assets through a factory-driven, data-oriented workflow.</p>
+                    <p>I was the team's most active contributor, focused on enemy AI and the game's core architecture: the state machine every enemy and boss runs on, pathfinding and movement, and the service layer the rest of the game's systems plug into. I also worked on the player, UI, stats and the upgrade system.</p>
                 </section>
                 <section>
                     <h2>How it works</h2>
-                    <p class="todo">// TODO: how the factory workflow works</p>
+                    <ul class="steps">
+                        <li><strong>Enemy FSM</strong>Enemies and bosses are built from reusable states and conditions: chase, charge, intercept, teleport around the target, stun, spawn minions, special-attack pools and multi-phase boss logic.</li>
+                        <li><strong>Theta* pathfinding</strong>Any-angle pathfinding, so enemies take straight, natural routes through rooms instead of zig-zagging along grid cells.</li>
+                        <li><strong>Steering behaviours</strong>Chase, flee and evade steering for smooth movement once a path is known.</li>
+                        <li><strong>Service Locator</strong>Events, stats, currency, inventory and upgrade pools are registered against interfaces and lazily created on first use, keeping systems decoupled from each other.</li>
+                    </ul>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
-                    <pre><code>// TODO: paste a representative snippet from the project</code></pre>
+                    <p>Services are registered once at startup, before any scene loads, and created only when first requested.</p>
+                    <p class="code-title">ServiceLocator.cs</p>
+<pre><code>[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+public static void DefineServices()
+{
+    Register&lt;IEventService, EventService&gt;();
+    Register&lt;IPersistenceService, LocalPersistenceService&gt;();
+    Register&lt;IUserDataService, UserDataService&gt;();
+    Register&lt;IStatsService, StatsService&gt;();
+    Register&lt;ICurrencyService, CurrencyService&gt;();
+    Register&lt;IInventoryService, InventoryService&gt;();
+    Register&lt;IUpgradePoolService, UpgradePoolService&gt;(true);
+    Register&lt;ISpawnItemsService, SpawnItemsService&gt;(true);
+}
+
+public static T Get&lt;T&gt;() where T : IGameService
+{
+    return (T)Get(typeof(T));
+}
+
+private static IGameService Get(Type p_type)
+{
+    return m_serviceInstances.TryGetValue(p_type, out var l_instance)
+        ? l_instance
+        : InitializeService(p_type);
+}</code></pre>
                 </section>
                 <section>
                     <h2>Media</h2>
@@ -446,9 +564,73 @@
                 <nav class="pager" aria-label="More projects"></nav>
                 <template class="inspector">
                     <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity</dd><dt>Language</dt><dd>C#</dd><dt>Role</dt><dd class="none">None (Role)</dd><dt>Year</dt><dd class="none">None (Year)</dd></dl>
+                        <dl class="fields"><dt>Type</dt><dd>Game</dd><dt>Genre</dt><dd>Roguelike</dd><dt>Engine</dt><dd>Unity 2022.3 · URP</dd><dt>Team</dt><dd>4 people</dd><dt>My focus</dt><dd>Enemy AI, architecture</dd><dt>Years</dt><dd>2023 – 2024</dd></dl>
                     </details>
-                    <details class="component" open><summary>Links</summary><p class="none">None (Link)</p></details>
+                    <details class="component" open><summary>Links</summary><a href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">itch.io page</a></details>
+                </template>
+            </article>
+
+            <article class="view project accent-terracotta" data-route="projects/scriptable-object-factory" data-title="Scriptable Object Factory" data-kind="Editor Tool" data-category="tool" hidden>
+                <header class="banner">
+                    <p class="banner-kind">Editor Tool · Unity 6</p>
+                    <h1>SO Factory</h1>
+                    <p class="banner-pitch">Create any ScriptableObject in your project in one click.</p>
+                </header>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Data-driven Unity projects pile up ScriptableObject types, and creating them means a <code>[CreateAssetMenu]</code> attribute on every class, then digging through nested menus and moving each new asset to the right folder.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>An Editor window that discovers every ScriptableObject type in the project automatically and creates an asset of it in one click, straight into the right folder. It also ships inside the Visual FSM Graph Editor, where it's used to create states and conditions quickly.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <ul class="steps">
+                        <li><strong>Type discovery</strong>Scans <code>TypeCache</code> for concrete ScriptableObject types, filtering out Unity's own types and editor windows and inspectors.</li>
+                        <li><strong>Fast to use</strong>Types grouped by namespace, live search, full keyboard navigation and an Alt+O shortcut.</li>
+                        <li><strong>Per-type defaults</strong>Hide types or give each one a default folder, right from a row's context menu. Settings are saved as JSON in ProjectSettings so the whole team shares them.</li>
+                        <li><strong>Native feel</strong>A Preferences page with reorderable lists and a searchable type picker built on Unity's own AdvancedDropdown.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <p>Discovery is a single TypeCache query, and folder paths returned by the native picker are force-imported, so assets can be created in a folder the user only just made.</p>
+                    <p class="code-title">ScriptableObjectTypeUtil.cs</p>
+<pre><code>public static List&lt;Type&gt; GetAllProjectScriptableObjectTypes()
+{
+    return TypeCache.GetTypesDerivedFrom&lt;ScriptableObject&gt;()
+        .Where(t =&gt; !t.IsAbstract &amp;&amp; !t.IsGenericType &amp;&amp; IsProjectType(t) &amp;&amp; IsAssetWorthy(t))
+        .OrderBy(t =&gt; t.Name)
+        .ToList();
+}
+
+// A folder made with the native picker's "New Folder" button exists on disk but
+// not yet in the AssetDatabase, so creating an asset there would fail.
+public static string ToProjectRelativePath(string p_absoluteFolderPath)
+{
+    if (string.IsNullOrEmpty(p_absoluteFolderPath) || !p_absoluteFolderPath.Contains(Application.dataPath))
+        return null;
+
+    string l_relative = "Assets" + p_absoluteFolderPath.Replace(Application.dataPath, "");
+    AssetDatabase.ImportAsset(l_relative, ImportAssetOptions.ForceSynchronousImport);
+    return l_relative;
+}</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity 6</dd><dt>UI</dt><dd>IMGUI</dd><dt>Language</dt><dd>C#</dd><dt>Team</dt><dd>Solo</dd><dt>Year</dt><dd>2026</dd></dl>
+                    </details>
+                    <details class="component" open><summary>Publisher</summary><p>Monarch Wing Studios</p></details>
                 </template>
             </article>
 
@@ -464,7 +646,7 @@
                 <dl class="fields"><dt>Name</dt><dd>Nicolás Fernández Perera</dd><dt>Alias</dt><dd>NFPerera</dd><dt>Role</dt><dd>Unity Developer</dd><dt>Company</dt><dd>Fernobite</dd></dl>
             </details>
             <details class="component" open><summary>Now (Script)</summary>
-                <dl class="fields"><dt>Working on</dt><dd>Gameplay &amp; editor tools</dd><dt>Playing</dt><dd class="none">None (Game)</dd><dt>Learning</dt><dd class="none">None (Skill)</dd></dl>
+                <dl class="fields"><dt>Working on</dt><dd>Gameplay &amp; editor tools</dd><dt>Playing</dt><dd class="none">Metal Gear Solid, complete saga</dd><dt>Learning</dt><dd class="none"> Automatizations, Chat Bots and Agro Culture</dd></dl>
             </details>
         </template>
     </aside>
