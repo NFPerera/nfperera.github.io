@@ -68,16 +68,17 @@
                         <a href="#/contact" class="btn btn-ghost">Get in touch</a>
                     </div>
                 </section>
-                <section class="accent-blue">
-                    <h2 class="path">Scene <span>/</span> Neuronal AI Plane</h2>
+                <section class="accent-green">
+                    <h2 class="path">Scene <span>/</span> AgroLife</h2>
                     <div class="demo">
-                        <canvas class="neuro-demo" data-demo="neuro" width="640" height="300" role="img" aria-label="A population of planes evolving to fly through gaps"></canvas>
+                        <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons"></canvas>
                         <div class="demo-controls">
-                            <span>Generation <b data-stat="gen">1</b></span>
-                            <span>Alive <b data-stat="alive">0</b></span>
-                            <span>Best <b data-stat="best">0</b></span>
+                            <span><b data-stat="date">25 Nov</b> · Year <b data-stat="year">1</b></span>
+                            <span>Mean temp <b data-stat="temp">–</b></span>
+                            <span data-stat="lot">Point at a lot</span>
                         </div>
-                        <p class="demo-caption">Forty planes learning to fly the gaps, live. No training data: every generation is bred from the best of the last. <a href="#/projects/neuronal-ai-plane">How it works</a></p>
+                        <div class="demo-controls agro-legend" data-legend></div>
+                        <p class="demo-caption">What I'm building now: a farming game and simulator on real data. These are real lots from Pergamino, Argentina, going through the seasons. <a href="#/projects/agrolife">How it works</a></p>
                     </div>
                 </section>
                 <section>
@@ -143,6 +144,88 @@
                 Code inside <pre><code> must be HTML-escaped (&lt; &gt; &amp;).
                 <template class="asset-icon"> holds the home-grid icon (100x100 line-art SVG); initials are used if absent.
             -->
+
+            <article class="view project accent-green" data-route="projects/agrolife" data-title="AgroLife" data-kind="Farming Sim" data-category="sim" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="muted" x="8" y="10" width="38" height="34" rx="2"/>
+<rect class="fill" x="54" y="10" width="38" height="34" rx="2"/>
+<rect class="muted" x="8" y="52" width="38" height="38" rx="2"/>
+<rect x="54" y="52" width="38" height="38" rx="2"/><path class="soft" d="M64 52 V90 M73 52 V90 M82 52 V90"/>
+<path d="M27 84 V66 M27 72 C27 65 32 61 38 61 C38 68 33 72 27 72 M27 77 C27 71 22 68 16 68 C16 74 21 77 27 77"/></svg></template>
+                <header class="banner">
+                    <p class="banner-kind">Farming Sim · Unity 6 · In development</p>
+                    <h1>AgroLife</h1>
+                    <p class="banner-pitch">A farming game and simulator built on real weather, soils, yields and costs, to learn how a crop campaign works by playing one.</p>
+                </header>
+                <section>
+                    <h2>Try it</h2>
+                    <div class="demo">
+                        <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons"></canvas>
+                        <div class="demo-controls">
+                            <span><b data-stat="date">25 Nov</b> · Year <b data-stat="year">1</b></span>
+                            <span>Mean temp <b data-stat="temp">–</b></span>
+                            <label>Speed <select data-control="speed"><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option></select></label>
+                            <label>Layer <select data-control="layer"><option value="status">Status</option><option value="ip">Productivity index</option></select></label>
+                            <span data-stat="lot">Point at a lot</span>
+                        </div>
+                        <div class="demo-controls agro-legend" data-legend></div>
+                        <p class="demo-caption">Real lots from Pergamino, Buenos Aires: a slice of the 3,477 the game's data pipeline cut out of the road network. They're farmed the way the game farms your neighbours: on 1 May each lot takes the next crop of the rotation (maize, soybean, wheat followed by second soybean) on its typical sowing date, and crops develop by growing degree-days under weather drawn from the generator's parameters for Pergamino. The productivity index layer comes from INTA's soil charts.</p>
+                    </div>
+                </section>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Agronomy students learn gross margins, break-even yields, water budgets and pest damage thresholds on paper. They rarely get to run a whole campaign and see why a yield came out the way it did.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A Unity 2D game on top of a simulation core written in plain C#, with no Unity references, so it can be tested and calibrated without a scene. Version 1 covers farming in one region, Pergamino, in Argentina's core farming zone: buy or lease land, plan each lot's crop, sowing date, genetics and fertiliser against a live budget, decide whether to spray when a pest crosses its threshold, then sell the grain or keep it in silo bags. Every harvest comes with a report that breaks the yield down by cause.</p>
+                    <p>It's aimed at agrotechnical-school and agronomy students, so it uses the real technical vocabulary, with an optional glossary, instead of simplifying it away.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <ul class="steps">
+                        <li><strong>Data pipeline</strong>Python scripts build the region from open data: lots cut from OpenStreetMap's road network, soil texture and water holding capacity from SoilGrids, the productivity index from INTA's soil charts, and each lot's road distance to the nearest grain elevator.</li>
+                        <li><strong>Weather</strong>A WGEN-type generator fitted to NASA POWER data from 1991 to 2025: a Markov chain picks the wet days, a gamma distribution the rain, AR(1) anomalies the temperatures. Each campaign draws an El Niño, neutral or La Niña phase, and the forecast the player sees is right 70% of the time.</li>
+                        <li><strong>Soil and crops</strong>A daily water bucket per lot (Hargreaves evapotranspiration, Saxton &amp; Rawls drainage), nitrogen and phosphorus balances, and crop stages driven by growing degree-days.</li>
+                        <li><strong>Yield</strong>Potential yield, scaled by the lot's productivity index, minus losses from sowing date, water, waterlogging, temperature, nitrogen, phosphorus and pests.</li>
+                        <li><strong>Determinism</strong>A PCG32 generator with a separate stream for each subsystem, so the same seed gives the same weather whatever the player does.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Technical highlights</h2>
+                    <p>Every harvest explains itself. Losses are taken in a fixed order, each one from what the previous ones left, so the report's waterfall always adds up to the real yield.</p>
+                    <p class="code-title">ModeloCultivo.cs</p>
+<pre><code>public static Cascada CalcularCascada(EstadoCultivo e, CultivoParams c)
+{
+    var p = PerdidasActuales(e, c);
+    var k = new Cascada { PotencialQqHa = e.RindeAlcanzableQqHa };
+    double resto = k.PotencialQqHa;
+    double Quitar(double fraccion) { double q = resto * fraccion; resto -= q; return q; }
+    k.FechaQq = Quitar(p.Fecha);
+    k.AguaQq = Quitar(p.Agua);
+    k.AnegamientoQq = Quitar(p.Anegamiento);
+    k.TemperaturaQq = Quitar(p.Temperatura);
+    k.NitrogenoQq = Quitar(p.Nitrogeno);
+    k.FosforoQq = Quitar(p.Fosforo);
+    k.PlagasQq = Quitar(p.Plagas);
+    k.RealQqHa = resto;
+    return k;
+}</code></pre>
+                </section>
+                <section>
+                    <h2>Media</h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2>What I learned</h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary>Project</summary>
+                        <dl class="fields"><dt>Type</dt><dd>Farming sim · Educational</dd><dt>Engine</dt><dd>Unity 6.3 · URP 2D</dd><dt>UI</dt><dd>UI Toolkit</dd><dt>Language</dt><dd>C# · Python</dd><dt>Region</dt><dd>Pergamino, Argentina</dd><dt>Status</dt><dd>In development</dd><dt>Year</dt><dd>2026</dd></dl>
+                    </details>
+                </template>
+            </article>
 
             <article class="view project accent-blue" data-route="projects/visual-fsm-editor" data-title="Visual FSM Editor" data-kind="Editor Tool" data-category="tool" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="fill" x="6" y="41" width="28" height="16" rx="4"/>

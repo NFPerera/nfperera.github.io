@@ -544,7 +544,10 @@ code { font-family: var(--mono); }
 .meter span { display: block; height: 100%; width: 0; background: var(--warn); }
 .perception-demo.aware ~ .demo-controls .meter span { background: var(--accent-terracotta); }
 
-.neuro-demo { display: block; width: 100%; height: auto; }
+.neuro-demo, .agro-demo { display: block; width: 100%; height: auto; }
+.agro-demo { cursor: crosshair; }
+.agro-legend { gap: 0.4rem 1rem; }
+.swatch { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 2px; margin-right: 0.4em; vertical-align: -0.05em; }
 
 .sliders {
     display: grid;
