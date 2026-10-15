@@ -1,0 +1,56 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1791062926.4062357,
+    "seen": 1792090305.8513231,
+    "ast_hash": "fabe6679700f036689c2293f0833dd9a",
+    "semantic_hash": ""
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1791068444.0595927,
+    "seen": 1792090305.8513265,
+    "ast_hash": "1a1dd88b368109b0d6694b3ba67dfa05",
+    "semantic_hash": ""
+  },
+  ".taste-skill/realshooter/report.json": {
+    "mtime": 1792085691.7701328,
+    "seen": 1792090305.851328,
+    "ast_hash": "8f9af461d364fdc054693da7c889d73c",
+    "semantic_hash": ""
+  },
+  "script.js": {
+    "mtime": 1792090074.6598356,
+    "seen": 1792090305.851329,
+    "ast_hash": "0a0ff05a3c98723ebbdb21ca7a87c1e9",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1792090293.089735,
+    "seen": 1792090305.8513298,
+    "ast_hash": "ad857ca0cb4110e84ef8b183f4b9cde7",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1792090251.4919205,
+    "seen": 1792090305.8513303,
+    "ast_hash": "8844cfd5dbd6a73367b14ec95a583cf8",
+    "semantic_hash": ""
+  },
+  ".taste-skill/realshooter/desktop-fold.jpg": {
+    "mtime": 1792084824.2545033,
+    "seen": 1792090305.851331,
+    "ast_hash": "11d1a5419bcfc453d9df3ea2379ca272",
+    "semantic_hash": ""
+  },
+  ".taste-skill/realshooter/desktop-page-01.jpg": {
+    "mtime": 1792084824.7333095,
+    "seen": 1792090305.851332,
+    "ast_hash": "22b419fffdac03602b6480209e7f9587",
+    "semantic_hash": ""
+  },
+  "MonarchWingStudiosImage.png": {
+    "mtime": 1771205022.7830248,
+    "seen": 1792090305.8513327,
+    "ast_hash": "b9f257849df003e988892da8ac0818ae",
+    "semantic_hash": ""
+  }
+}
