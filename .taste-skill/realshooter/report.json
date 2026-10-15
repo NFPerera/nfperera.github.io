@@ -1,0 +1,404 @@
+{
+ "url": "http://localhost:8765/#/projects/realshooter",
+ "at": "2026-10-15T17:20:21.951Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.95
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 900,
+     "screens": 1,
+     "words": 679,
+     "img": 2,
+     "video": 0,
+     "canvas": 2,
+     "svg": 9,
+     "sections": 44,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [
+      "☾"
+     ]
+    },
+    "hero": {
+     "text": "RealShooter",
+     "words": 1,
+     "chars": 11,
+     "lines": 1,
+     "size": 38.4,
+     "vw": 2.7,
+     "font": "Segoe UI",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.15,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.15,
+     "top": 237,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": null,
+    "headings": [
+     {
+      "text": "RealShooter",
+      "words": 1,
+      "chars": 11,
+      "lines": 1,
+      "size": 38.4,
+      "vw": 2.7,
+      "font": "Segoe UI",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.15,
+      "top": 237,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Segoe UI",
+       "share": 0.6,
+       "mono": false
+      },
+      {
+       "family": "Cascadia Code",
+       "share": 0.4,
+       "mono": true
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      16,
+      17,
+      18,
+      20,
+      38
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Segoe UI",
+      "size": 17,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": null
+     },
+     "measureChars": 82,
+     "max": {
+      "size": 38.4,
+      "vw": 2.7,
+      "font": "Segoe UI",
+      "text": "RealShooter"
+     },
+     "monoShare": 0.4,
+     "monoProseShare": 0.1,
+     "monoFamilies": [
+      "Cascadia Code"
+     ],
+     "monoSamples": [
+      "NFPerera",
+      "Editor",
+      "Simulation · Unity 6",
+      "800",
+      "0.223",
+      "4"
+     ],
+     "microLabels": 1,
+     "microLabelShare": 0.005,
+     "microSamples": [
+      "Simulation · Unity 6"
+     ],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 2
+    },
+    "eyebrows": [
+     {
+      "text": "Simulation · Unity 6",
+      "above": "RealShooter",
+      "upper": true,
+      "tracked": true,
+      "mono": true,
+      "pill": false,
+      "size": 12.8,
+      "top": 214
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#101315",
+     "bodyBgHsl": {
+      "h": 204,
+      "s": 0.14,
+      "l": 0.07
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#1d2124",
+       "top": 46,
+       "hsl": {
+        "h": 206,
+        "s": 0.11,
+        "l": 0.13
+       }
+      },
+      {
+       "color": "#181b1e",
+       "top": 76,
+       "hsl": {
+        "h": 210,
+        "s": 0.11,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#8f989e",
+       "share": 0.5
+      },
+      {
+       "color": "#e4e1dc",
+       "share": 0.47
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      },
+      {
+       "color": "#1d2124",
+       "share": 0
+      },
+      {
+       "color": "#bf7b58",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#1d2124",
+      "hsl": {
+       "h": 206,
+       "s": 0.11,
+       "l": 0.13
+      },
+      "fg": "#e4e1dc"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 1,
+     "radius": 8,
+     "height": 84,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "☾ Night"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 1,
+     "scrims": 1,
+     "gradientSamples": [
+      "header.banner → linear-gradient(rgba(255, 255, 255, 0.07) 1px, rgba(0, 0, 0, 0) 1px), linear-gradient(90deg, rgba(255, 255, 25"
+     ],
+     "gradientText": 0,
+     "hairlines": 5,
+     "hairlineSamples": [
+      "div.demo-controls.sliders 694px",
+      "div.dope-wrap 694px",
+      "p.demo-caption 694px",
+      "details.component 280px",
+      "form#console-form.console-input 936px"
+     ],
+     "outlinedBoxes": 11,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 11,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 1419
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "svg",
+      "ratio": 0.14
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": false,
+     "height": 44,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 1440,
+   "message": "1 eyebrow/kicker label(s) above headings: \"Simulation · Unity 6\" above \"RealShooter\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence."
+  },
+  {
+   "level": "FAIL",
+   "id": "mono",
+   "width": 1440,
+   "message": "Monospace type outside code: Cascadia Code — e.g. \"NFPerera\", \"Editor\", \"Simulation · Unity 6\", \"800\"",
+   "fix": "Set it in the text face. Monospace is for literal code inside <pre>/<code> only."
+  },
+  {
+   "level": "WARN",
+   "id": "micro-label",
+   "width": 1440,
+   "message": "1 tiny uppercase letter-spaced label(s): \"Simulation · Unity 6\"",
+   "fix": "Prefer sentence case at body size."
+  },
+  {
+   "level": "FAIL",
+   "id": "emoji",
+   "width": 1440,
+   "message": "Emoji in the page: ☾",
+   "fix": "Remove. Use words or real imagery."
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "1 gradient fill(s): header.banner → linear-gradient(rgba(255, 255, 255, 0.07) 1px, rgba(0, 0, 0, 0) 1px), linear-gradient(90deg, rgba(255, 255, 25",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility."
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "5 thin rule(s)/divider line(s): div.demo-controls.sliders 694px | div.dope-wrap 694px | p.demo-caption 694px | details.component 280px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields."
+  },
+  {
+   "level": "FAIL",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "11 boxes drawn with a 1px outline.",
+   "fix": "Define a surface by its fill (one tone step from the page) or leave the content unboxed."
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "small-text",
+   "width": 1440,
+   "message": "2 text block(s) under 13px.",
+   "fix": "Nothing meant to be read goes below 13px."
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 38.4px (2.7vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw."
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 0 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "S:\\Git\\MonarchWingStudios.github.io\\.taste-skill\\realshooter\\desktop-fold.jpg",
+   "pages": [
+    "S:\\Git\\MonarchWingStudios.github.io\\.taste-skill\\realshooter\\desktop-page-01.jpg"
+   ]
+  }
+ ]
+}

@@ -68,6 +68,18 @@
                         <a href="#/contact" class="btn btn-ghost">Get in touch</a>
                     </div>
                 </section>
+                <section class="accent-blue">
+                    <h2 class="path">Scene <span>/</span> Neuronal AI Plane</h2>
+                    <div class="demo">
+                        <canvas class="neuro-demo" data-demo="neuro" width="640" height="300" role="img" aria-label="A population of planes evolving to fly through gaps"></canvas>
+                        <div class="demo-controls">
+                            <span>Generation <b data-stat="gen">1</b></span>
+                            <span>Alive <b data-stat="alive">0</b></span>
+                            <span>Best <b data-stat="best">0</b></span>
+                        </div>
+                        <p class="demo-caption">Forty planes learning to fly the gaps, live. No training data: every generation is bred from the best of the last. <a href="#/projects/neuronal-ai-plane">How it works</a></p>
+                    </div>
+                </section>
                 <section>
                     <h2 class="path">Assets <span>/</span> Projects</h2>
                     <div id="asset-grid" class="asset-grid"></div>
@@ -125,7 +137,7 @@
             <!--
                 PROJECTS — one <article class="view project"> each. Order here = order in the grid and prev/next.
                 data-category: game | tool | ai | sim  (Hierarchy folder)
-                Banner image: add <img class="banner-media" src="..." alt=""> inside .banner
+                Banner image: add <img class="banner-media" src="img/..." alt=""> inside .banner; it also becomes the home-grid thumbnail
                 Gallery: replace a .slot with <img src="..." alt="...">
                 The <template class="inspector"> fills the Inspector panel when the project is open.
                 Code inside <pre><code> must be HTML-escaped (&lt; &gt; &amp;).
@@ -145,6 +157,25 @@
                     <a class="btn btn-primary" href="https://assetstore.unity.com/packages/tools/behavior-ai/visual-fsm-graph-editor-ai-state-machine-tool-367524" target="_blank" rel="noopener">View on the Asset Store</a>
                 </header>
                 <section>
+                    <h2>Try it</h2>
+                    <div class="demo">
+                        <svg class="fsm-demo" data-demo="fsm" viewBox="0 0 640 300" role="img" aria-label="Interactive state machine: drag the states around">
+                            <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow-head" d="M0 0L10 5L0 10z"/></marker></defs>
+                            <path class="edge" data-from="idle" data-to="patrol" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="patrol" data-to="chase" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="chase" data-to="search" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="search" data-to="patrol" marker-end="url(#arrow)"/>
+                            <path class="edge" data-from="search" data-to="idle" marker-end="url(#arrow)"/>
+                            <!-- data-m: position on phones, where the demo switches to a narrower 400x320 canvas -->
+                            <g class="node" data-id="idle" data-x="30" data-y="128" data-m="10 138"><rect width="120" height="44" rx="8"/><text x="60" y="27">Idle</text></g>
+                            <g class="node" data-id="patrol" data-x="200" data-y="40" data-m="140 18"><rect width="120" height="44" rx="8"/><text x="60" y="27">Patrol</text></g>
+                            <g class="node" data-id="chase" data-x="470" data-y="70" data-m="270 138"><rect width="120" height="44" rx="8"/><text x="60" y="27">Chase</text></g>
+                            <g class="node" data-id="search" data-x="320" data-y="215" data-m="140 258"><rect width="120" height="44" rx="8"/><text x="60" y="27">Search</text></g>
+                        </svg>
+                        <p class="demo-caption">Drag the states around. Like the tool's Play-mode view, the active state lights up as the machine takes random transitions.</p>
+                    </div>
+                </section>
+                <section>
                     <h2>The problem</h2>
                     <p>AI behaviors like patrol, chase and attack are naturally state machines, but written by hand they become a tangle of flags and switch statements. They are hard to read, hard to debug at runtime, and every new transition means touching code.</p>
                 </section>
@@ -162,24 +193,6 @@
                         <li><strong>Readable graphs</strong>Reroute points, "Go To State" markers instead of canvas-wide wires, shared condition boxes, and direction arrows on every curve.</li>
                         <li><strong>Production polish</strong>Descriptive validation errors, a Preferences page, orphan-asset cleanup, URP and Built-in support, and a full PDF manual.</li>
                     </ul>
-                </section>
-                <section>
-                    <h2>Try it</h2>
-                    <div class="demo">
-                        <svg class="fsm-demo" data-demo="fsm" viewBox="0 0 640 300" role="img" aria-label="Interactive state machine: drag the states around">
-                            <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow-head" d="M0 0L10 5L0 10z"/></marker></defs>
-                            <path class="edge" data-from="idle" data-to="patrol" marker-end="url(#arrow)"/>
-                            <path class="edge" data-from="patrol" data-to="chase" marker-end="url(#arrow)"/>
-                            <path class="edge" data-from="chase" data-to="search" marker-end="url(#arrow)"/>
-                            <path class="edge" data-from="search" data-to="patrol" marker-end="url(#arrow)"/>
-                            <path class="edge" data-from="search" data-to="idle" marker-end="url(#arrow)"/>
-                            <g class="node" data-id="idle" data-x="30" data-y="128"><rect width="120" height="44" rx="8"/><text x="60" y="27">Idle</text></g>
-                            <g class="node" data-id="patrol" data-x="200" data-y="40"><rect width="120" height="44" rx="8"/><text x="60" y="27">Patrol</text></g>
-                            <g class="node" data-id="chase" data-x="470" data-y="70"><rect width="120" height="44" rx="8"/><text x="60" y="27">Chase</text></g>
-                            <g class="node" data-id="search" data-x="320" data-y="215"><rect width="120" height="44" rx="8"/><text x="60" y="27">Search</text></g>
-                        </svg>
-                        <p class="demo-caption">Drag the states around. Like the tool's Play-mode view, the active state lights up as the machine takes random transitions.</p>
-                    </div>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
@@ -246,6 +259,23 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
                     <p class="banner-pitch">Sight and hearing for AI agents, in 2D and 3D.</p>
                 </header>
                 <section>
+                    <h2>Try it</h2>
+                    <div class="demo">
+                        <svg class="perception-demo" data-demo="perception" viewBox="0 0 640 320" role="img" aria-label="Interactive perception demo: move your pointer to sneak past the agent">
+                            <circle class="hearing" cx="320" cy="170" r="130"/>
+                            <path class="cone"/>
+                            <circle class="inner" cx="320" cy="170" r="45"/>
+                            <circle class="agent" cx="320" cy="170" r="12"/>
+                            <circle class="player" cx="-50" cy="-50" r="8"/>
+                        </svg>
+                        <div class="demo-controls">
+                            <span>Awareness <b class="demo-status">Unaware</b></span>
+                            <span class="meter" aria-hidden="true"><span></span></span>
+                        </div>
+                        <p class="demo-caption">You're the dot (on a phone, drag a finger). The cone and the small inner circle are sight; moving fast inside the dashed circle makes noise. Linger and the confirm meter fills from Suspicious to Aware, just like the toolkit's timers.</p>
+                    </div>
+                </section>
+                <section>
                     <h2>The problem</h2>
                     <p>Stealth and combat AI only feel fair when enemies react to what they could plausibly see and hear, and give the player a moment of warning before they commit. A raw "is the player in range" check gives neither.</p>
                 </section>
@@ -261,23 +291,6 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
                         <li><strong>Awareness</strong>Unaware → Suspicious → Aware. A target must be detected for a confirm time before it's spotted, and a lose timer keeps agents from forgetting instantly.</li>
                         <li><strong>Editor tooling</strong>Custom Scene-view handles to drag the cone's angle and radii, and gizmos tinted by the current awareness level.</li>
                     </ul>
-                </section>
-                <section>
-                    <h2>Try it</h2>
-                    <div class="demo">
-                        <svg class="perception-demo" data-demo="perception" viewBox="0 0 640 320" role="img" aria-label="Interactive perception demo: move your pointer to sneak past the agent">
-                            <circle class="hearing" cx="320" cy="170" r="130"/>
-                            <path class="cone"/>
-                            <circle class="inner" cx="320" cy="170" r="45"/>
-                            <circle class="agent" cx="320" cy="170" r="12"/>
-                            <circle class="player" cx="-50" cy="-50" r="8"/>
-                        </svg>
-                        <div class="demo-controls">
-                            <span>Awareness <b class="demo-status">Unaware</b></span>
-                            <span class="meter" aria-hidden="true"><span></span></span>
-                        </div>
-                        <p class="demo-caption">You're the dot. The cone and the small inner circle are sight; moving fast inside the dashed circle makes noise. Linger and the confirm meter fills from Suspicious to Aware, just like the toolkit's timers.</p>
-                    </div>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
@@ -344,25 +357,6 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
                     <p class="banner-pitch">A long-range rifle simulator built on real external ballistics, not hitscan.</p>
                 </header>
                 <section>
-                    <h2>The problem</h2>
-                    <p>Most shooters fake bullets with a raycast or a simple projectile. At 600 m and beyond that falls apart: real bullets slow down along a Mach-dependent drag curve, drift with the wind, and even feel the Earth's rotation. Unity's PhysX can't represent any of that.</p>
-                </section>
-                <section>
-                    <h2>What I built</h2>
-                    <p>A custom ballistics simulation with physically based drag, wind, Coriolis and spin drift, driven by real ammunition data, plus a scoped rifle whose elevation and windage turrets click in 0.1 mil steps like the real thing.</p>
-                </section>
-                <section>
-                    <h2>How it works</h2>
-                    <ul class="steps">
-                        <li><strong>Real drag data</strong>Standard G1/G7 Mach→Cd tables, scaled by each bullet's form factor (sectional density / BC), so published ballistic coefficients plug straight in.</li>
-                        <li><strong>RK4 integration</strong>Projectiles are plain C# objects integrated with Runge-Kutta 4 and substeps in FixedUpdate, with gravity, drag and Coriolis as continuous forces.</li>
-                        <li><strong>Atmosphere</strong>A weather system derives air density and speed of sound from temperature, pressure and humidity; gravity varies with latitude and altitude.</li>
-                        <li><strong>Spin drift</strong>Miller's gyroscopic stability factor and Litz's spin-drift formula, with a warning when a barrel's twist rate can't stabilize the bullet.</li>
-                        <li><strong>No tunneling</strong>Each substep sweeps a raycast from the previous position, so fast bullets can't skip through thin targets.</li>
-                        <li><strong>Test range tooling</strong>One menu command rebuilds a test scene with targets at 100, 300, 600 and 900 m, fully wired.</li>
-                    </ul>
-                </section>
-                <section>
                     <h2>Try it</h2>
                     <div class="demo ballistics" data-demo="ballistics">
                         <div class="demo-controls sliders">
@@ -380,6 +374,25 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
                         </div>
                         <p class="demo-caption">A .308 175 gr bullet using RealShooter's own G7 drag table, form-factor formula and RK4 integrator, ported to JavaScript. Turret corrections are in 0.1 mil clicks. Simplified: standard atmosphere, no Coriolis or spin drift.</p>
                     </div>
+                </section>
+                <section>
+                    <h2>The problem</h2>
+                    <p>Most shooters fake bullets with a raycast or a simple projectile. At 600 m and beyond that falls apart: real bullets slow down along a Mach-dependent drag curve, drift with the wind, and even feel the Earth's rotation. Unity's PhysX can't represent any of that.</p>
+                </section>
+                <section>
+                    <h2>What I built</h2>
+                    <p>A custom ballistics simulation with physically based drag, wind, Coriolis and spin drift, driven by real ammunition data, plus a scoped rifle whose elevation and windage turrets click in 0.1 mil steps like the real thing.</p>
+                </section>
+                <section>
+                    <h2>How it works</h2>
+                    <ul class="steps">
+                        <li><strong>Real drag data</strong>Standard G1/G7 Mach→Cd tables, scaled by each bullet's form factor (sectional density / BC), so published ballistic coefficients plug straight in.</li>
+                        <li><strong>RK4 integration</strong>Projectiles are plain C# objects integrated with Runge-Kutta 4 and substeps in FixedUpdate, with gravity, drag and Coriolis as continuous forces.</li>
+                        <li><strong>Atmosphere</strong>A weather system derives air density and speed of sound from temperature, pressure and humidity; gravity varies with latitude and altitude.</li>
+                        <li><strong>Spin drift</strong>Miller's gyroscopic stability factor and Litz's spin-drift formula, with a warning when a barrel's twist rate can't stabilize the bullet.</li>
+                        <li><strong>No tunneling</strong>Each substep sweeps a raycast from the previous position, so fast bullets can't skip through thin targets.</li>
+                        <li><strong>Test range tooling</strong>One menu command rebuilds a test scene with targets at 100, 300, 600 and 900 m, fully wired.</li>
+                    </ul>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
@@ -447,6 +460,20 @@ CheckImpact(projectile, stepStartPosition, projectile.Position);</code></pre>
                     <p class="banner-pitch">Planes that learn to fly through evolution, with no training data and no backpropagation.</p>
                 </header>
                 <section>
+                    <h2>Try it</h2>
+                    <div class="demo">
+                        <canvas class="neuro-demo" data-demo="neuro" width="640" height="300" role="img" aria-label="A population of planes evolving to fly through gaps"></canvas>
+                        <div class="demo-controls">
+                            <span>Generation <b data-stat="gen">1</b></span>
+                            <span>Alive <b data-stat="alive">0</b></span>
+                            <span>Best <b data-stat="best">0</b></span>
+                            <label>Speed <select data-control="speed"><option value="1">1×</option><option value="4" selected>4×</option><option value="16">16×</option></select></label>
+                            <button type="button" class="tool-btn" data-control="reset">Reset</button>
+                        </div>
+                        <p class="demo-caption">A 2D version of the same idea: 40 planes, each flown by its own small network (5 rays + heading → 6 → steering). Nobody tells them how to fly. After each generation the elite survive and the rest are bred with tournament selection, crossover and mutation.</p>
+                    </div>
+                </section>
+                <section>
                     <h2>The problem</h2>
                     <p>Hand-tuning a flight controller to dodge obstacles and hit checkpoints is brittle. Could a population of planes discover how to fly the course on their own, just by being rewarded for getting further?</p>
                 </section>
@@ -463,20 +490,6 @@ CheckImpact(projectile, stepStartPosition, projectile.Position);</code></pre>
                         <li><strong>Evolution</strong>Elitism keeps the top 4 untouched; the rest come from tournament selection, uniform crossover and 5% mutation.</li>
                         <li><strong>Architecture</strong>Clean Model / View / Controller split, hyperparameters in a ScriptableObject, and editor scripts that build the test scene.</li>
                     </ul>
-                </section>
-                <section>
-                    <h2>Try it</h2>
-                    <div class="demo">
-                        <canvas class="neuro-demo" data-demo="neuro" width="640" height="300" role="img" aria-label="A population of planes evolving to fly through gaps"></canvas>
-                        <div class="demo-controls">
-                            <span>Generation <b data-stat="gen">1</b></span>
-                            <span>Alive <b data-stat="alive">0</b></span>
-                            <span>Best <b data-stat="best">0</b></span>
-                            <label>Speed <select data-control="speed"><option value="1">1×</option><option value="4" selected>4×</option><option value="16">16×</option></select></label>
-                            <button type="button" class="tool-btn" data-control="reset">Reset</button>
-                        </div>
-                        <p class="demo-caption">A 2D version of the same idea: 40 planes, each flown by its own small network (5 rays + heading → 6 → steering). Nobody tells them how to fly. After each generation the elite survive and the rest are bred with tournament selection, crossover and mutation.</p>
-                    </div>
                 </section>
                 <section>
                     <h2>Technical highlights</h2>
@@ -679,8 +692,11 @@ public static string ToProjectRelativePath(string p_absoluteFolderPath)
         </template>
     </aside>
 
+    <!-- CONSOLE: collapsed to a status bar showing the last message, like Unity's; click to expand -->
     <section id="console" class="panel" aria-label="Console">
-        <div class="panel-tabs"><span class="tab">Console</span></div>
+        <button type="button" id="console-toggle" class="panel-tabs console-bar" aria-expanded="false" aria-controls="console-log">
+            <span class="tab">Console</span><span id="console-last"></span>
+        </button>
         <ol id="console-log" class="panel-body" aria-live="polite"></ol>
         <form id="console-form" class="console-input">
             <label for="console-input">&gt;</label>

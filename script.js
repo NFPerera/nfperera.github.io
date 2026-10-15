@@ -3,6 +3,8 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 
 // ---------- Console ----------
 const consoleLog = document.getElementById('console-log');
+const consoleToggle = document.getElementById('console-toggle');
+const consoleLast = document.getElementById('console-last');
 
 function log(message, type = '') {
     const li = document.createElement('li');
@@ -11,7 +13,16 @@ function log(message, type = '') {
     li.textContent = message;
     consoleLog.append(li);
     consoleLog.scrollTop = consoleLog.scrollHeight;
+    consoleLast.textContent = message;
 }
+
+function setConsoleOpen(open) {
+    document.body.classList.toggle('console-open', open);
+    consoleToggle.setAttribute('aria-expanded', open);
+    consoleLog.scrollTop = consoleLog.scrollHeight;
+}
+
+consoleToggle.addEventListener('click', () => setConsoleOpen(!document.body.classList.contains('console-open')));
 
 // ---------- Build Hierarchy, asset grid and prev/next from the project articles ----------
 const views = [...document.querySelectorAll('.view')];
@@ -34,11 +45,14 @@ Object.entries(folders).forEach(([category, label]) => {
 
 const assetGrid = document.getElementById('asset-grid');
 projects.forEach((p, i) => {
+    // Thumbnail: the banner screenshot if there is one, else the line-art icon, else initials
+    const shot = p.querySelector('.banner-media');
     const icon = p.querySelector('template.asset-icon');
     const initials = p.dataset.title.split(' ').map(w => w[0]).join('').slice(0, 2);
+    const thumb = shot ? `<img src="${shot.getAttribute('src')}" alt="" loading="lazy">` : icon ? icon.innerHTML : initials;
     assetGrid.insertAdjacentHTML('beforeend',
         `<a class="asset ${accentOf(p)}" href="#/${p.dataset.route}">
-            <span class="asset-icon">${icon ? icon.innerHTML : initials}</span>
+            <span class="asset-icon">${thumb}</span>
             <span class="asset-name">${p.dataset.title}</span>
             <span class="asset-kind">${p.dataset.kind}</span>
         </a>`);
@@ -93,6 +107,12 @@ hierToggle.addEventListener('click', () => {
     hierToggle.setAttribute('aria-expanded', open);
 });
 
+// Tapping outside the open drawer (on its scrim) or pressing Escape closes it
+document.addEventListener('click', e => {
+    if (document.body.classList.contains('hier-open') && !e.target.closest('#hierarchy, #hier-toggle')) closeHierarchy();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHierarchy(); });
+
 // ---------- Day / night theme ----------
 const themeBtn = document.getElementById('theme-toggle');
 const currentTheme = () => root.dataset.theme ||
@@ -142,6 +162,7 @@ consoleForm.addEventListener('submit', e => {
     const input = consoleInput.value.trim();
     consoleInput.value = '';
     if (!input) return;
+    setConsoleOpen(true);
     log('> ' + input, 'cmd');
     const [cmd, ...args] = input.split(/\s+/);
     const run = commands[cmd.toLowerCase()];
@@ -241,9 +262,14 @@ function fsmDemo(svg) {
     svg.dataset.ready = 'true';
 
     const W = 120, H = 44;
-    const { width: vbW, height: vbH } = svg.viewBox.baseVal;
     const nodes = {};
     svg.querySelectorAll('.node').forEach(g => { nodes[g.dataset.id] = g; });
+    // Phones get a narrower canvas so the states stay readable instead of shrinking to fit
+    if (svg.clientWidth < 500) {
+        svg.setAttribute('viewBox', '0 0 400 320');
+        Object.values(nodes).forEach(g => { [g.dataset.x, g.dataset.y] = g.dataset.m.split(' '); });
+    }
+    const { width: vbW, height: vbH } = svg.viewBox.baseVal;
     const edges = [...svg.querySelectorAll('.edge')].map(path => ({ path, from: path.dataset.from, to: path.dataset.to }));
     const pos = id => ({ x: +nodes[id].dataset.x, y: +nodes[id].dataset.y });
 
@@ -505,13 +531,13 @@ function neuroDemo(canvas) {
 
     function frame() {
         if (canvas.closest('[hidden]')) { running = false; return; }
-        const speed = Number(speedSelect.value);
+        const speed = Number(speedSelect?.value || 4); // the Home copy has no controls
         for (let i = 0; i < speed; i++) step();
         draw();
         requestAnimationFrame(frame);
     }
 
-    root.querySelector('[data-control="reset"]').addEventListener('click', () => {
+    root.querySelector('[data-control="reset"]')?.addEventListener('click', () => {
         reset();
         log('Neuroevolution demo reset to generation 1.');
     });
@@ -602,8 +628,11 @@ function ballisticsDemo(root) {
         const formFactor = SECTIONAL_DENSITY / Number(inputs.bc.value);
         const samples = flight(zeroAngle(v0, formFactor, zero), v0, wind, formFactor, MAX_RANGE, 10);
 
-        // Chart: drop and drift in cm over range
-        const left = 70, right = 605, top = 14, bottom = 228;
+        // Chart: drop and drift in cm over range, drawn in CSS pixels so labels stay legible on phones
+        const width = svg.clientWidth;
+        if (!width) return; // hidden; the ResizeObserver renders it once it is shown
+        svg.setAttribute('viewBox', `0 0 ${width} 260`);
+        const left = 70, right = width - 35, top = 14, bottom = 228;
         const values = samples.flatMap(p => [p.y * 100, p.z * 100]).concat(0);
         const rawStep = (Math.max(...values) - Math.min(...values)) / 4;
         const magnitude = 10 ** Math.floor(Math.log10(rawStep));
@@ -640,7 +669,7 @@ function ballisticsDemo(root) {
     }
 
     Object.values(inputs).forEach(el => el.addEventListener('input', render));
-    render();
+    new ResizeObserver(render).observe(svg);
 }
 
 // ---------- Init ----------
