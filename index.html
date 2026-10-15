@@ -4,46 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFPerera · Game & Software Developer</title>
-    <meta name="description" content="Nicolás Fernández Perera — game and software developer. Gameplay systems, editor tools, game AI and software architecture.">
+    <meta name="description" content="Nicolás Fernández Perera — game and software developer. Gameplay systems, editor tools, game AI and software architecture." data-es-content="Nicolás Fernández Perera — desarrollador de videojuegos y de software. Sistemas de gameplay, herramientas de editor, IA de juegos y arquitectura de software.">
     <link rel="icon" type="image/png" href="MonarchWingStudiosImage.png">
     <link rel="stylesheet" href="style.css">
     <!-- Apply saved day/night theme before first paint to avoid a flash -->
-    <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+    <script>(function () { try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {} })();</script>
+    <!-- Same for the language: a saved choice wins, otherwise follow the browser. Translated text is in <span lang="en|es"> pairs. -->
+    <script>(function () { var l; try { l = localStorage.getItem('lang'); } catch (e) {} l = l || (/^es/i.test(navigator.language) ? 'es' : 'en'); document.documentElement.dataset.lang = l; document.documentElement.lang = l; })();</script>
 </head>
 <body>
     <header class="toolbar">
         <div class="toolbar-left">
-            <button id="hier-toggle" class="icon-btn mobile-only" aria-label="Open hierarchy" aria-expanded="false" aria-controls="hierarchy">☰</button>
+            <button id="hier-toggle" class="icon-btn mobile-only" aria-label="Open hierarchy" data-es-aria-label="Abrir jerarquía" aria-expanded="false" aria-controls="hierarchy">☰</button>
             <a href="#/" class="brand">
                 <img src="MonarchWingStudiosImage.png" alt="" width="26" height="26">
                 <span>NFPerera</span><small>Editor</small>
             </a>
         </div>
-        <button id="play-btn" class="icon-btn play-btn" aria-pressed="false" title="Play">▶</button>
+        <div class="toolbar-center">
+            <button type="button" id="lang-toggle" class="tool-btn lang-btn"><span class="lang-opt" data-opt="en">EN</span><span class="lang-opt" data-opt="es">ES</span></button>
+            <button id="play-btn" class="icon-btn play-btn" aria-pressed="false" title="Play">▶</button>
+        </div>
         <div class="toolbar-right">
-            <button id="theme-toggle" class="tool-btn" aria-label="Toggle day/night theme"></button>
+            <button id="theme-toggle" class="tool-btn" aria-label="Toggle day/night theme" data-es-aria-label="Cambiar entre tema de día y de noche"></button>
         </div>
     </header>
 
     <!-- HIERARCHY: section links are static, project links are generated from the project articles -->
-    <nav id="hierarchy" class="panel" aria-label="Hierarchy">
-        <div class="panel-tabs"><span class="tab">Hierarchy</span></div>
+    <nav id="hierarchy" class="panel" aria-label="Hierarchy" data-es-aria-label="Jerarquía">
+        <div class="panel-tabs"><span class="tab"><span lang="en">Hierarchy</span><span lang="es">Jerarquía</span></span></div>
         <div class="panel-body">
             <ul class="tree">
                 <li>
                     <details open>
                         <summary class="tree-root">NFPerera</summary>
                         <ul>
-                            <li><a href="#/" class="item-home">Home</a></li>
-                            <li><a href="#/about" class="item-about">About</a></li>
-                            <li><a href="#/experience" class="item-experience">Experience</a></li>
+                            <li><a href="#/" class="item-home"><span lang="en">Home</span><span lang="es">Inicio</span></a></li>
+                            <li><a href="#/about" class="item-about"><span lang="en">About</span><span lang="es">Sobre mí</span></a></li>
+                            <li><a href="#/experience" class="item-experience"><span lang="en">Experience</span><span lang="es">Experiencia</span></a></li>
                             <li>
                                 <details open>
-                                    <summary>Projects</summary>
+                                    <summary><span lang="en">Projects</span><span lang="es">Proyectos</span></summary>
                                     <ul id="tree-projects"></ul>
                                 </details>
                             </li>
-                            <li><a href="#/contact" class="item-contact">Contact</a></li>
+                            <li><a href="#/contact" class="item-contact"><span lang="en">Contact</span><span lang="es">Contacto</span></a></li>
                         </ul>
                     </details>
                 </li>
@@ -57,81 +62,81 @@
         <div id="scene-body" class="panel-body scene-body">
 
             <!-- HOME -->
-            <article class="view" data-route="" data-title="Home">
+            <article class="view" data-route="" data-title="Home" data-title-es="Inicio">
                 <section class="hero">
-                    <p class="eyebrow">Hi, I'm</p>
+                    <p class="eyebrow"><span lang="en">Hi, I'm</span><span lang="es">Hola, soy</span></p>
                     <h1>Nicolás Fernández Perera</h1>
                     <p class="hero-role"><span class="prompt">&gt;</span> <span id="typing-text">Software Developer</span><span class="caret" aria-hidden="true"></span></p>
-                    <p class="hero-tagline">Crafting robust system architectures, custom tools, and engaging gameplay mechanics.</p>
+                    <p class="hero-tagline"><span lang="en">Crafting robust system architectures, custom tools, and engaging gameplay mechanics.</span><span lang="es">Diseño arquitecturas de sistemas robustas, herramientas a medida y mecánicas de gameplay atractivas.</span></p>
                     <div class="hero-actions">
-                        <a href="#/about" class="btn btn-primary">About me</a>
-                        <a href="#/contact" class="btn btn-ghost">Get in touch</a>
+                        <a href="#/about" class="btn btn-primary"><span lang="en">About me</span><span lang="es">Sobre mí</span></a>
+                        <a href="#/contact" class="btn btn-ghost"><span lang="en">Get in touch</span><span lang="es">Contáctame</span></a>
                     </div>
                 </section>
                 <section class="accent-green">
-                    <h2 class="path">Scene <span>/</span> AgroLife</h2>
+                    <h2 class="path"><span lang="en">Scene</span><span lang="es">Escena</span> <span>/</span> AgroLife</h2>
                     <div class="demo">
-                        <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons"></canvas>
+                        <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons" data-es-aria-label="Lotes agrícolas reales de Pergamino, Argentina, que cambian de color a medida que sus cultivos crecen a lo largo de las estaciones"></canvas>
                         <div class="demo-controls">
-                            <span><b data-stat="date">25 Nov</b> · Year <b data-stat="year">1</b></span>
-                            <span>Mean temp <b data-stat="temp">–</b></span>
+                            <span><b data-stat="date">25 Nov</b> · <span lang="en">Year</span><span lang="es">Año</span> <b data-stat="year">1</b></span>
+                            <span><span lang="en">Mean temp</span><span lang="es">Temp. media</span> <b data-stat="temp">–</b></span>
                             <span data-stat="lot">Point at a lot</span>
                         </div>
                         <div class="demo-controls agro-legend" data-legend></div>
-                        <p class="demo-caption">What I'm building now: a farming game and simulator on real data. These are real lots from Pergamino, Argentina, going through the seasons. <a href="#/projects/agrolife">How it works</a></p>
+                        <p class="demo-caption"><span lang="en">What I'm building now: a farming game and simulator on real data. These are real lots from Pergamino, Argentina, going through the seasons. <a href="#/projects/agrolife">How it works</a></span><span lang="es">Lo que estoy construyendo ahora: un juego y simulador agropecuario con datos reales. Estos son lotes reales de Pergamino, Argentina, atravesando las estaciones. <a href="#/projects/agrolife">Cómo funciona</a></span></p>
                     </div>
                 </section>
                 <section>
-                    <h2 class="path">Assets <span>/</span> Projects</h2>
+                    <h2 class="path">Assets <span>/</span> <span lang="en">Projects</span><span lang="es">Proyectos</span></h2>
                     <div id="asset-grid" class="asset-grid"></div>
                 </section>
             </article>
 
             <!-- ABOUT -->
-            <article class="view page" data-route="about" data-title="About" hidden>
-                <h1>About Me</h1>
-                <p>I am a Software and Video Game Developer. My core focus is on system architecture, object-oriented programming, editor tool development, and creating scalable, maintainable code.</p>
+            <article class="view page" data-route="about" data-title="About" data-title-es="Sobre mí" hidden>
+                <h1><span lang="en">About Me</span><span lang="es">Sobre mí</span></h1>
+                <p><span lang="en">I am a Software and Video Game Developer. My core focus is on system architecture, object-oriented programming, editor tool development, and creating scalable, maintainable code.</span><span lang="es">Soy desarrollador de software y de videojuegos. Mi foco principal está en la arquitectura de sistemas, la programación orientada a objetos, el desarrollo de herramientas de editor y la creación de código escalable y mantenible.</span></p>
                 <div class="interest-list">
-                    <div class="accent-blue"><strong>Gameplay</strong><span>Mechanics for online &amp; offline games</span></div>
-                    <div class="accent-green"><strong>Tools</strong><span>Editor extensions that speed teams up</span></div>
-                    <div class="accent-terracotta"><strong>Game AI</strong><span>Perception, agents, neural networks</span></div>
-                    <div class="accent-blue"><strong>Architecture</strong><span>Scalable, maintainable systems</span></div>
+                    <div class="accent-blue"><strong>Gameplay</strong><span><span lang="en">Mechanics for online &amp; offline games</span><span lang="es">Mecánicas para juegos online y offline</span></span></div>
+                    <div class="accent-green"><strong><span lang="en">Tools</span><span lang="es">Herramientas</span></strong><span><span lang="en">Editor extensions that speed teams up</span><span lang="es">Extensiones de editor que aceleran a los equipos</span></span></div>
+                    <div class="accent-terracotta"><strong><span lang="en">Game AI</span><span lang="es">IA de juegos</span></strong><span><span lang="en">Perception, agents, neural networks</span><span lang="es">Percepción, agentes, redes neuronales</span></span></div>
+                    <div class="accent-blue"><strong><span lang="en">Architecture</span><span lang="es">Arquitectura</span></strong><span><span lang="en">Scalable, maintainable systems</span><span lang="es">Sistemas escalables y mantenibles</span></span></div>
                 </div>
-                <h2>Skills</h2>
+                <h2><span lang="en">Skills</span><span lang="es">Habilidades</span></h2>
                 <div class="component-list">
-                    <details class="component" open><summary>Languages</summary><ul class="tags"><li>C#</li><li>C++</li><li>Python</li></ul></details>
-                    <details class="component" open><summary>Engines &amp; Frameworks</summary><ul class="tags"><li>Unity</li><li>Unreal Engine</li><li>.NET</li></ul></details>
-                    <details class="component" open><summary>Version Control</summary><ul class="tags"><li>Git</li><li>LFS</li><li>Submodules</li><li>Subtrees</li></ul></details>
+                    <details class="component" open><summary><span lang="en">Languages</span><span lang="es">Lenguajes</span></summary><ul class="tags"><li>C#</li><li>C++</li><li>Python</li></ul></details>
+                    <details class="component" open><summary><span lang="en">Engines &amp; Frameworks</span><span lang="es">Motores y frameworks</span></summary><ul class="tags"><li>Unity</li><li>Unreal Engine</li><li>.NET</li></ul></details>
+                    <details class="component" open><summary><span lang="en">Version Control</span><span lang="es">Control de versiones</span></summary><ul class="tags"><li>Git</li><li>LFS</li><li>Submodules</li><li>Subtrees</li></ul></details>
                 </div>
             </article>
 
             <!-- EXPERIENCE -->
-            <article class="view page" data-route="experience" data-title="Experience" hidden>
-                <h1>Experience</h1>
+            <article class="view page" data-route="experience" data-title="Experience" data-title-es="Experiencia" hidden>
+                <h1><span lang="en">Experience</span><span lang="es">Experiencia</span></h1>
                 <ol class="timeline">
                     <li>
                         <div class="job-header">
-                            <h3>Unity Developer · <a href="https://fernobite.com/" target="_blank" rel="noopener">Fernobite</a></h3>
-                            <span class="job-date">Oct 2024 – Present</span>
+                            <h3><span lang="en">Unity Developer</span><span lang="es">Desarrollador Unity</span> · <a href="https://fernobite.com/" target="_blank" rel="noopener">Fernobite</a></h3>
+                            <span class="job-date"><span lang="en">Oct 2024 – Present</span><span lang="es">Oct 2024 – Presente</span></span>
                         </div>
                         <ul>
-                            <li>Integration of core gameplay features for <strong>online and offline</strong> games.</li>
-                            <li>Development of <strong>internal optimization tools</strong> for the Unity Editor.</li>
+                            <li><span lang="en">Integration of core gameplay features for <strong>online and offline</strong> games.</span><span lang="es">Integración de funcionalidades centrales de gameplay para juegos <strong>online y offline</strong>.</span></li>
+                            <li><span lang="en">Development of <strong>internal optimization tools</strong> for the Unity Editor.</span><span lang="es">Desarrollo de <strong>herramientas internas de optimización</strong> para el Editor de Unity.</span></li>
                         </ul>
                     </li>
                 </ol>
             </article>
 
             <!-- CONTACT -->
-            <article class="view page" data-route="contact" data-title="Contact" hidden>
-                <h1>Let's Connect</h1>
-                <p>Currently seeking Gameplay Programmer opportunities.</p>
+            <article class="view page" data-route="contact" data-title="Contact" data-title-es="Contacto" hidden>
+                <h1><span lang="en">Let's Connect</span><span lang="es">Conectemos</span></h1>
+                <p><span lang="en">Currently seeking Gameplay Programmer opportunities.</span><span lang="es">Actualmente busco oportunidades como Programador de Gameplay.</span></p>
                 <button type="button" id="email-btn" class="btn btn-primary mono" data-email="nfperera02@gmail.com">nfperera02@gmail.com</button>
                 <p id="email-status" class="hint" aria-live="polite">Click to copy</p>
                 <div class="social-links">
                     <a href="https://github.com/NFPerera" target="_blank" rel="noopener">GitHub</a>
                     <a href="https://www.linkedin.com/in/nfperera/" target="_blank" rel="noopener">LinkedIn</a>
-                    <a href="mailto:nfperera02@gmail.com">Email</a>
+                    <a href="mailto:nfperera02@gmail.com"><span lang="en">Email</span><span lang="es">Correo</span></a>
                 </div>
             </article>
 
@@ -145,56 +150,56 @@
                 <template class="asset-icon"> holds the home-grid icon (100x100 line-art SVG); initials are used if absent.
             -->
 
-            <article class="view project accent-green" data-route="projects/agrolife" data-title="AgroLife" data-kind="Farming Sim" data-category="sim" hidden>
+            <article class="view project accent-green" data-route="projects/agrolife" data-title="AgroLife" data-kind="Farming Sim" data-kind-es="Simulador agrícola" data-category="sim" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="muted" x="8" y="10" width="38" height="34" rx="2"/>
 <rect class="fill" x="54" y="10" width="38" height="34" rx="2"/>
 <rect class="muted" x="8" y="52" width="38" height="38" rx="2"/>
 <rect x="54" y="52" width="38" height="38" rx="2"/><path class="soft" d="M64 52 V90 M73 52 V90 M82 52 V90"/>
 <path d="M27 84 V66 M27 72 C27 65 32 61 38 61 C38 68 33 72 27 72 M27 77 C27 71 22 68 16 68 C16 74 21 77 27 77"/></svg></template>
                 <header class="banner">
-                    <p class="banner-kind">Farming Sim · Unity 6 · In development</p>
+                    <p class="banner-kind"><span lang="en">Farming Sim · Unity 6 · In development</span><span lang="es">Simulador agrícola · Unity 6 · En desarrollo</span></p>
                     <h1>AgroLife</h1>
-                    <p class="banner-pitch">A farming game and simulator built on real weather, soils, yields and costs, to learn how a crop campaign works by playing one.</p>
+                    <p class="banner-pitch"><span lang="en">A farming game and simulator built on real weather, soils, yields and costs, to learn how a crop campaign works by playing one.</span><span lang="es">Un juego y simulador agropecuario construido con clima, suelos, rindes y costos reales, para aprender cómo funciona una campaña agrícola jugándola.</span></p>
                 </header>
                 <section>
-                    <h2>Try it</h2>
+                    <h2><span lang="en">Try it</span><span lang="es">Pruébalo</span></h2>
                     <div class="demo">
-                        <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons"></canvas>
+                        <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons" data-es-aria-label="Lotes agrícolas reales de Pergamino, Argentina, que cambian de color a medida que sus cultivos crecen a lo largo de las estaciones"></canvas>
                         <div class="demo-controls">
-                            <span><b data-stat="date">25 Nov</b> · Year <b data-stat="year">1</b></span>
-                            <span>Mean temp <b data-stat="temp">–</b></span>
-                            <label>Speed <select data-control="speed"><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option></select></label>
-                            <label>Layer <select data-control="layer"><option value="status">Status</option><option value="ip">Productivity index</option></select></label>
+                            <span><b data-stat="date">25 Nov</b> · <span lang="en">Year</span><span lang="es">Año</span> <b data-stat="year">1</b></span>
+                            <span><span lang="en">Mean temp</span><span lang="es">Temp. media</span> <b data-stat="temp">–</b></span>
+                            <label><span lang="en">Speed</span><span lang="es">Velocidad</span> <select data-control="speed"><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option></select></label>
+                            <label><span lang="en">Layer</span><span lang="es">Capa</span> <select data-control="layer"><option value="status" data-es="Estado">Status</option><option value="ip" data-es="Índice de productividad">Productivity index</option></select></label>
                             <span data-stat="lot">Point at a lot</span>
                         </div>
                         <div class="demo-controls agro-legend" data-legend></div>
-                        <p class="demo-caption">Real lots from Pergamino, Buenos Aires: a slice of the 3,477 the game's data pipeline cut out of the road network. They're farmed the way the game farms your neighbours: on 1 May each lot takes the next crop of the rotation (maize, soybean, wheat followed by second soybean) on its typical sowing date, and crops develop by growing degree-days under weather drawn from the generator's parameters for Pergamino. The productivity index layer comes from INTA's soil charts.</p>
+                        <p class="demo-caption"><span lang="en">Real lots from Pergamino, Buenos Aires: a slice of the 3,477 the game's data pipeline cut out of the road network. They're farmed the way the game farms your neighbours: on 1 May each lot takes the next crop of the rotation (maize, soybean, wheat followed by second soybean) on its typical sowing date, and crops develop by growing degree-days under weather drawn from the generator's parameters for Pergamino. The productivity index layer comes from INTA's soil charts.</span><span lang="es">Lotes reales de Pergamino, Buenos Aires: un recorte de los 3.477 que el pipeline de datos del juego sacó de la red de caminos. Se trabajan como el juego trabaja a tus vecinos: el 1 de mayo cada lote toma el siguiente cultivo de la rotación (maíz, soja, trigo seguido de soja de segunda) en su fecha de siembra típica, y los cultivos se desarrollan por grados-día con un clima sorteado a partir de los parámetros del generador para Pergamino. La capa de índice de productividad sale de las cartas de suelo del INTA.</span></p>
                     </div>
                 </section>
                 <section>
-                    <h2>The problem</h2>
-                    <p>Agronomy students learn gross margins, break-even yields, water budgets and pest damage thresholds on paper. They rarely get to run a whole campaign and see why a yield came out the way it did.</p>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">Agronomy students learn gross margins, break-even yields, water budgets and pest damage thresholds on paper. They rarely get to run a whole campaign and see why a yield came out the way it did.</span><span lang="es">Los estudiantes de agronomía aprenden margen bruto, rinde de indiferencia, balances hídricos y umbrales de daño por plagas en el papel. Pocas veces pueden llevar adelante una campaña entera y ver por qué un rinde dio como dio.</span></p>
                 </section>
                 <section>
-                    <h2>What I built</h2>
-                    <p>A Unity 2D game on top of a simulation core written in plain C#, with no Unity references, so it can be tested and calibrated without a scene. Version 1 covers farming in one region, Pergamino, in Argentina's core farming zone: buy or lease land, plan each lot's crop, sowing date, genetics and fertiliser against a live budget, decide whether to spray when a pest crosses its threshold, then sell the grain or keep it in silo bags. Every harvest comes with a report that breaks the yield down by cause.</p>
-                    <p>It's aimed at agrotechnical-school and agronomy students, so it uses the real technical vocabulary, with an optional glossary, instead of simplifying it away.</p>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">A Unity 2D game on top of a simulation core written in plain C#, with no Unity references, so it can be tested and calibrated without a scene. Version 1 covers farming in one region, Pergamino, in Argentina's core farming zone: buy or lease land, plan each lot's crop, sowing date, genetics and fertiliser against a live budget, decide whether to spray when a pest crosses its threshold, then sell the grain or keep it in silo bags. Every harvest comes with a report that breaks the yield down by cause.</span><span lang="es">Un juego 2D en Unity montado sobre un núcleo de simulación escrito en C# puro, sin referencias a Unity, de modo que se puede testear y calibrar sin una escena. La versión 1 cubre la agricultura en una región, Pergamino, en plena zona núcleo de Argentina: comprar o arrendar tierra, planificar el cultivo, la fecha de siembra, la genética y la fertilización de cada lote contra un presupuesto en vivo, decidir si aplicar cuando una plaga supera su umbral, y después vender el grano o guardarlo en silobolsa. Cada cosecha viene con un reporte que desglosa el rinde por causa.</span></p>
+                    <p><span lang="en">It's aimed at agrotechnical-school and agronomy students, so it uses the real technical vocabulary, with an optional glossary, instead of simplifying it away.</span><span lang="es">Está pensado para estudiantes de escuelas agrotécnicas y de agronomía, por eso usa el vocabulario técnico real, con un glosario opcional, en lugar de simplificarlo.</span></p>
                 </section>
                 <section>
-                    <h2>How it works</h2>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
                     <ul class="steps">
-                        <li><strong>Data pipeline</strong>Python scripts build the region from open data: lots cut from OpenStreetMap's road network, soil texture and water holding capacity from SoilGrids, the productivity index from INTA's soil charts, and each lot's road distance to the nearest grain elevator.</li>
-                        <li><strong>Weather</strong>A WGEN-type generator fitted to NASA POWER data from 1991 to 2025: a Markov chain picks the wet days, a gamma distribution the rain, AR(1) anomalies the temperatures. Each campaign draws an El Niño, neutral or La Niña phase, and the forecast the player sees is right 70% of the time.</li>
-                        <li><strong>Soil and crops</strong>A daily water bucket per lot (Hargreaves evapotranspiration, Saxton &amp; Rawls drainage), nitrogen and phosphorus balances, and crop stages driven by growing degree-days.</li>
-                        <li><strong>Yield</strong>Potential yield, scaled by the lot's productivity index, minus losses from sowing date, water, waterlogging, temperature, nitrogen, phosphorus and pests.</li>
-                        <li><strong>Determinism</strong>A PCG32 generator with a separate stream for each subsystem, so the same seed gives the same weather whatever the player does.</li>
+                        <li><strong><span lang="en">Data pipeline</span><span lang="es">Pipeline de datos</span></strong><span lang="en">Python scripts build the region from open data: lots cut from OpenStreetMap's road network, soil texture and water holding capacity from SoilGrids, the productivity index from INTA's soil charts, and each lot's road distance to the nearest grain elevator.</span><span lang="es">Scripts de Python arman la región a partir de datos abiertos: lotes recortados de la red de caminos de OpenStreetMap, textura y capacidad de retención de agua del suelo desde SoilGrids, el índice de productividad de las cartas de suelo del INTA y la distancia por camino de cada lote al acopio más cercano.</span></li>
+                        <li><strong><span lang="en">Weather</span><span lang="es">Clima</span></strong><span lang="en">A WGEN-type generator fitted to NASA POWER data from 1991 to 2025: a Markov chain picks the wet days, a gamma distribution the rain, AR(1) anomalies the temperatures. Each campaign draws an El Niño, neutral or La Niña phase, and the forecast the player sees is right 70% of the time.</span><span lang="es">Un generador tipo WGEN ajustado con datos de NASA POWER de 1991 a 2025: una cadena de Markov decide los días lluviosos, una distribución gamma la lluvia y anomalías AR(1) las temperaturas. Cada campaña sortea una fase El Niño, neutra o La Niña, y el pronóstico que ve el jugador acierta el 70 % de las veces.</span></li>
+                        <li><strong><span lang="en">Soil and crops</span><span lang="es">Suelo y cultivos</span></strong><span lang="en">A daily water bucket per lot (Hargreaves evapotranspiration, Saxton &amp; Rawls drainage), nitrogen and phosphorus balances, and crop stages driven by growing degree-days.</span><span lang="es">Un balde de agua diario por lote (evapotranspiración de Hargreaves, drenaje de Saxton &amp; Rawls), balances de nitrógeno y fósforo, y etapas del cultivo regidas por grados-día.</span></li>
+                        <li><strong><span lang="en">Yield</span><span lang="es">Rinde</span></strong><span lang="en">Potential yield, scaled by the lot's productivity index, minus losses from sowing date, water, waterlogging, temperature, nitrogen, phosphorus and pests.</span><span lang="es">El rinde potencial, escalado por el índice de productividad del lote, menos las pérdidas por fecha de siembra, agua, anegamiento, temperatura, nitrógeno, fósforo y plagas.</span></li>
+                        <li><strong><span lang="en">Determinism</span><span lang="es">Determinismo</span></strong><span lang="en">A PCG32 generator with a separate stream for each subsystem, so the same seed gives the same weather whatever the player does.</span><span lang="es">Un generador PCG32 con un flujo separado para cada subsistema, así la misma semilla da el mismo clima haga lo que haga el jugador.</span></li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Technical highlights</h2>
-                    <p>Every harvest explains itself. Losses are taken in a fixed order, each one from what the previous ones left, so the report's waterfall always adds up to the real yield.</p>
-                    <p class="code-title">ModeloCultivo.cs</p>
-<pre><code>public static Cascada CalcularCascada(EstadoCultivo e, CultivoParams c)
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">Every harvest explains itself. Losses are taken in a fixed order, each one from what the previous ones left, so the report's waterfall always adds up to the real yield.</span><span lang="es">Cada cosecha se explica sola. Las pérdidas se restan en un orden fijo, cada una sobre lo que dejaron las anteriores, por eso la escalera del reporte siempre suma el rinde real.</span></p>
+                    <p class="code-title">ModeloCultivo.cs<span lang="en"> · translated from Spanish</span></p>
+<pre lang="es"><code>public static Cascada CalcularCascada(EstadoCultivo e, CultivoParams c)
 {
     var p = PerdidasActuales(e, c);
     var k = new Cascada { PotencialQqHa = e.RindeAlcanzableQqHa };
@@ -210,39 +215,55 @@
     k.RealQqHa = resto;
     return k;
 }</code></pre>
+<pre lang="en"><code>public static Waterfall ComputeWaterfall(CropState e, CropParams c)
+{
+    var p = CurrentLosses(e, c);
+    var k = new Waterfall { PotentialQuintalsHa = e.AttainableYieldQuintalsHa };
+    double remaining = k.PotentialQuintalsHa;
+    double Deduct(double fraction) { double q = remaining * fraction; remaining -= q; return q; }
+    k.SowingDateQuintals = Deduct(p.SowingDate);
+    k.WaterQuintals = Deduct(p.Water);
+    k.WaterloggingQuintals = Deduct(p.Waterlogging);
+    k.TemperatureQuintals = Deduct(p.Temperature);
+    k.NitrogenQuintals = Deduct(p.Nitrogen);
+    k.PhosphorusQuintals = Deduct(p.Phosphorus);
+    k.PestsQuintals = Deduct(p.Pests);
+    k.ActualQuintalsHa = remaining;
+    return k;
+}</code></pre>
                 </section>
                 <section>
-                    <h2>Media</h2>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
                     <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
                 </section>
                 <section>
-                    <h2>What I learned</h2>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
                     <p class="todo">// TODO: what you learned and what you'd do differently</p>
                 </section>
-                <nav class="pager" aria-label="More projects"></nav>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
                 <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Farming sim · Educational</dd><dt>Engine</dt><dd>Unity 6.3 · URP 2D</dd><dt>UI</dt><dd>UI Toolkit</dd><dt>Language</dt><dd>C# · Python</dd><dt>Region</dt><dd>Pergamino, Argentina</dd><dt>Status</dt><dd>In development</dd><dt>Year</dt><dd>2026</dd></dl>
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Farming sim · Educational</span><span lang="es">Simulador agrícola · Educativo</span></dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 6.3 · URP 2D</dd><dt>UI</dt><dd>UI Toolkit</dd><dt><span lang="en">Language</span><span lang="es">Lenguaje</span></dt><dd>C# · Python</dd><dt><span lang="en">Region</span><span lang="es">Región</span></dt><dd>Pergamino, Argentina</dd><dt><span lang="en">Status</span><span lang="es">Estado</span></dt><dd><span lang="en">In development</span><span lang="es">En desarrollo</span></dd><dt><span lang="en">Year</span><span lang="es">Año</span></dt><dd>2026</dd></dl>
                     </details>
                 </template>
             </article>
 
-            <article class="view project accent-blue" data-route="projects/visual-fsm-editor" data-title="Visual FSM Editor" data-kind="Editor Tool" data-category="tool" hidden>
+            <article class="view project accent-blue" data-route="projects/visual-fsm-editor" data-title="Visual FSM Editor" data-kind="Editor Tool" data-kind-es="Herramienta de editor" data-category="tool" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="fill" x="6" y="41" width="28" height="16" rx="4"/>
 <rect x="64" y="14" width="30" height="16" rx="4"/>
 <rect x="64" y="70" width="30" height="16" rx="4"/>
 <path d="M34 49 C50 49 46 22 62 22"/><path d="M34 49 C50 49 46 78 62 78"/><path class="muted" d="M79 68 V34"/>
 <path d="M57 18 L62 22 L57 26"/><path d="M57 74 L62 78 L57 82"/><path class="muted" d="M75 38 L79 32 L83 38"/></svg></template>
                 <header class="banner">
-                    <p class="banner-kind">Editor Tool · Unity Asset Store</p>
+                    <p class="banner-kind"><span lang="en">Editor Tool · Unity Asset Store</span><span lang="es">Herramienta de editor · Unity Asset Store</span></p>
                     <h1>Visual FSM Graph Editor</h1>
-                    <p class="banner-pitch">A node-based state machine editor for Unity AI, published on the Asset Store.</p>
-                    <a class="btn btn-primary" href="https://assetstore.unity.com/packages/tools/behavior-ai/visual-fsm-graph-editor-ai-state-machine-tool-367524" target="_blank" rel="noopener">View on the Asset Store</a>
+                    <p class="banner-pitch"><span lang="en">A node-based state machine editor for Unity AI, published on the Asset Store.</span><span lang="es">Un editor de máquinas de estados basado en nodos para IA en Unity, publicado en el Asset Store.</span></p>
+                    <a class="btn btn-primary" href="https://assetstore.unity.com/packages/tools/behavior-ai/visual-fsm-graph-editor-ai-state-machine-tool-367524" target="_blank" rel="noopener"><span lang="en">View on the Asset Store</span><span lang="es">Ver en el Asset Store</span></a>
                 </header>
                 <section>
-                    <h2>Try it</h2>
+                    <h2><span lang="en">Try it</span><span lang="es">Pruébalo</span></h2>
                     <div class="demo">
-                        <svg class="fsm-demo" data-demo="fsm" viewBox="0 0 640 300" role="img" aria-label="Interactive state machine: drag the states around">
+                        <svg class="fsm-demo" data-demo="fsm" viewBox="0 0 640 300" role="img" aria-label="Interactive state machine: drag the states around" data-es-aria-label="Máquina de estados interactiva: arrastra los estados">
                             <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow-head" d="M0 0L10 5L0 10z"/></marker></defs>
                             <path class="edge" data-from="idle" data-to="patrol" marker-end="url(#arrow)"/>
                             <path class="edge" data-from="patrol" data-to="chase" marker-end="url(#arrow)"/>
@@ -255,33 +276,33 @@
                             <g class="node" data-id="chase" data-x="470" data-y="70" data-m="270 138"><rect width="120" height="44" rx="8"/><text x="60" y="27">Chase</text></g>
                             <g class="node" data-id="search" data-x="320" data-y="215" data-m="140 258"><rect width="120" height="44" rx="8"/><text x="60" y="27">Search</text></g>
                         </svg>
-                        <p class="demo-caption">Drag the states around. Like the tool's Play-mode view, the active state lights up as the machine takes random transitions.</p>
+                        <p class="demo-caption"><span lang="en">Drag the states around. Like the tool's Play-mode view, the active state lights up as the machine takes random transitions.</span><span lang="es">Arrastra los estados. Igual que la vista en modo Play de la herramienta, el estado activo se ilumina a medida que la máquina toma transiciones al azar.</span></p>
                     </div>
                 </section>
                 <section>
-                    <h2>The problem</h2>
-                    <p>AI behaviors like patrol, chase and attack are naturally state machines, but written by hand they become a tangle of flags and switch statements. They are hard to read, hard to debug at runtime, and every new transition means touching code.</p>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">AI behaviors like patrol, chase and attack are naturally state machines, but written by hand they become a tangle of flags and switch statements. They are hard to read, hard to debug at runtime, and every new transition means touching code.</span><span lang="es">Comportamientos de IA como patrullar, perseguir y atacar son máquinas de estados por naturaleza, pero escritos a mano terminan en un enredo de banderas y sentencias switch. Cuesta leerlos, cuesta depurarlos en ejecución y cada transición nueva implica tocar código.</span></p>
                 </section>
                 <section>
-                    <h2>What I built</h2>
-                    <p>A complete, commercial Unity Editor tool for designing finite state machines visually. States and conditions are ScriptableObject assets wired together on a GraphView canvas, and the runtime has no dependency on the editor, so the same graphs run in builds. I took it from first commit to a published Asset Store product, including documentation, example scenes and post-release updates.</p>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">A complete, commercial Unity Editor tool for designing finite state machines visually. States and conditions are ScriptableObject assets wired together on a GraphView canvas, and the runtime has no dependency on the editor, so the same graphs run in builds. I took it from first commit to a published Asset Store product, including documentation, example scenes and post-release updates.</span><span lang="es">Una herramienta comercial y completa para el Editor de Unity que permite diseñar máquinas de estados finitos de forma visual. Los estados y las condiciones son assets ScriptableObject conectados sobre un lienzo GraphView, y el runtime no depende del editor, así que los mismos grafos corren en las builds. La llevé desde el primer commit hasta un producto publicado en el Asset Store, con documentación, escenas de ejemplo y actualizaciones posteriores al lanzamiento.</span></p>
                 </section>
                 <section>
-                    <h2>How it works</h2>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
                     <ul class="steps">
-                        <li><strong>Runtime layer</strong>The FSM, its states and conditions are ScriptableObjects. Each entity clones the FSM asset on Awake, so many entities can share one graph without sharing runtime state.</li>
-                        <li><strong>Editor layer</strong>A GraphView window edits a GUI model of the graph and only commits back to the assets on save or autosave, with full Undo support.</li>
-                        <li><strong>Live debugging</strong>In Play mode, selecting an entity loads its running FSM: the active state pulses and a trail marks the last few states visited.</li>
-                        <li><strong>Logic gates</strong>And / Or / Negate conditions let designers build compound transitions from existing conditions without writing new code.</li>
-                        <li><strong>Readable graphs</strong>Reroute points, "Go To State" markers instead of canvas-wide wires, shared condition boxes, and direction arrows on every curve.</li>
-                        <li><strong>Production polish</strong>Descriptive validation errors, a Preferences page, orphan-asset cleanup, URP and Built-in support, and a full PDF manual.</li>
+                        <li><strong><span lang="en">Runtime layer</span><span lang="es">Capa de runtime</span></strong><span lang="en">The FSM, its states and conditions are ScriptableObjects. Each entity clones the FSM asset on Awake, so many entities can share one graph without sharing runtime state.</span><span lang="es">La FSM, sus estados y sus condiciones son ScriptableObjects. Cada entidad clona el asset de la FSM en Awake, así muchas entidades pueden compartir un grafo sin compartir el estado en ejecución.</span></li>
+                        <li><strong><span lang="en">Editor layer</span><span lang="es">Capa de editor</span></strong><span lang="en">A GraphView window edits a GUI model of the graph and only commits back to the assets on save or autosave, with full Undo support.</span><span lang="es">Una ventana GraphView edita un modelo del grafo pensado para la interfaz y recién escribe en los assets al guardar o con el autoguardado, con soporte completo de Deshacer.</span></li>
+                        <li><strong><span lang="en">Live debugging</span><span lang="es">Depuración en vivo</span></strong><span lang="en">In Play mode, selecting an entity loads its running FSM: the active state pulses and a trail marks the last few states visited.</span><span lang="es">En modo Play, al seleccionar una entidad se carga su FSM en ejecución: el estado activo pulsa y un rastro marca los últimos estados visitados.</span></li>
+                        <li><strong><span lang="en">Logic gates</span><span lang="es">Compuertas lógicas</span></strong><span lang="en">And / Or / Negate conditions let designers build compound transitions from existing conditions without writing new code.</span><span lang="es">Las condiciones And / Or / Negate permiten a los diseñadores armar transiciones compuestas a partir de condiciones existentes, sin escribir código nuevo.</span></li>
+                        <li><strong><span lang="en">Readable graphs</span><span lang="es">Grafos legibles</span></strong><span lang="en">Reroute points, "Go To State" markers instead of canvas-wide wires, shared condition boxes, and direction arrows on every curve.</span><span lang="es">Puntos de reroute, marcadores "Go To State" en lugar de cables que cruzan todo el lienzo, cajas de condición compartidas y flechas de dirección en cada curva.</span></li>
+                        <li><strong><span lang="en">Production polish</span><span lang="es">Acabado de producción</span></strong><span lang="en">Descriptive validation errors, a Preferences page, orphan-asset cleanup, URP and Built-in support, and a full PDF manual.</span><span lang="es">Errores de validación descriptivos, una página de Preferencias, limpieza de assets huérfanos, soporte para URP y Built-in, y un manual completo en PDF.</span></li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Technical highlights</h2>
-                    <p>The runtime loop is deliberately tiny: poll the current state's conditions in order, take the first one that passes, otherwise keep executing the state.</p>
-                    <p class="code-title">MonarchFsm.cs</p>
-<pre><code>public void RunStateMachine()
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">The runtime loop is deliberately tiny: poll the current state's conditions in order, take the first one that passes, otherwise keep executing the state.</span><span lang="es">El bucle de runtime es deliberadamente mínimo: se evalúan en orden las condiciones del estado actual, se toma la primera que se cumple y, si ninguna lo hace, se sigue ejecutando el estado.</span></p>
+                    <p class="code-title">MonarchFsm.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>public void RunStateMachine()
 {
     if (m_currentState == null) return;
 
@@ -296,9 +317,24 @@
 
     m_currentState.fsmState.ExecuteState(m_model);
 }</code></pre>
-                    <p>GraphView edges don't show direction, so a custom edge samples its own bezier with De Casteljau's algorithm and draws an arrowhead at the true midpoint, following bends around reroute points.</p>
-                    <p class="code-title">FsmEdge.cs</p>
-<pre><code>// Repeatedly lerp adjacent points until one remains, giving the curve's
+<pre lang="es"><code>public void EjecutarMaquinaDeEstados()
+{
+    if (m_estadoActual == null) return;
+
+    for (var l_i = 0; l_i &lt; m_cantidadCondicionesEstadoActual; l_i++)
+    {
+        if (!m_estadoActual.CondicionesDeEstado[l_i].CondicionCumplida(m_modelo))
+            continue;
+
+        CambiarEstado(m_estadoActual.EstadosDeSalida[l_i]);
+        return;
+    }
+
+    m_estadoActual.estadoFsm.EjecutarEstado(m_modelo);
+}</code></pre>
+                    <p><span lang="en">GraphView edges don't show direction, so a custom edge samples its own bezier with De Casteljau's algorithm and draws an arrowhead at the true midpoint, following bends around reroute points.</span><span lang="es">Las aristas de GraphView no muestran dirección, así que una arista propia muestrea su bézier con el algoritmo de De Casteljau y dibuja una punta de flecha en el punto medio real, siguiendo las curvas alrededor de los puntos de reroute.</span></p>
+                    <p class="code-title">FsmEdge.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>// Repeatedly lerp adjacent points until one remains, giving the curve's
 // actual position (and, via two nearby samples, tangent) at parameter t.
 private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
 {
@@ -312,39 +348,53 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
     }
     return l_working[0];
 }</code></pre>
+<pre lang="es"><code>// Interpola linealmente los puntos adyacentes una y otra vez hasta que queda uno,
+// lo que da la posición real de la curva (y, con dos muestras cercanas, su tangente) en t.
+private static Vector2 MuestrearBezier(Vector2[] p_puntos, float p_t)
+{
+    var l_trabajo = (Vector2[])p_puntos.Clone();
+    int l_cantidad = l_trabajo.Length;
+    while (l_cantidad &gt; 1)
+    {
+        for (int l_i = 0; l_i &lt; l_cantidad - 1; l_i++)
+            l_trabajo[l_i] = Vector2.Lerp(l_trabajo[l_i], l_trabajo[l_i + 1], p_t);
+        l_cantidad--;
+    }
+    return l_trabajo[0];
+}</code></pre>
                 </section>
                 <section>
-                    <h2>Media</h2>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
                     <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
                 </section>
                 <section>
-                    <h2>What I learned</h2>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
                     <p class="todo">// TODO: what you learned and what you'd do differently</p>
                 </section>
-                <nav class="pager" aria-label="More projects"></nav>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
                 <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity 2022.3</dd><dt>UI</dt><dd>GraphView / UI Toolkit</dd><dt>Language</dt><dd>C#</dd><dt>Team</dt><dd>Solo</dd><dt>Years</dt><dd>2025 – 2026</dd><dt>Status</dt><dd>Live · v1.2.0</dd></dl>
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Editor Tool</span><span lang="es">Herramienta de editor</span></dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 2022.3</dd><dt>UI</dt><dd>GraphView / UI Toolkit</dd><dt><span lang="en">Language</span><span lang="es">Lenguaje</span></dt><dd>C#</dd><dt><span lang="en">Team</span><span lang="es">Equipo</span></dt><dd><span lang="en">Solo</span><span lang="es">Individual</span></dd><dt><span lang="en">Years</span><span lang="es">Años</span></dt><dd>2025 – 2026</dd><dt><span lang="en">Status</span><span lang="es">Estado</span></dt><dd><span lang="en">Live · v1.2.0</span><span lang="es">Publicado · v1.2.0</span></dd></dl>
                     </details>
                     <details class="component" open><summary>Publisher</summary><p>Monarch Wing Studios</p></details>
-                    <details class="component" open><summary>Links</summary><a href="https://assetstore.unity.com/packages/tools/behavior-ai/visual-fsm-graph-editor-ai-state-machine-tool-367524" target="_blank" rel="noopener">Unity Asset Store</a></details>
+                    <details class="component" open><summary><span lang="en">Links</span><span lang="es">Enlaces</span></summary><a href="https://assetstore.unity.com/packages/tools/behavior-ai/visual-fsm-graph-editor-ai-state-machine-tool-367524" target="_blank" rel="noopener">Unity Asset Store</a></details>
                 </template>
             </article>
 
-            <article class="view project accent-green" data-route="projects/perception-toolkit" data-title="Perception Toolkit" data-kind="Game AI" data-category="ai" hidden>
+            <article class="view project accent-green" data-route="projects/perception-toolkit" data-title="Perception Toolkit" data-kind="Game AI" data-kind-es="IA de juegos" data-category="ai" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="muted dash" cx="46" cy="54" r="30"/>
 <path class="fill soft" d="M46 54 L84 32 A44 44 0 0 1 84 76 Z"/>
 <circle cx="46" cy="54" r="11"/><circle class="fill" cx="46" cy="54" r="5"/>
 <circle class="fill muted" cx="18" cy="24" r="4"/></svg></template>
                 <header class="banner">
-                    <p class="banner-kind">Game AI · Unity 6</p>
+                    <p class="banner-kind"><span lang="en">Game AI · Unity 6</span><span lang="es">IA de juegos · Unity 6</span></p>
                     <h1>Perception Toolkit</h1>
-                    <p class="banner-pitch">Sight and hearing for AI agents, in 2D and 3D.</p>
+                    <p class="banner-pitch"><span lang="en">Sight and hearing for AI agents, in 2D and 3D.</span><span lang="es">Vista y oído para agentes de IA, en 2D y 3D.</span></p>
                 </header>
                 <section>
-                    <h2>Try it</h2>
+                    <h2><span lang="en">Try it</span><span lang="es">Pruébalo</span></h2>
                     <div class="demo">
-                        <svg class="perception-demo" data-demo="perception" viewBox="0 0 640 320" role="img" aria-label="Interactive perception demo: move your pointer to sneak past the agent">
+                        <svg class="perception-demo" data-demo="perception" viewBox="0 0 640 320" role="img" aria-label="Interactive perception demo: move your pointer to sneak past the agent" data-es-aria-label="Demo interactiva de percepción: mueve el puntero para pasar sigilosamente junto al agente">
                             <circle class="hearing" cx="320" cy="170" r="130"/>
                             <path class="cone"/>
                             <circle class="inner" cx="320" cy="170" r="45"/>
@@ -352,34 +402,34 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
                             <circle class="player" cx="-50" cy="-50" r="8"/>
                         </svg>
                         <div class="demo-controls">
-                            <span>Awareness <b class="demo-status">Unaware</b></span>
+                            <span><span lang="en">Awareness</span><span lang="es">Nivel de alerta</span> <b class="demo-status">Unaware</b></span>
                             <span class="meter" aria-hidden="true"><span></span></span>
                         </div>
-                        <p class="demo-caption">You're the dot (on a phone, drag a finger). The cone and the small inner circle are sight; moving fast inside the dashed circle makes noise. Linger and the confirm meter fills from Suspicious to Aware, just like the toolkit's timers.</p>
+                        <p class="demo-caption"><span lang="en">You're the dot (on a phone, drag a finger). The cone and the small inner circle are sight; moving fast inside the dashed circle makes noise. Linger and the confirm meter fills from Suspicious to Aware, just like the toolkit's timers.</span><span lang="es">Tú eres el punto (en un teléfono, arrastra un dedo). El cono y el pequeño círculo interior son la vista; moverse rápido dentro del círculo punteado hace ruido. Si te quedas ahí, el medidor de confirmación se llena de Sospechoso a Alerta, igual que los temporizadores del toolkit.</span></p>
                     </div>
                 </section>
                 <section>
-                    <h2>The problem</h2>
-                    <p>Stealth and combat AI only feel fair when enemies react to what they could plausibly see and hear, and give the player a moment of warning before they commit. A raw "is the player in range" check gives neither.</p>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">Stealth and combat AI only feel fair when enemies react to what they could plausibly see and hear, and give the player a moment of warning before they commit. A raw "is the player in range" check gives neither.</span><span lang="es">La IA de sigilo y de combate solo se siente justa cuando los enemigos reaccionan a lo que podrían ver y oír de forma verosímil, y le dan al jugador un instante de aviso antes de actuar. Una simple comprobación de «el jugador está en rango» no da ninguna de las dos cosas.</span></p>
                 </section>
                 <section>
-                    <h2>What I built</h2>
-                    <p>A modular perception package: drop-in sense components (2D field of view, 3D field of view, hearing) that each track their own awareness, plus an agent component that aggregates every sense into one state an FSM or behavior tree can react to through C# or UnityEvents.</p>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">A modular perception package: drop-in sense components (2D field of view, 3D field of view, hearing) that each track their own awareness, plus an agent component that aggregates every sense into one state an FSM or behavior tree can react to through C# or UnityEvents.</span><span lang="es">Un paquete de percepción modular: componentes de sentidos listos para usar (campo de visión 2D, campo de visión 3D, oído) que llevan cada uno su propio nivel de alerta, más un componente de agente que reúne todos los sentidos en un único estado al que una FSM o un árbol de comportamiento puede reaccionar mediante C# o UnityEvents.</span></p>
                 </section>
                 <section>
-                    <h2>How it works</h2>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
                     <ul class="steps">
-                        <li><strong>Vision</strong>A view cone with range and angle, plus an omnidirectional inner radius that detects instantly. Candidates come from a non-allocating overlap query, then a raycast checks line of sight against an obstacle mask.</li>
-                        <li><strong>Hearing</strong>Noise emitters and noise zones broadcast events. Each listener applies distance falloff, ignores anything below an audible threshold and remembers the last noise briefly.</li>
-                        <li><strong>Awareness</strong>Unaware → Suspicious → Aware. A target must be detected for a confirm time before it's spotted, and a lose timer keeps agents from forgetting instantly.</li>
-                        <li><strong>Editor tooling</strong>Custom Scene-view handles to drag the cone's angle and radii, and gizmos tinted by the current awareness level.</li>
+                        <li><strong><span lang="en">Vision</span><span lang="es">Visión</span></strong><span lang="en">A view cone with range and angle, plus an omnidirectional inner radius that detects instantly. Candidates come from a non-allocating overlap query, then a raycast checks line of sight against an obstacle mask.</span><span lang="es">Un cono de visión con alcance y ángulo, más un radio interior omnidireccional que detecta al instante. Los candidatos salen de una consulta de solapamiento sin asignaciones de memoria y luego un raycast verifica la línea de visión contra una máscara de obstáculos.</span></li>
+                        <li><strong><span lang="en">Hearing</span><span lang="es">Oído</span></strong><span lang="en">Noise emitters and noise zones broadcast events. Each listener applies distance falloff, ignores anything below an audible threshold and remembers the last noise briefly.</span><span lang="es">Los emisores y las zonas de ruido difunden eventos. Cada oyente aplica una atenuación por distancia, ignora todo lo que esté por debajo de un umbral audible y recuerda el último ruido por un momento.</span></li>
+                        <li><strong><span lang="en">Awareness</span><span lang="es">Nivel de alerta</span></strong><span lang="en">Unaware → Suspicious → Aware. A target must be detected for a confirm time before it's spotted, and a lose timer keeps agents from forgetting instantly.</span><span lang="es">Desprevenido → Sospechoso → Alerta. Un objetivo debe ser detectado durante un tiempo de confirmación antes de ser avistado, y un temporizador de pérdida evita que los agentes se olviden al instante.</span></li>
+                        <li><strong><span lang="en">Editor tooling</span><span lang="es">Herramientas de editor</span></strong><span lang="en">Custom Scene-view handles to drag the cone's angle and radii, and gizmos tinted by the current awareness level.</span><span lang="es">Handles propios en la vista de Escena para arrastrar el ángulo y los radios del cono, y gizmos teñidos según el nivel de alerta actual.</span></li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Technical highlights</h2>
-                    <p>Every sense shares the same detection tick, so awareness behaves consistently whether it came from sight or sound. Detection runs on an interval rather than every frame.</p>
-                    <p class="code-title">PerceptionSenseBase.cs</p>
-<pre><code>private void RunDetectionTick(float elapsed)
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">Every sense shares the same detection tick, so awareness behaves consistently whether it came from sight or sound. Detection runs on an interval rather than every frame.</span><span lang="es">Todos los sentidos comparten el mismo tick de detección, por lo que la alerta se comporta igual venga de la vista o del oído. La detección corre a intervalos y no en cada frame.</span></p>
+                    <p class="code-title">PerceptionSenseBase.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>private void RunDetectionTick(float elapsed)
 {
     bool found = TryDetect(out IPerceivable detected, out bool instantDetect);
     if (found)
@@ -411,77 +461,109 @@ private static Vector2 SampleBezier(Vector2[] p_points, float p_t)
         }
     }
 }</code></pre>
+<pre lang="es"><code>private void EjecutarTickDeDeteccion(float transcurrido)
+{
+    bool encontrado = IntentarDetectar(out IPercibible detectado, out bool deteccionInstantanea);
+    if (encontrado)
+    {
+        temporizadorPerdida = 0f;
+        temporizadorConfirmacion = deteccionInstantanea ? tiempoDeteccion : temporizadorConfirmacion + transcurrido;
+        if (temporizadorConfirmacion &gt;= tiempoDeteccion &amp;&amp; NivelAlerta != NivelDeAlerta.Alerta)
+        {
+            NivelAlerta = NivelDeAlerta.Alerta;
+            ObjetivoActual = detectado;
+            LanzarAvistado(detectado);
+        }
+        else if (temporizadorConfirmacion &gt; 0f &amp;&amp; NivelAlerta == NivelDeAlerta.Desprevenido)
+        {
+            NivelAlerta = NivelDeAlerta.Sospechoso;
+            LanzarSospecha(detectado);
+        }
+    }
+    else
+    {
+        if (NivelAlerta != NivelDeAlerta.Desprevenido) temporizadorPerdida += transcurrido;
+        if (temporizadorPerdida &gt; tiempoPerdida)
+        {
+            if (NivelAlerta == NivelDeAlerta.Alerta) LanzarPerdido(ObjetivoActual);
+            NivelAlerta = NivelDeAlerta.Desprevenido;
+            ObjetivoActual = null;
+            temporizadorConfirmacion = 0f;
+            temporizadorPerdida = 0f;
+        }
+    }
+}</code></pre>
                 </section>
                 <section>
-                    <h2>Media</h2>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
                     <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
                 </section>
                 <section>
-                    <h2>What I learned</h2>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
                     <p class="todo">// TODO: what you learned and what you'd do differently</p>
                 </section>
-                <nav class="pager" aria-label="More projects"></nav>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
                 <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Game AI</dd><dt>Engine</dt><dd>Unity 6</dd><dt>Language</dt><dd>C#</dd><dt>Senses</dt><dd>Sight 2D/3D, Hearing</dd><dt>States</dt><dd>Unaware, Suspicious, Aware</dd></dl>
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Game AI</span><span lang="es">IA de juegos</span></dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 6</dd><dt><span lang="en">Language</span><span lang="es">Lenguaje</span></dt><dd>C#</dd><dt><span lang="en">Senses</span><span lang="es">Sentidos</span></dt><dd><span lang="en">Sight 2D/3D, Hearing</span><span lang="es">Vista 2D/3D, oído</span></dd><dt><span lang="en">States</span><span lang="es">Estados</span></dt><dd><span lang="en">Unaware, Suspicious, Aware</span><span lang="es">Desprevenido, Sospechoso, Alerta</span></dd></dl>
                     </details>
                 </template>
             </article>
 
-            <article class="view project accent-terracotta" data-route="projects/realshooter" data-title="RealShooter" data-kind="Ballistics Sim" data-category="sim" hidden>
+            <article class="view project accent-terracotta" data-route="projects/realshooter" data-title="RealShooter" data-kind="Ballistics Sim" data-kind-es="Simulador de balística" data-category="sim" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="muted dash" d="M8 40 H92"/>
 <path class="soft dash" d="M8 40 Q60 38 90 26"/>
 <path d="M8 44 Q48 30 88 76"/>
 <circle class="fill" cx="27" cy="40" r="3.5"/>
 <circle class="muted" cx="88" cy="76" r="9"/><circle class="muted" cx="88" cy="76" r="3"/></svg></template>
                 <header class="banner">
-                    <p class="banner-kind">Simulation · Unity 6</p>
+                    <p class="banner-kind"><span lang="en">Simulation · Unity 6</span><span lang="es">Simulación · Unity 6</span></p>
                     <h1>RealShooter</h1>
-                    <p class="banner-pitch">A long-range rifle simulator built on real external ballistics, not hitscan.</p>
+                    <p class="banner-pitch"><span lang="en">A long-range rifle simulator built on real external ballistics, not hitscan.</span><span lang="es">Un simulador de rifle de largo alcance basado en balística externa real, no en hitscan.</span></p>
                 </header>
                 <section>
-                    <h2>Try it</h2>
+                    <h2><span lang="en">Try it</span><span lang="es">Pruébalo</span></h2>
                     <div class="demo ballistics" data-demo="ballistics">
                         <div class="demo-controls sliders">
-                            <label>Muzzle velocity <output>800</output> m/s <input type="range" data-input="v0" min="700" max="950" step="5" value="800"></label>
+                            <label><span lang="en">Muzzle velocity</span><span lang="es">Velocidad inicial</span> <output>800</output> m/s <input type="range" data-input="v0" min="700" max="950" step="5" value="800"></label>
                             <label>G7 BC <output>0.223</output> <input type="range" data-input="bc" min="0.15" max="0.35" step="0.001" value="0.223"></label>
-                            <label>Crosswind <output>4</output> m/s <input type="range" data-input="wind" min="0" max="10" step="0.5" value="4"></label>
-                            <label>Zero <output>100</output> m <input type="range" data-input="zero" min="100" max="300" step="50" value="100"></label>
+                            <label><span lang="en">Crosswind</span><span lang="es">Viento cruzado</span> <output>4</output> m/s <input type="range" data-input="wind" min="0" max="10" step="0.5" value="4"></label>
+                            <label><span lang="en">Zero</span><span lang="es">Puesta a cero</span> <output>100</output> m <input type="range" data-input="zero" min="100" max="300" step="50" value="100"></label>
                         </div>
-                        <svg class="trajectory" viewBox="0 0 640 260" role="img" aria-label="Bullet drop and wind drift over range"></svg>
+                        <svg class="trajectory" viewBox="0 0 640 260" role="img" aria-label="Bullet drop and wind drift over range" data-es-aria-label="Caída de la bala y deriva por viento según la distancia"></svg>
                         <div class="dope-wrap">
                             <table class="dope">
-                                <thead><tr><th>Range</th><th>Drop</th><th>Elevation</th><th>Wind drift</th><th>Windage</th><th>Time</th><th>Velocity</th></tr></thead>
+                                <thead><tr><th><span lang="en">Range</span><span lang="es">Distancia</span></th><th><span lang="en">Drop</span><span lang="es">Caída</span></th><th><span lang="en">Elevation</span><span lang="es">Elevación</span></th><th><span lang="en">Wind drift</span><span lang="es">Deriva por viento</span></th><th><span lang="en">Windage</span><span lang="es">Corrección lateral</span></th><th><span lang="en">Time</span><span lang="es">Tiempo</span></th><th><span lang="en">Velocity</span><span lang="es">Velocidad</span></th></tr></thead>
                                 <tbody></tbody>
                             </table>
                         </div>
-                        <p class="demo-caption">A .308 175 gr bullet using RealShooter's own G7 drag table, form-factor formula and RK4 integrator, ported to JavaScript. Turret corrections are in 0.1 mil clicks. Simplified: standard atmosphere, no Coriolis or spin drift.</p>
+                        <p class="demo-caption"><span lang="en">A .308 175 gr bullet using RealShooter's own G7 drag table, form-factor formula and RK4 integrator, ported to JavaScript. Turret corrections are in 0.1 mil clicks. Simplified: standard atmosphere, no Coriolis or spin drift.</span><span lang="es">Una bala .308 de 175 gr que usa la tabla de arrastre G7, la fórmula de factor de forma y el integrador RK4 del propio RealShooter, portados a JavaScript. Las correcciones de torreta están en clics de 0,1 mil. Simplificado: atmósfera estándar, sin Coriolis ni deriva por giro.</span></p>
                     </div>
                 </section>
                 <section>
-                    <h2>The problem</h2>
-                    <p>Most shooters fake bullets with a raycast or a simple projectile. At 600 m and beyond that falls apart: real bullets slow down along a Mach-dependent drag curve, drift with the wind, and even feel the Earth's rotation. Unity's PhysX can't represent any of that.</p>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">Most shooters fake bullets with a raycast or a simple projectile. At 600 m and beyond that falls apart: real bullets slow down along a Mach-dependent drag curve, drift with the wind, and even feel the Earth's rotation. Unity's PhysX can't represent any of that.</span><span lang="es">La mayoría de los shooters simulan las balas con un raycast o con un proyectil simple. A 600 m o más eso se cae a pedazos: las balas reales se frenan siguiendo una curva de arrastre que depende del número de Mach, se desvían con el viento e incluso sienten la rotación de la Tierra. El PhysX de Unity no puede representar nada de eso.</span></p>
                 </section>
                 <section>
-                    <h2>What I built</h2>
-                    <p>A custom ballistics simulation with physically based drag, wind, Coriolis and spin drift, driven by real ammunition data, plus a scoped rifle whose elevation and windage turrets click in 0.1 mil steps like the real thing.</p>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">A custom ballistics simulation with physically based drag, wind, Coriolis and spin drift, driven by real ammunition data, plus a scoped rifle whose elevation and windage turrets click in 0.1 mil steps like the real thing.</span><span lang="es">Una simulación balística propia con arrastre basado en física, viento, Coriolis y deriva por giro, alimentada con datos reales de munición, más un rifle con mira cuyas torretas de elevación y deriva avanzan en clics de 0,1 mil como las reales.</span></p>
                 </section>
                 <section>
-                    <h2>How it works</h2>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
                     <ul class="steps">
-                        <li><strong>Real drag data</strong>Standard G1/G7 Mach→Cd tables, scaled by each bullet's form factor (sectional density / BC), so published ballistic coefficients plug straight in.</li>
-                        <li><strong>RK4 integration</strong>Projectiles are plain C# objects integrated with Runge-Kutta 4 and substeps in FixedUpdate, with gravity, drag and Coriolis as continuous forces.</li>
-                        <li><strong>Atmosphere</strong>A weather system derives air density and speed of sound from temperature, pressure and humidity; gravity varies with latitude and altitude.</li>
-                        <li><strong>Spin drift</strong>Miller's gyroscopic stability factor and Litz's spin-drift formula, with a warning when a barrel's twist rate can't stabilize the bullet.</li>
-                        <li><strong>No tunneling</strong>Each substep sweeps a raycast from the previous position, so fast bullets can't skip through thin targets.</li>
-                        <li><strong>Test range tooling</strong>One menu command rebuilds a test scene with targets at 100, 300, 600 and 900 m, fully wired.</li>
+                        <li><strong><span lang="en">Real drag data</span><span lang="es">Datos de arrastre reales</span></strong><span lang="en">Standard G1/G7 Mach→Cd tables, scaled by each bullet's form factor (sectional density / BC), so published ballistic coefficients plug straight in.</span><span lang="es">Tablas estándar G1/G7 de Mach→Cd, escaladas por el factor de forma de cada bala (densidad seccional / BC), así los coeficientes balísticos publicados se usan tal cual.</span></li>
+                        <li><strong><span lang="en">RK4 integration</span><span lang="es">Integración RK4</span></strong><span lang="en">Projectiles are plain C# objects integrated with Runge-Kutta 4 and substeps in FixedUpdate, with gravity, drag and Coriolis as continuous forces.</span><span lang="es">Los proyectiles son objetos C# simples integrados con Runge-Kutta 4 y subpasos en FixedUpdate, con la gravedad, el arrastre y Coriolis como fuerzas continuas.</span></li>
+                        <li><strong><span lang="en">Atmosphere</span><span lang="es">Atmósfera</span></strong><span lang="en">A weather system derives air density and speed of sound from temperature, pressure and humidity; gravity varies with latitude and altitude.</span><span lang="es">Un sistema de clima calcula la densidad del aire y la velocidad del sonido a partir de la temperatura, la presión y la humedad; la gravedad varía con la latitud y la altitud.</span></li>
+                        <li><strong><span lang="en">Spin drift</span><span lang="es">Deriva por giro</span></strong><span lang="en">Miller's gyroscopic stability factor and Litz's spin-drift formula, with a warning when a barrel's twist rate can't stabilize the bullet.</span><span lang="es">El factor de estabilidad giroscópica de Miller y la fórmula de deriva por giro de Litz, con una advertencia cuando el paso de rayado del cañón no alcanza para estabilizar la bala.</span></li>
+                        <li><strong><span lang="en">No tunneling</span><span lang="es">Sin tunneling</span></strong><span lang="en">Each substep sweeps a raycast from the previous position, so fast bullets can't skip through thin targets.</span><span lang="es">Cada subpaso barre un raycast desde la posición anterior, así las balas rápidas no atraviesan objetivos delgados sin chocar.</span></li>
+                        <li><strong><span lang="en">Test range tooling</span><span lang="es">Campo de pruebas</span></strong><span lang="en">One menu command rebuilds a test scene with targets at 100, 300, 600 and 900 m, fully wired.</span><span lang="es">Un comando de menú reconstruye una escena de prueba con blancos a 100, 300, 600 y 900 m, ya totalmente conectados.</span></li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Technical highlights</h2>
-                    <p>One RK4 step over (position, velocity). Every acceleration evaluation samples drag at the current Mach number, gravity and Coriolis; spin drift is applied afterwards as an empirical correction so it isn't double-counted with a Magnus force.</p>
-                    <p class="code-title">PhysicsManager.cs</p>
-<pre><code>Vector3 a1 = ComputeAcceleration(p0, v0, projectile);
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">One RK4 step over (position, velocity). Every acceleration evaluation samples drag at the current Mach number, gravity and Coriolis; spin drift is applied afterwards as an empirical correction so it isn't double-counted with a Magnus force.</span><span lang="es">Un paso RK4 sobre (posición, velocidad). Cada evaluación de la aceleración muestrea el arrastre al número de Mach actual, la gravedad y Coriolis; la deriva por giro se aplica después como corrección empírica para no contarla dos veces con una fuerza de Magnus.</span></p>
+                    <p class="code-title">PhysicsManager.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>Vector3 a1 = ComputeAcceleration(p0, v0, projectile);
 Vector3 v1 = v0 + a1 * (dt * 0.5f);
 Vector3 p1 = p0 + v0 * (dt * 0.5f);
 
@@ -501,8 +583,28 @@ projectile.TimeOfFlight += dt;
 
 ApplySpinDrift(projectile);
 CheckImpact(projectile, stepStartPosition, projectile.Position);</code></pre>
-                    <p class="code-title">BallisticsMath.cs</p>
-<pre><code>public static Vector3 GetDragAcceleration(Vector3 velocityRelativeToAir, BulletData bullet,
+<pre lang="es"><code>Vector3 a1 = CalcularAceleracion(p0, v0, proyectil);
+Vector3 v1 = v0 + a1 * (dt * 0.5f);
+Vector3 p1 = p0 + v0 * (dt * 0.5f);
+
+Vector3 a2 = CalcularAceleracion(p1, v1, proyectil);
+Vector3 v2 = v0 + a2 * (dt * 0.5f);
+Vector3 p2 = p0 + v1 * (dt * 0.5f);
+
+Vector3 a3 = CalcularAceleracion(p2, v2, proyectil);
+Vector3 v3 = v0 + a3 * dt;
+Vector3 p3 = p0 + v2 * dt;
+
+Vector3 a4 = CalcularAceleracion(p3, v3, proyectil);
+
+proyectil.Velocidad = v0 + (dt / 6f) * (a1 + 2f * a2 + 2f * a3 + a4);
+proyectil.Posicion = p0 + (dt / 6f) * (v0 + 2f * v1 + 2f * v2 + v3);
+proyectil.TiempoDeVuelo += dt;
+
+AplicarDerivaPorGiro(proyectil);
+VerificarImpacto(proyectil, posicionInicioPaso, proyectil.Posicion);</code></pre>
+                    <p class="code-title">BallisticsMath.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>public static Vector3 GetDragAcceleration(Vector3 velocityRelativeToAir, BulletData bullet,
                                           float airDensity, float speedOfSound)
 {
     float speed = velocityRelativeToAir.magnitude;
@@ -515,70 +617,83 @@ CheckImpact(projectile, stepStartPosition, projectile.Position);</code></pre>
     float dragForce = 0.5f * airDensity * speed * speed * actualCd * bullet.CrossSectionalAreaM2;
     return -velocityRelativeToAir.normalized * (dragForce / bullet.MassKg);
 }</code></pre>
+<pre lang="es"><code>public static Vector3 ObtenerAceleracionDeArrastre(Vector3 velocidadRelativaAlAire, DatosBala bala,
+                                                   float densidadAire, float velocidadDelSonido)
+{
+    float rapidez = velocidadRelativaAlAire.magnitude;
+    if (rapidez &lt; 0.01f) return Vector3.zero;
+
+    float mach = rapidez / velocidadDelSonido;
+    float cdEstandar = TablasDeArrastre.ObtenerCdEstandar(bala.modeloArrastre, mach);
+    float cdReal = cdEstandar * bala.FactorDeForma;
+
+    float fuerzaArrastre = 0.5f * densidadAire * rapidez * rapidez * cdReal * bala.AreaTransversalM2;
+    return -velocidadRelativaAlAire.normalized * (fuerzaArrastre / bala.MasaKg);
+}</code></pre>
                 </section>
                 <section>
-                    <h2>Media</h2>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
                     <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
                 </section>
                 <section>
-                    <h2>What I learned</h2>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
                     <p class="todo">// TODO: what you learned and what you'd do differently</p>
                 </section>
-                <nav class="pager" aria-label="More projects"></nav>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
                 <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Ballistics simulator</dd><dt>Engine</dt><dd>Unity 6 · URP</dd><dt>Language</dt><dd>C#</dd><dt>Integrator</dt><dd>RK4 + substeps</dd><dt>Drag</dt><dd>G1 / G7 tables</dd><dt>Year</dt><dd>2026</dd></dl>
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Ballistics simulator</span><span lang="es">Simulador de balística</span></dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 6 · URP</dd><dt><span lang="en">Language</span><span lang="es">Lenguaje</span></dt><dd>C#</dd><dt><span lang="en">Integrator</span><span lang="es">Integrador</span></dt><dd><span lang="en">RK4 + substeps</span><span lang="es">RK4 + subpasos</span></dd><dt><span lang="en">Drag</span><span lang="es">Arrastre</span></dt><dd><span lang="en">G1 / G7 tables</span><span lang="es">Tablas G1 / G7</span></dd><dt><span lang="en">Year</span><span lang="es">Año</span></dt><dd>2026</dd></dl>
                     </details>
                 </template>
             </article>
 
-            <article class="view project accent-blue" data-route="projects/neuronal-ai-plane" data-title="Neuronal AI Plane" data-kind="Neuroevolution" data-category="ai" hidden>
+            <article class="view project accent-blue" data-route="projects/neuronal-ai-plane" data-title="Neuronal AI Plane" data-kind="Neuroevolution" data-kind-es="Neuroevolución" data-category="ai" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="fill muted" d="M38 6 h10 v26 h-10z M38 62 h10 v32 h-10z M68 6 h10 v46 h-10z M68 80 h10 v14 h-10z"/>
 <path class="dash soft" d="M8 58 C26 58 30 47 43 47 S60 66 73 66 L86 60"/>
 <polygon class="fill" points="0,0 -9,-5 -6,0 -9,5" transform="translate(90 58) rotate(-22) scale(1.7)"/>
 <g class="soft"><polygon class="fill" points="0,0 -9,-5 -6,0 -9,5" transform="translate(33 26) rotate(-40) scale(1.7)"/><polygon class="fill" points="0,0 -9,-5 -6,0 -9,5" transform="translate(33 78) rotate(35) scale(1.7)"/></g></svg></template>
                 <header class="banner">
-                    <p class="banner-kind">Machine Learning · Unity 6</p>
+                    <p class="banner-kind"><span lang="en">Machine Learning · Unity 6</span><span lang="es">Aprendizaje automático · Unity 6</span></p>
                     <h1>Neuronal AI Plane</h1>
-                    <p class="banner-pitch">Planes that learn to fly through evolution, with no training data and no backpropagation.</p>
+                    <p class="banner-pitch"><span lang="en">Planes that learn to fly through evolution, with no training data and no backpropagation.</span><span lang="es">Aviones que aprenden a volar por evolución, sin datos de entrenamiento y sin retropropagación.</span></p>
                 </header>
                 <section>
-                    <h2>Try it</h2>
+                    <h2><span lang="en">Try it</span><span lang="es">Pruébalo</span></h2>
                     <div class="demo">
-                        <canvas class="neuro-demo" data-demo="neuro" width="640" height="300" role="img" aria-label="A population of planes evolving to fly through gaps"></canvas>
+                        <canvas class="neuro-demo" data-demo="neuro" width="640" height="300" role="img" aria-label="A population of planes evolving to fly through gaps" data-es-aria-label="Una población de aviones que evoluciona para volar a través de los huecos"></canvas>
                         <div class="demo-controls">
-                            <span>Generation <b data-stat="gen">1</b></span>
-                            <span>Alive <b data-stat="alive">0</b></span>
-                            <span>Best <b data-stat="best">0</b></span>
-                            <label>Speed <select data-control="speed"><option value="1">1×</option><option value="4" selected>4×</option><option value="16">16×</option></select></label>
-                            <button type="button" class="tool-btn" data-control="reset">Reset</button>
+                            <span><span lang="en">Generation</span><span lang="es">Generación</span> <b data-stat="gen">1</b></span>
+                            <span><span lang="en">Alive</span><span lang="es">Vivos</span> <b data-stat="alive">0</b></span>
+                            <span><span lang="en">Best</span><span lang="es">Mejor</span> <b data-stat="best">0</b></span>
+                            <label><span lang="en">Speed</span><span lang="es">Velocidad</span> <select data-control="speed"><option value="1">1×</option><option value="4" selected>4×</option><option value="16">16×</option></select></label>
+                            <button type="button" class="tool-btn" data-control="reset"><span lang="en">Reset</span><span lang="es">Reiniciar</span></button>
                         </div>
-                        <p class="demo-caption">A 2D version of the same idea: 40 planes, each flown by its own small network (5 rays + heading → 6 → steering). Nobody tells them how to fly. After each generation the elite survive and the rest are bred with tournament selection, crossover and mutation.</p>
+                        <p class="demo-caption"><span lang="en">A 2D version of the same idea: 40 planes, each flown by its own small network (5 rays + heading → 6 → steering). Nobody tells them how to fly. After each generation the elite survive and the rest are bred with tournament selection, crossover and mutation.</span><span lang="es">Una versión 2D de la misma idea: 40 aviones, cada uno pilotado por su propia red pequeña (5 rayos + rumbo → 6 → dirección). Nadie les dice cómo volar. Después de cada generación sobrevive la élite y el resto se cría con selección por torneo, cruce y mutación.</span></p>
                     </div>
                 </section>
                 <section>
-                    <h2>The problem</h2>
-                    <p>Hand-tuning a flight controller to dodge obstacles and hit checkpoints is brittle. Could a population of planes discover how to fly the course on their own, just by being rewarded for getting further?</p>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">Hand-tuning a flight controller to dodge obstacles and hit checkpoints is brittle. Could a population of planes discover how to fly the course on their own, just by being rewarded for getting further?</span><span lang="es">Ajustar a mano un controlador de vuelo para esquivar obstáculos y pasar por los checkpoints es frágil. ¿Podría una población de aviones descubrir por sí sola cómo recorrer el circuito, solo recibiendo una recompensa por llegar más lejos?</span></p>
                 </section>
                 <section>
-                    <h2>What I built</h2>
-                    <p>A neuroevolution sandbox written from scratch in plain C#: a feedforward neural network and a genetic algorithm, with no ML libraries. Fifty planes fly at once; when the whole generation has crashed or timed out, the best brains are bred into the next one.</p>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">A neuroevolution sandbox written from scratch in plain C#: a feedforward neural network and a genetic algorithm, with no ML libraries. Fifty planes fly at once; when the whole generation has crashed or timed out, the best brains are bred into the next one.</span><span lang="es">Un sandbox de neuroevolución escrito desde cero en C# puro: una red neuronal feedforward y un algoritmo genético, sin librerías de ML. Cincuenta aviones vuelan a la vez; cuando toda la generación se estrelló o se quedó sin tiempo, los mejores cerebros se cruzan para formar la siguiente.</span></p>
                 </section>
                 <section>
-                    <h2>How it works</h2>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
                     <ul class="steps">
-                        <li><strong>Sensors</strong>14 inputs: 8 obstacle rays across a 120° view, the local direction to the next ring, speed, bank and pitch.</li>
-                        <li><strong>Brain</strong>A 14 → 16 → 8 → 5 tanh network outputs throttle, brake, pitch, roll and yaw every physics step.</li>
-                        <li><strong>Fitness</strong>Distance flown, plus a bonus for every checkpoint ring passed in order. Crashing or dropping too low ends the episode.</li>
-                        <li><strong>Evolution</strong>Elitism keeps the top 4 untouched; the rest come from tournament selection, uniform crossover and 5% mutation.</li>
-                        <li><strong>Architecture</strong>Clean Model / View / Controller split, hyperparameters in a ScriptableObject, and editor scripts that build the test scene.</li>
+                        <li><strong><span lang="en">Sensors</span><span lang="es">Sensores</span></strong><span lang="en">14 inputs: 8 obstacle rays across a 120° view, the local direction to the next ring, speed, bank and pitch.</span><span lang="es">14 entradas: 8 rayos de obstáculos en un campo de 120°, la dirección local hacia el siguiente aro, la velocidad, el alabeo y el cabeceo.</span></li>
+                        <li><strong><span lang="en">Brain</span><span lang="es">Cerebro</span></strong><span lang="en">A 14 → 16 → 8 → 5 tanh network outputs throttle, brake, pitch, roll and yaw every physics step.</span><span lang="es">Una red tanh de 14 → 16 → 8 → 5 produce en cada paso de física el acelerador, el freno, el cabeceo, el alabeo y la guiñada.</span></li>
+                        <li><strong><span lang="en">Fitness</span><span lang="es">Fitness</span></strong><span lang="en">Distance flown, plus a bonus for every checkpoint ring passed in order. Crashing or dropping too low ends the episode.</span><span lang="es">La distancia recorrida, más una bonificación por cada aro de checkpoint cruzado en orden. Chocar o bajar demasiado termina el episodio.</span></li>
+                        <li><strong><span lang="en">Evolution</span><span lang="es">Evolución</span></strong><span lang="en">Elitism keeps the top 4 untouched; the rest come from tournament selection, uniform crossover and 5% mutation.</span><span lang="es">El elitismo conserva intactos a los 4 mejores; el resto sale de selección por torneo, cruce uniforme y 5 % de mutación.</span></li>
+                        <li><strong><span lang="en">Architecture</span><span lang="es">Arquitectura</span></strong><span lang="en">Clean Model / View / Controller split, hyperparameters in a ScriptableObject, and editor scripts that build the test scene.</span><span lang="es">Separación limpia en Modelo / Vista / Controlador, hiperparámetros en un ScriptableObject y scripts de editor que arman la escena de prueba.</span></li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Technical highlights</h2>
-                    <p>The whole genetic algorithm fits on one screen and is pure C#, so it's independent of Unity and easy to test.</p>
-                    <p class="code-title">GeneticAlgorithm.cs</p>
-<pre><code>// Elitism + tournament selection + uniform crossover + mutation.
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">The whole genetic algorithm fits on one screen and is pure C#, so it's independent of Unity and easy to test.</span><span lang="es">Todo el algoritmo genético entra en una pantalla y es C# puro, así que no depende de Unity y es fácil de testear.</span></p>
+                    <p class="code-title">GeneticAlgorithm.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>// Elitism + tournament selection + uniform crossover + mutation.
 public static List&lt;NeuralNetwork&gt; Evolve(List&lt;PlaneGenome&gt; genomes, TrainingConfig config)
 {
     List&lt;PlaneGenome&gt; ranked = genomes.OrderByDescending(g =&gt; g.Fitness).ToList();
@@ -598,55 +713,75 @@ public static List&lt;NeuralNetwork&gt; Evolve(List&lt;PlaneGenome&gt; genomes, 
     }
     return nextGeneration;
 }</code></pre>
+<pre lang="es"><code>// Elitismo + selección por torneo + cruce uniforme + mutación.
+public static List&lt;RedNeuronal&gt; Evolucionar(List&lt;GenomaAvion&gt; genomas, ConfigEntrenamiento config)
+{
+    List&lt;GenomaAvion&gt; clasificados = genomas.OrderByDescending(g =&gt; g.Aptitud).ToList();
+    var siguienteGeneracion = new List&lt;RedNeuronal&gt;(config.tamanoPoblacion);
+
+    int cantidadElite = Mathf.Min(config.cantidadElitismo, clasificados.Count);
+    for (int i = 0; i &lt; cantidadElite; i++)
+        siguienteGeneracion.Add(clasificados[i].Cerebro.Clonar());
+
+    while (siguienteGeneracion.Count &lt; config.tamanoPoblacion)
+    {
+        RedNeuronal padreA = SeleccionPorTorneo(clasificados, config.tamanoTorneo);
+        RedNeuronal padreB = SeleccionPorTorneo(clasificados, config.tamanoTorneo);
+        RedNeuronal hijo = RedNeuronal.Cruzar(padreA, padreB);
+        hijo.Mutar(config.tasaMutacion, config.intensidadMutacion);
+        siguienteGeneracion.Add(hijo);
+    }
+    return siguienteGeneracion;
+}</code></pre>
                 </section>
                 <section>
-                    <h2>Media</h2>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
                     <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
                 </section>
                 <section>
-                    <h2>What I learned</h2>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
                     <p class="todo">// TODO: what you learned and what you'd do differently</p>
                 </section>
-                <nav class="pager" aria-label="More projects"></nav>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
                 <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Neuroevolution</dd><dt>Engine</dt><dd>Unity 6</dd><dt>Language</dt><dd>C# (no ML libs)</dd><dt>Network</dt><dd>14 → 16 → 8 → 5</dd><dt>Population</dt><dd>50 planes</dd></dl>
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Neuroevolution</span><span lang="es">Neuroevolución</span></dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 6</dd><dt><span lang="en">Language</span><span lang="es">Lenguaje</span></dt><dd><span lang="en">C# (no ML libs)</span><span lang="es">C# (sin librerías de ML)</span></dd><dt><span lang="en">Network</span><span lang="es">Red</span></dt><dd>14 → 16 → 8 → 5</dd><dt><span lang="en">Population</span><span lang="es">Población</span></dt><dd><span lang="en">50 planes</span><span lang="es">50 aviones</span></dd></dl>
                     </details>
                 </template>
             </article>
 
-            <article class="view project accent-green" data-route="projects/wizards-nightmare" data-title="Wizard's Nightmare" data-kind="Game" data-category="game" hidden>
+            <article class="view project accent-green" data-route="projects/wizards-nightmare" data-title="Wizard's Nightmare" data-kind="Game" data-kind-es="Juego" data-category="game" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><g class="muted"><rect x="8" y="58" width="28" height="28" rx="3"/><rect x="40" y="58" width="28" height="28" rx="3"/><rect x="40" y="24" width="28" height="28" rx="3"/><rect x="72" y="24" width="22" height="28" rx="3"/></g>
 <path class="dash" d="M58 34 L48 64 L22 74"/>
 <circle class="fill enemy" cx="58" cy="34" r="5"/><circle class="fill" cx="22" cy="74" r="5"/></svg></template>
                 <header class="banner">
-                    <p class="banner-kind">Game · Roguelike · Team project</p>
+                    <p class="banner-kind"><span lang="en">Game · Roguelike · Team project</span><span lang="es">Juego · Roguelike · Proyecto en equipo</span></p>
                     <h1>Wizard's Nightmare</h1>
-                    <p class="banner-pitch">A roguelike we built and shipped as our final-year thesis project. Free to play.</p>
-                    <a class="btn btn-primary" href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">Play on itch.io</a>
+                    <p class="banner-pitch"><span lang="en">A roguelike we built and shipped as our final-year thesis project. Free to play.</span><span lang="es">Un roguelike que construimos y publicamos como proyecto de tesis de último año. Gratis.</span></p>
+                    <a class="btn btn-primary" href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener"><span lang="en">Play on itch.io</span><span lang="es">Jugar en itch.io</span></a>
                 </header>
                 <section>
-                    <h2>The problem</h2>
-                    <p>Our final-year thesis: design, build and ship a complete roguelike as a team of four in about eight months, with procedurally assembled rooms, a roster of enemies and bosses, and upgrades and progression between runs.</p>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">Our final-year thesis: design, build and ship a complete roguelike as a team of four in about eight months, with procedurally assembled rooms, a roster of enemies and bosses, and upgrades and progression between runs.</span><span lang="es">Nuestra tesis de último año: diseñar, construir y publicar un roguelike completo en un equipo de cuatro en unos ocho meses, con salas armadas proceduralmente, un elenco de enemigos y jefes, y mejoras y progresión entre partidas.</span></p>
                 </section>
                 <section>
-                    <h2>What I built</h2>
-                    <p>I was the team's most active contributor, focused on enemy AI and the game's core architecture: the state machine every enemy and boss runs on, pathfinding and movement, and the service layer the rest of the game's systems plug into. I also worked on the player, UI, stats and the upgrade system.</p>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">I was the team's most active contributor, focused on enemy AI and the game's core architecture: the state machine every enemy and boss runs on, pathfinding and movement, and the service layer the rest of the game's systems plug into. I also worked on the player, UI, stats and the upgrade system.</span><span lang="es">Fui el integrante más activo del equipo, con foco en la IA de los enemigos y en la arquitectura central del juego: la máquina de estados sobre la que corren todos los enemigos y jefes, el pathfinding y el movimiento, y la capa de servicios a la que se conectan el resto de los sistemas. También trabajé en el jugador, la interfaz, las estadísticas y el sistema de mejoras.</span></p>
                 </section>
                 <section>
-                    <h2>How it works</h2>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
                     <ul class="steps">
-                        <li><strong>Enemy FSM</strong>Enemies and bosses are built from reusable states and conditions: chase, charge, intercept, teleport around the target, stun, spawn minions, special-attack pools and multi-phase boss logic.</li>
-                        <li><strong>Theta* pathfinding</strong>Any-angle pathfinding, so enemies take straight, natural routes through rooms instead of zig-zagging along grid cells.</li>
-                        <li><strong>Steering behaviours</strong>Chase, flee and evade steering for smooth movement once a path is known.</li>
-                        <li><strong>Service Locator</strong>Events, stats, currency, inventory and upgrade pools are registered against interfaces and lazily created on first use, keeping systems decoupled from each other.</li>
+                        <li><strong><span lang="en">Enemy FSM</span><span lang="es">FSM de enemigos</span></strong><span lang="en">Enemies and bosses are built from reusable states and conditions: chase, charge, intercept, teleport around the target, stun, spawn minions, special-attack pools and multi-phase boss logic.</span><span lang="es">Enemigos y jefes se arman con estados y condiciones reutilizables: perseguir, embestir, interceptar, teletransportarse alrededor del objetivo, aturdir, invocar esbirros, repertorios de ataques especiales y lógica de jefes con varias fases.</span></li>
+                        <li><strong><span lang="en">Theta* pathfinding</span><span lang="es">Pathfinding Theta*</span></strong><span lang="en">Any-angle pathfinding, so enemies take straight, natural routes through rooms instead of zig-zagging along grid cells.</span><span lang="es">Pathfinding de cualquier ángulo, así los enemigos toman rutas rectas y naturales por las salas en lugar de zigzaguear por las celdas de la grilla.</span></li>
+                        <li><strong><span lang="en">Steering behaviours</span><span lang="es">Steering behaviours</span></strong><span lang="en">Chase, flee and evade steering for smooth movement once a path is known.</span><span lang="es">Dirección de persecución, huida y evasión para un movimiento fluido una vez que se conoce el camino.</span></li>
+                        <li><strong><span lang="en">Service Locator</span><span lang="es">Service Locator</span></strong><span lang="en">Events, stats, currency, inventory and upgrade pools are registered against interfaces and lazily created on first use, keeping systems decoupled from each other.</span><span lang="es">Eventos, estadísticas, moneda, inventario y pools de mejoras se registran contra interfaces y se crean de forma perezosa en el primer uso, manteniendo los sistemas desacoplados entre sí.</span></li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Technical highlights</h2>
-                    <p>Services are registered once at startup, before any scene loads, and created only when first requested.</p>
-                    <p class="code-title">ServiceLocator.cs</p>
-<pre><code>[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">Services are registered once at startup, before any scene loads, and created only when first requested.</span><span lang="es">Los servicios se registran una sola vez al arrancar, antes de que cargue cualquier escena, y se crean recién cuando alguien los pide por primera vez.</span></p>
+                    <p class="code-title">ServiceLocator.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
 public static void DefineServices()
 {
     Register&lt;IEventService, EventService&gt;();
@@ -670,25 +805,49 @@ private static IGameService Get(Type p_type)
         ? l_instance
         : InitializeService(p_type);
 }</code></pre>
+<pre lang="es"><code>[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+public static void DefinirServicios()
+{
+    Registrar&lt;IServicioEventos, ServicioEventos&gt;();
+    Registrar&lt;IServicioPersistencia, ServicioPersistenciaLocal&gt;();
+    Registrar&lt;IServicioDatosUsuario, ServicioDatosUsuario&gt;();
+    Registrar&lt;IServicioEstadisticas, ServicioEstadisticas&gt;();
+    Registrar&lt;IServicioMoneda, ServicioMoneda&gt;();
+    Registrar&lt;IServicioInventario, ServicioInventario&gt;();
+    Registrar&lt;IServicioPoolMejoras, ServicioPoolMejoras&gt;(true);
+    Registrar&lt;IServicioGeneracionObjetos, ServicioGeneracionObjetos&gt;(true);
+}
+
+public static T Obtener&lt;T&gt;() where T : IServicioJuego
+{
+    return (T)Obtener(typeof(T));
+}
+
+private static IServicioJuego Obtener(Type p_tipo)
+{
+    return m_instanciasServicios.TryGetValue(p_tipo, out var l_instancia)
+        ? l_instancia
+        : InicializarServicio(p_tipo);
+}</code></pre>
                 </section>
                 <section>
-                    <h2>Media</h2>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
                     <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
                 </section>
                 <section>
-                    <h2>What I learned</h2>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
                     <p class="todo">// TODO: what you learned and what you'd do differently</p>
                 </section>
-                <nav class="pager" aria-label="More projects"></nav>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
                 <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Game</dd><dt>Genre</dt><dd>Roguelike</dd><dt>Engine</dt><dd>Unity 2022.3 · URP</dd><dt>Team</dt><dd>4 people</dd><dt>My focus</dt><dd>Enemy AI, architecture</dd><dt>Years</dt><dd>2023 – 2024</dd></dl>
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Game</span><span lang="es">Juego</span></dd><dt><span lang="en">Genre</span><span lang="es">Género</span></dt><dd>Roguelike</dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 2022.3 · URP</dd><dt><span lang="en">Team</span><span lang="es">Equipo</span></dt><dd><span lang="en">4 people</span><span lang="es">4 personas</span></dd><dt><span lang="en">My focus</span><span lang="es">Mi foco</span></dt><dd><span lang="en">Enemy AI, architecture</span><span lang="es">IA de enemigos, arquitectura</span></dd><dt><span lang="en">Years</span><span lang="es">Años</span></dt><dd>2023 – 2024</dd></dl>
                     </details>
-                    <details class="component" open><summary>Links</summary><a href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener">itch.io page</a></details>
+                    <details class="component" open><summary><span lang="en">Links</span><span lang="es">Enlaces</span></summary><a href="https://sensuousowl.itch.io/wizards-nightmare" target="_blank" rel="noopener"><span lang="en">itch.io page</span><span lang="es">Página en itch.io</span></a></details>
                 </template>
             </article>
 
-            <article class="view project accent-terracotta" data-route="projects/scriptable-object-factory" data-title="Scriptable Object Factory" data-kind="Editor Tool" data-category="tool" hidden>
+            <article class="view project accent-terracotta" data-route="projects/scriptable-object-factory" data-title="Scriptable Object Factory" data-kind="Editor Tool" data-kind-es="Herramienta de editor" data-category="tool" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="muted" x="8" y="12" width="84" height="72" rx="6"/><path class="muted" d="M8 26 H92"/>
 <rect class="fill soft" x="14" y="44" width="72" height="13" rx="3"/>
 <rect class="fill" x="18" y="34" width="7" height="7" rx="1.5"/><path class="muted" d="M31 37.5 H66"/>
@@ -696,32 +855,32 @@ private static IGameService Get(Type p_type)
 <rect class="fill" x="18" y="60" width="7" height="7" rx="1.5"/><path class="muted" d="M31 63.5 H60"/>
 <circle class="fill" cx="80" cy="76" r="10"/><path class="plus" d="M80 71 V81 M75 76 H85"/></svg></template>
                 <header class="banner">
-                    <p class="banner-kind">Editor Tool · Unity 6</p>
+                    <p class="banner-kind"><span lang="en">Editor Tool · Unity 6</span><span lang="es">Herramienta de editor · Unity 6</span></p>
                     <h1>SO Factory</h1>
-                    <p class="banner-pitch">Create any ScriptableObject in your project in one click.</p>
+                    <p class="banner-pitch"><span lang="en">Create any ScriptableObject in your project in one click.</span><span lang="es">Crea cualquier ScriptableObject de tu proyecto con un clic.</span></p>
                 </header>
                 <section>
-                    <h2>The problem</h2>
-                    <p>Data-driven Unity projects pile up ScriptableObject types, and creating them means a <code>[CreateAssetMenu]</code> attribute on every class, then digging through nested menus and moving each new asset to the right folder.</p>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">Data-driven Unity projects pile up ScriptableObject types, and creating them means a <code>[CreateAssetMenu]</code> attribute on every class, then digging through nested menus and moving each new asset to the right folder.</span><span lang="es">Los proyectos de Unity orientados a datos acumulan tipos de ScriptableObject, y crearlos implica poner un atributo <code>[CreateAssetMenu]</code> en cada clase, buscar entre menús anidados y mover cada asset nuevo a la carpeta correcta.</span></p>
                 </section>
                 <section>
-                    <h2>What I built</h2>
-                    <p>An Editor window that discovers every ScriptableObject type in the project automatically and creates an asset of it in one click, straight into the right folder. It also ships inside the Visual FSM Graph Editor, where it's used to create states and conditions quickly.</p>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">An Editor window that discovers every ScriptableObject type in the project automatically and creates an asset of it in one click, straight into the right folder. It also ships inside the Visual FSM Graph Editor, where it's used to create states and conditions quickly.</span><span lang="es">Una ventana de Editor que descubre automáticamente todos los tipos de ScriptableObject del proyecto y crea un asset de cualquiera de ellos con un clic, directo en la carpeta correcta. También viene incluida en el Visual FSM Graph Editor, donde se usa para crear estados y condiciones rápidamente.</span></p>
                 </section>
                 <section>
-                    <h2>How it works</h2>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
                     <ul class="steps">
-                        <li><strong>Type discovery</strong>Scans <code>TypeCache</code> for concrete ScriptableObject types, filtering out Unity's own types and editor windows and inspectors.</li>
-                        <li><strong>Fast to use</strong>Types grouped by namespace, live search, full keyboard navigation and an Alt+O shortcut.</li>
-                        <li><strong>Per-type defaults</strong>Hide types or give each one a default folder, right from a row's context menu. Settings are saved as JSON in ProjectSettings so the whole team shares them.</li>
-                        <li><strong>Native feel</strong>A Preferences page with reorderable lists and a searchable type picker built on Unity's own AdvancedDropdown.</li>
+                        <li><strong><span lang="en">Type discovery</span><span lang="es">Descubrimiento de tipos</span></strong><span lang="en">Scans <code>TypeCache</code> for concrete ScriptableObject types, filtering out Unity's own types and editor windows and inspectors.</span><span lang="es">Recorre <code>TypeCache</code> en busca de tipos concretos de ScriptableObject, filtrando los tipos propios de Unity y las ventanas e inspectores de editor.</span></li>
+                        <li><strong><span lang="en">Fast to use</span><span lang="es">Rápida de usar</span></strong><span lang="en">Types grouped by namespace, live search, full keyboard navigation and an Alt+O shortcut.</span><span lang="es">Tipos agrupados por namespace, búsqueda en vivo, navegación completa con teclado y un atajo Alt+O.</span></li>
+                        <li><strong><span lang="en">Per-type defaults</span><span lang="es">Valores por tipo</span></strong><span lang="en">Hide types or give each one a default folder, right from a row's context menu. Settings are saved as JSON in ProjectSettings so the whole team shares them.</span><span lang="es">Oculta tipos o asígnale a cada uno una carpeta por defecto, directo desde el menú contextual de una fila. La configuración se guarda como JSON en ProjectSettings para que todo el equipo la comparta.</span></li>
+                        <li><strong><span lang="en">Native feel</span><span lang="es">Aspecto nativo</span></strong><span lang="en">A Preferences page with reorderable lists and a searchable type picker built on Unity's own AdvancedDropdown.</span><span lang="es">Una página de Preferencias con listas reordenables y un selector de tipos con búsqueda, construido sobre el AdvancedDropdown de Unity.</span></li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Technical highlights</h2>
-                    <p>Discovery is a single TypeCache query, and folder paths returned by the native picker are force-imported, so assets can be created in a folder the user only just made.</p>
-                    <p class="code-title">ScriptableObjectTypeUtil.cs</p>
-<pre><code>public static List&lt;Type&gt; GetAllProjectScriptableObjectTypes()
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">Discovery is a single TypeCache query, and folder paths returned by the native picker are force-imported, so assets can be created in a folder the user only just made.</span><span lang="es">El descubrimiento es una sola consulta a TypeCache, y las rutas de carpeta que devuelve el selector nativo se importan a la fuerza, así que se pueden crear assets en una carpeta que el usuario acaba de crear.</span></p>
+                    <p class="code-title">ScriptableObjectTypeUtil.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>public static List&lt;Type&gt; GetAllProjectScriptableObjectTypes()
 {
     return TypeCache.GetTypesDerivedFrom&lt;ScriptableObject&gt;()
         .Where(t =&gt; !t.IsAbstract &amp;&amp; !t.IsGenericType &amp;&amp; IsProjectType(t) &amp;&amp; IsAssetWorthy(t))
@@ -740,19 +899,38 @@ public static string ToProjectRelativePath(string p_absoluteFolderPath)
     AssetDatabase.ImportAsset(l_relative, ImportAssetOptions.ForceSynchronousImport);
     return l_relative;
 }</code></pre>
+<pre lang="es"><code>public static List&lt;Type&gt; ObtenerTodosLosTiposDeScriptableObjectDelProyecto()
+{
+    return TypeCache.GetTypesDerivedFrom&lt;ScriptableObject&gt;()
+        .Where(t =&gt; !t.IsAbstract &amp;&amp; !t.IsGenericType &amp;&amp; EsTipoDelProyecto(t) &amp;&amp; ValeLaPenaComoAsset(t))
+        .OrderBy(t =&gt; t.Name)
+        .ToList();
+}
+
+// Una carpeta creada con el botón de nueva carpeta del selector nativo existe en disco pero
+// todavía no en el AssetDatabase, así que crear un asset ahí fallaría.
+public static string ARutaRelativaAlProyecto(string p_rutaAbsolutaCarpeta)
+{
+    if (string.IsNullOrEmpty(p_rutaAbsolutaCarpeta) || !p_rutaAbsolutaCarpeta.Contains(Application.dataPath))
+        return null;
+
+    string l_relativa = "Assets" + p_rutaAbsolutaCarpeta.Replace(Application.dataPath, "");
+    AssetDatabase.ImportAsset(l_relativa, ImportAssetOptions.ForceSynchronousImport);
+    return l_relativa;
+}</code></pre>
                 </section>
                 <section>
-                    <h2>Media</h2>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
                     <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
                 </section>
                 <section>
-                    <h2>What I learned</h2>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
                     <p class="todo">// TODO: what you learned and what you'd do differently</p>
                 </section>
-                <nav class="pager" aria-label="More projects"></nav>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
                 <template class="inspector">
-                    <details class="component" open><summary>Project</summary>
-                        <dl class="fields"><dt>Type</dt><dd>Editor Tool</dd><dt>Engine</dt><dd>Unity 6</dd><dt>UI</dt><dd>IMGUI</dd><dt>Language</dt><dd>C#</dd><dt>Team</dt><dd>Solo</dd><dt>Year</dt><dd>2026</dd></dl>
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Editor Tool</span><span lang="es">Herramienta de editor</span></dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 6</dd><dt>UI</dt><dd>IMGUI</dd><dt><span lang="en">Language</span><span lang="es">Lenguaje</span></dt><dd>C#</dd><dt><span lang="en">Team</span><span lang="es">Equipo</span></dt><dd><span lang="en">Solo</span><span lang="es">Individual</span></dd><dt><span lang="en">Year</span><span lang="es">Año</span></dt><dd>2026</dd></dl>
                     </details>
                     <details class="component" open><summary>Publisher</summary><p>Monarch Wing Studios</p></details>
                 </template>
@@ -766,24 +944,24 @@ public static string ToProjectRelativePath(string p_absoluteFolderPath)
         <div class="panel-tabs"><span class="tab">Inspector</span></div>
         <div id="inspector-body" class="panel-body"></div>
         <template id="inspector-default">
-            <details class="component" open><summary>Profile</summary>
-                <dl class="fields"><dt>Name</dt><dd>Nicolás Fernández Perera</dd><dt>Alias</dt><dd>NFPerera</dd><dt>Role</dt><dd>Unity Developer</dd><dt>Company</dt><dd>Fernobite</dd></dl>
+            <details class="component" open><summary><span lang="en">Profile</span><span lang="es">Perfil</span></summary>
+                <dl class="fields"><dt><span lang="en">Name</span><span lang="es">Nombre</span></dt><dd>Nicolás Fernández Perera</dd><dt>Alias</dt><dd>NFPerera</dd><dt><span lang="en">Role</span><span lang="es">Rol</span></dt><dd><span lang="en">Unity Developer</span><span lang="es">Desarrollador Unity</span></dd><dt><span lang="en">Company</span><span lang="es">Empresa</span></dt><dd>Fernobite</dd></dl>
             </details>
-            <details class="component" open><summary>Now (Script)</summary>
-                <dl class="fields"><dt>Working on</dt><dd>Gameplay &amp; editor tools</dd><dt>Playing</dt><dd>Metal Gear Solid, complete saga</dd><dt>Learning</dt><dd>Automations, chatbots and agriculture</dd></dl>
+            <details class="component" open><summary><span lang="en">Now (Script)</span><span lang="es">Ahora (Script)</span></summary>
+                <dl class="fields"><dt><span lang="en">Working on</span><span lang="es">Trabajando en</span></dt><dd><span lang="en">Gameplay &amp; editor tools</span><span lang="es">Gameplay y herramientas de editor</span></dd><dt><span lang="en">Playing</span><span lang="es">Jugando</span></dt><dd><span lang="en">Metal Gear Solid, complete saga</span><span lang="es">Metal Gear Solid, la saga completa</span></dd><dt><span lang="en">Learning</span><span lang="es">Aprendiendo</span></dt><dd><span lang="en">Automations, chatbots and agriculture</span><span lang="es">Automatizaciones, chatbots y agricultura</span></dd></dl>
             </details>
         </template>
     </aside>
 
     <!-- CONSOLE: collapsed to a status bar showing the last message, like Unity's; click to expand -->
-    <section id="console" class="panel" aria-label="Console">
+    <section id="console" class="panel" aria-label="Console" data-es-aria-label="Consola">
         <button type="button" id="console-toggle" class="panel-tabs console-bar" aria-expanded="false" aria-controls="console-log">
-            <span class="tab">Console</span><span id="console-last"></span>
+            <span class="tab"><span lang="en">Console</span><span lang="es">Consola</span></span><span id="console-last"></span>
         </button>
         <ol id="console-log" class="panel-body" aria-live="polite"></ol>
         <form id="console-form" class="console-input">
             <label for="console-input">&gt;</label>
-            <input id="console-input" autocomplete="off" spellcheck="false" placeholder="Type 'help'">
+            <input id="console-input" autocomplete="off" spellcheck="false" placeholder="Type 'help'" data-es-placeholder="Escribe 'help'">
         </form>
     </section>
 

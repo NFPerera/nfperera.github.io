@@ -13,7 +13,31 @@
       "file_type": "code",
       "norm_label": "accentof()",
       "source_file": "script.js",
-      "source_location": "L30"
+      "source_location": "L73"
+    },
+    {
+      "id": "script_kindof",
+      "label": "kindOf()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "script.js",
+      "file_type": "code",
+      "norm_label": "kindof()",
+      "source_file": "script.js",
+      "source_location": "L77"
+    },
+    {
+      "id": "script_pair",
+      "label": "pair()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "script.js",
+      "file_type": "code",
+      "norm_label": "pair()",
+      "source_file": "script.js",
+      "source_location": "L9"
     },
     {
       "id": "script_setconsoleopen",
@@ -25,19 +49,7 @@
       "file_type": "code",
       "norm_label": "setconsoleopen()",
       "source_file": "script.js",
-      "source_location": "L19"
-    },
-    {
-      "id": "script_type",
-      "label": "type()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "script.js",
-      "file_type": "code",
-      "norm_label": "type()",
-      "source_file": "script.js",
-      "source_location": "L180"
+      "source_location": "L62"
     },
     {
       "id": "script_agroday",
@@ -49,7 +61,7 @@
       "file_type": "code",
       "norm_label": "agroday()",
       "source_file": "script.js",
-      "source_location": "L680"
+      "source_location": "L777"
     },
     {
       "id": "script_agrodemo",
@@ -61,7 +73,7 @@
       "file_type": "code",
       "norm_label": "agrodemo()",
       "source_file": "script.js",
-      "source_location": "L705"
+      "source_location": "L803"
     },
     {
       "id": "script_agrodemo_colorof",
@@ -73,7 +85,7 @@
       "file_type": "code",
       "norm_label": "colorof()",
       "source_file": "script.js",
-      "source_location": "L786"
+      "source_location": "L884"
     },
     {
       "id": "script_agrodemo_draw",
@@ -85,7 +97,7 @@
       "file_type": "code",
       "norm_label": "draw()",
       "source_file": "script.js",
-      "source_location": "L794"
+      "source_location": "L892"
     },
     {
       "id": "script_agrodemo_drawlegend",
@@ -97,7 +109,7 @@
       "file_type": "code",
       "norm_label": "drawlegend()",
       "source_file": "script.js",
-      "source_location": "L829"
+      "source_location": "L927"
     },
     {
       "id": "script_agrodemo_frame",
@@ -109,7 +121,7 @@
       "file_type": "code",
       "norm_label": "frame()",
       "source_file": "script.js",
-      "source_location": "L844"
+      "source_location": "L943"
     },
     {
       "id": "script_agrodemo_monthof",
@@ -121,7 +133,7 @@
       "file_type": "code",
       "norm_label": "monthof()",
       "source_file": "script.js",
-      "source_location": "L747"
+      "source_location": "L845"
     },
     {
       "id": "script_agrodemo_pointat",
@@ -133,7 +145,7 @@
       "file_type": "code",
       "norm_label": "pointat()",
       "source_file": "script.js",
-      "source_location": "L838"
+      "source_location": "L937"
     },
     {
       "id": "script_agrodemo_sow",
@@ -145,7 +157,7 @@
       "file_type": "code",
       "norm_label": "sow()",
       "source_file": "script.js",
-      "source_location": "L753"
+      "source_location": "L851"
     },
     {
       "id": "script_agrodemo_step",
@@ -157,7 +169,7 @@
       "file_type": "code",
       "norm_label": "step()",
       "source_file": "script.js",
-      "source_location": "L761"
+      "source_location": "L859"
     },
     {
       "id": "script_agrodemo_weather",
@@ -169,7 +181,7 @@
       "file_type": "code",
       "norm_label": "weather()",
       "source_file": "script.js",
-      "source_location": "L736"
+      "source_location": "L834"
     },
     {
       "id": "script_neurodemo_frame",
@@ -181,7 +193,7 @@
       "file_type": "code",
       "norm_label": "frame()",
       "source_file": "script.js",
-      "source_location": "L532"
+      "source_location": "L627"
     },
     {
       "id": "script_perceptiondemo",
@@ -193,7 +205,7 @@
       "file_type": "code",
       "norm_label": "perceptiondemo()",
       "source_file": "script.js",
-      "source_location": "L327"
+      "source_location": "L419"
     },
     {
       "id": "script_perceptiondemo_frame",
@@ -205,7 +217,7 @@
       "file_type": "code",
       "norm_label": "frame()",
       "source_file": "script.js",
-      "source_location": "L355"
+      "source_location": "L450"
     },
     {
       "id": "script_perceptiondemo_setawareness",
@@ -217,7 +229,19 @@
       "file_type": "code",
       "norm_label": "setawareness()",
       "source_file": "script.js",
-      "source_location": "L347"
+      "source_location": "L439"
+    },
+    {
+      "id": "script_pick",
+      "label": "pick()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "agroDemo",
+      "file_type": "code",
+      "norm_label": "pick()",
+      "source_file": "script.js",
+      "source_location": "L8"
     },
     {
       "id": "script_neurodemo",
@@ -229,7 +253,7 @@
       "file_type": "code",
       "norm_label": "neurodemo()",
       "source_file": "script.js",
-      "source_location": "L409"
+      "source_location": "L504"
     },
     {
       "id": "script_neurodemo_draw",
@@ -241,7 +265,7 @@
       "file_type": "code",
       "norm_label": "draw()",
       "source_file": "script.js",
-      "source_location": "L493"
+      "source_location": "L588"
     },
     {
       "id": "script_neurodemo_evolve",
@@ -253,7 +277,7 @@
       "file_type": "code",
       "norm_label": "evolve()",
       "source_file": "script.js",
-      "source_location": "L447"
+      "source_location": "L542"
     },
     {
       "id": "script_neurodemo_reset",
@@ -265,7 +289,7 @@
       "file_type": "code",
       "norm_label": "reset()",
       "source_file": "script.js",
-      "source_location": "L457"
+      "source_location": "L552"
     },
     {
       "id": "script_neurodemo_sense",
@@ -277,7 +301,7 @@
       "file_type": "code",
       "norm_label": "sense()",
       "source_file": "script.js",
-      "source_location": "L464"
+      "source_location": "L559"
     },
     {
       "id": "script_neurodemo_step",
@@ -289,7 +313,7 @@
       "file_type": "code",
       "norm_label": "step()",
       "source_file": "script.js",
-      "source_location": "L471"
+      "source_location": "L566"
     },
     {
       "id": "script_neurodemo_tournament",
@@ -301,7 +325,7 @@
       "file_type": "code",
       "norm_label": "tournament()",
       "source_file": "script.js",
-      "source_location": "L438"
+      "source_location": "L533"
     },
     {
       "id": "script_ballisticsdemo",
@@ -313,7 +337,7 @@
       "file_type": "code",
       "norm_label": "ballisticsdemo()",
       "source_file": "script.js",
-      "source_location": "L569"
+      "source_location": "L664"
     },
     {
       "id": "script_ballisticsdemo_flight",
@@ -325,7 +349,7 @@
       "file_type": "code",
       "norm_label": "flight()",
       "source_file": "script.js",
-      "source_location": "L585"
+      "source_location": "L680"
     },
     {
       "id": "script_ballisticsdemo_render",
@@ -337,7 +361,7 @@
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "script.js",
-      "source_location": "L625"
+      "source_location": "L720"
     },
     {
       "id": "script_ballisticsdemo_zeroangle",
@@ -349,7 +373,7 @@
       "file_type": "code",
       "norm_label": "zeroangle()",
       "source_file": "script.js",
-      "source_location": "L610"
+      "source_location": "L705"
     },
     {
       "id": "script_g7cd",
@@ -361,7 +385,19 @@
       "file_type": "code",
       "norm_label": "g7cd()",
       "source_file": "script.js",
-      "source_location": "L561"
+      "source_location": "L656"
+    },
+    {
+      "id": "script_applylang",
+      "label": "applyLang()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "applylang()",
+      "source_file": "script.js",
+      "source_location": "L187"
     },
     {
       "id": "script_closehierarchy",
@@ -369,11 +405,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "log",
+      "community_name": "t",
       "file_type": "code",
       "norm_label": "closehierarchy()",
       "source_file": "script.js",
-      "source_location": "L100"
+      "source_location": "L153"
+    },
+    {
+      "id": "script_currenttheme",
+      "label": "currentTheme()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "currenttheme()",
+      "source_file": "script.js",
+      "source_location": "L171"
     },
     {
       "id": "script_log",
@@ -381,11 +429,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "log",
+      "community_name": "t",
       "file_type": "code",
       "norm_label": "log()",
       "source_file": "script.js",
-      "source_location": "L9"
+      "source_location": "L52"
     },
     {
       "id": "script_monarchmigration",
@@ -393,11 +441,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "log",
+      "community_name": "t",
       "file_type": "code",
       "norm_label": "monarchmigration()",
       "source_file": "script.js",
-      "source_location": "L240"
+      "source_location": "L332"
     },
     {
       "id": "script_openview",
@@ -405,11 +453,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "log",
+      "community_name": "t",
       "file_type": "code",
       "norm_label": "openview()",
       "source_file": "script.js",
-      "source_location": "L143"
+      "source_location": "L227"
+    },
+    {
+      "id": "script_resettyping",
+      "label": "resetTyping()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "resettyping()",
+      "source_file": "script.js",
+      "source_location": "L264"
     },
     {
       "id": "script_route",
@@ -417,11 +477,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "log",
+      "community_name": "t",
       "file_type": "code",
       "norm_label": "route()",
       "source_file": "script.js",
+      "source_location": "L129"
+    },
+    {
+      "id": "script_showtitles",
+      "label": "showTitles()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "showtitles()",
+      "source_file": "script.js",
+      "source_location": "L123"
+    },
+    {
+      "id": "script_t",
+      "label": "t()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "t()",
+      "source_file": "script.js",
+      "source_location": "L42"
+    },
+    {
+      "id": "script_titleof",
+      "label": "titleOf()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "titleof()",
+      "source_file": "script.js",
       "source_location": "L76"
+    },
+    {
+      "id": "script_type",
+      "label": "type()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "type()",
+      "source_file": "script.js",
+      "source_location": "L271"
+    },
+    {
+      "id": "script_updatethemebtn",
+      "label": "updateThemeBtn()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "code",
+      "norm_label": "updatethemebtn()",
+      "source_file": "script.js",
+      "source_location": "L173"
     },
     {
       "id": "script_fsmdemo",
@@ -433,7 +553,7 @@
       "file_type": "code",
       "norm_label": "fsmdemo()",
       "source_file": "script.js",
-      "source_location": "L260"
+      "source_location": "L352"
     },
     {
       "id": "script_fsmdemo_draw",
@@ -445,7 +565,7 @@
       "file_type": "code",
       "norm_label": "draw()",
       "source_file": "script.js",
-      "source_location": "L276"
+      "source_location": "L368"
     },
     {
       "id": "script_fsmdemo_setactive",
@@ -457,7 +577,7 @@
       "file_type": "code",
       "norm_label": "setactive()",
       "source_file": "script.js",
-      "source_location": "L308"
+      "source_location": "L400"
     },
     {
       "id": "script_svgpoint",
@@ -469,31 +589,7 @@
       "file_type": "code",
       "norm_label": "svgpoint()",
       "source_file": "script.js",
-      "source_location": "L255"
-    },
-    {
-      "id": "script_currenttheme",
-      "label": "currentTheme()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "currentTheme",
-      "file_type": "code",
-      "norm_label": "currenttheme()",
-      "source_file": "script.js",
-      "source_location": "L118"
-    },
-    {
-      "id": "script_updatethemebtn",
-      "label": "updateThemeBtn()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "currentTheme",
-      "file_type": "code",
-      "norm_label": "updatethemebtn()",
-      "source_file": "script.js",
-      "source_location": "L120"
+      "source_location": "L347"
     },
     {
       "id": "script",
@@ -515,7 +611,7 @@
       "file_type": "code",
       "norm_label": "agro_colors",
       "source_file": "script.js",
-      "source_location": "L703"
+      "source_location": "L801"
     },
     {
       "id": "script_agro_crops",
@@ -526,7 +622,7 @@
       "file_type": "code",
       "norm_label": "agro_crops",
       "source_file": "script.js",
-      "source_location": "L695"
+      "source_location": "L792"
     },
     {
       "id": "script_agro_month_names",
@@ -537,7 +633,7 @@
       "file_type": "code",
       "norm_label": "agro_month_names",
       "source_file": "script.js",
-      "source_location": "L679"
+      "source_location": "L775"
     },
     {
       "id": "script_agro_months",
@@ -548,7 +644,7 @@
       "file_type": "code",
       "norm_label": "agro_months",
       "source_file": "script.js",
-      "source_location": "L678"
+      "source_location": "L774"
     },
     {
       "id": "script_agro_rotation",
@@ -559,7 +655,7 @@
       "file_type": "code",
       "norm_label": "agro_rotation",
       "source_file": "script.js",
-      "source_location": "L701"
+      "source_location": "L798"
     },
     {
       "id": "script_agro_soy",
@@ -570,7 +666,7 @@
       "file_type": "code",
       "norm_label": "agro_soy",
       "source_file": "script.js",
-      "source_location": "L694"
+      "source_location": "L791"
     },
     {
       "id": "script_agro_stages",
@@ -581,7 +677,7 @@
       "file_type": "code",
       "norm_label": "agro_stages",
       "source_file": "script.js",
-      "source_location": "L702"
+      "source_location": "L799"
     },
     {
       "id": "script_agro_weather",
@@ -592,7 +688,7 @@
       "file_type": "code",
       "norm_label": "agro_weather",
       "source_file": "script.js",
-      "source_location": "L685"
+      "source_location": "L782"
     },
     {
       "id": "script_assetgrid",
@@ -603,7 +699,7 @@
       "file_type": "code",
       "norm_label": "assetgrid",
       "source_file": "script.js",
-      "source_location": "L46"
+      "source_location": "L92"
     },
     {
       "id": "script_commands",
@@ -614,7 +710,7 @@
       "file_type": "code",
       "norm_label": "commands",
       "source_file": "script.js",
-      "source_location": "L151"
+      "source_location": "L236"
     },
     {
       "id": "script_consoleform",
@@ -625,7 +721,7 @@
       "file_type": "code",
       "norm_label": "consoleform",
       "source_file": "script.js",
-      "source_location": "L140"
+      "source_location": "L224"
     },
     {
       "id": "script_consoleinput",
@@ -636,7 +732,7 @@
       "file_type": "code",
       "norm_label": "consoleinput",
       "source_file": "script.js",
-      "source_location": "L141"
+      "source_location": "L225"
     },
     {
       "id": "script_consolelast",
@@ -647,7 +743,7 @@
       "file_type": "code",
       "norm_label": "consolelast",
       "source_file": "script.js",
-      "source_location": "L7"
+      "source_location": "L50"
     },
     {
       "id": "script_consolelog",
@@ -658,7 +754,7 @@
       "file_type": "code",
       "norm_label": "consolelog",
       "source_file": "script.js",
-      "source_location": "L5"
+      "source_location": "L48"
     },
     {
       "id": "script_consoletoggle",
@@ -669,7 +765,7 @@
       "file_type": "code",
       "norm_label": "consoletoggle",
       "source_file": "script.js",
-      "source_location": "L6"
+      "source_location": "L49"
     },
     {
       "id": "script_defaultinspector",
@@ -680,7 +776,7 @@
       "file_type": "code",
       "norm_label": "defaultinspector",
       "source_file": "script.js",
-      "source_location": "L72"
+      "source_location": "L118"
     },
     {
       "id": "script_demos",
@@ -691,7 +787,7 @@
       "file_type": "code",
       "norm_label": "demos",
       "source_file": "script.js",
-      "source_location": "L73"
+      "source_location": "L119"
     },
     {
       "id": "script_emailbtn",
@@ -702,7 +798,7 @@
       "file_type": "code",
       "norm_label": "emailbtn",
       "source_file": "script.js",
-      "source_location": "L198"
+      "source_location": "L290"
     },
     {
       "id": "script_emailstatus",
@@ -713,7 +809,7 @@
       "file_type": "code",
       "norm_label": "emailstatus",
       "source_file": "script.js",
-      "source_location": "L199"
+      "source_location": "L291"
     },
     {
       "id": "script_folders",
@@ -724,7 +820,7 @@
       "file_type": "code",
       "norm_label": "folders",
       "source_file": "script.js",
-      "source_location": "L31"
+      "source_location": "L74"
     },
     {
       "id": "script_g7_cd",
@@ -735,7 +831,7 @@
       "file_type": "code",
       "norm_label": "g7_cd",
       "source_file": "script.js",
-      "source_location": "L556"
+      "source_location": "L651"
     },
     {
       "id": "script_g7_mach",
@@ -746,7 +842,7 @@
       "file_type": "code",
       "norm_label": "g7_mach",
       "source_file": "script.js",
-      "source_location": "L553"
+      "source_location": "L648"
     },
     {
       "id": "script_hierlinks",
@@ -757,7 +853,7 @@
       "file_type": "code",
       "norm_label": "hierlinks",
       "source_file": "script.js",
-      "source_location": "L68"
+      "source_location": "L114"
     },
     {
       "id": "script_hiertoggle",
@@ -768,7 +864,7 @@
       "file_type": "code",
       "norm_label": "hiertoggle",
       "source_file": "script.js",
-      "source_location": "L98"
+      "source_location": "L151"
     },
     {
       "id": "script_inspectorbody",
@@ -779,7 +875,7 @@
       "file_type": "code",
       "norm_label": "inspectorbody",
       "source_file": "script.js",
-      "source_location": "L71"
+      "source_location": "L117"
     },
     {
       "id": "script_konami",
@@ -790,7 +886,29 @@
       "file_type": "code",
       "norm_label": "konami",
       "source_file": "script.js",
-      "source_location": "L227"
+      "source_location": "L319"
+    },
+    {
+      "id": "script_lang_attrs",
+      "label": "LANG_ATTRS",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "script.js",
+      "file_type": "code",
+      "norm_label": "lang_attrs",
+      "source_file": "script.js",
+      "source_location": "L185"
+    },
+    {
+      "id": "script_langbtn",
+      "label": "langBtn",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "script.js",
+      "file_type": "code",
+      "norm_label": "langbtn",
+      "source_file": "script.js",
+      "source_location": "L184"
     },
     {
       "id": "script_lightbox",
@@ -801,18 +919,7 @@
       "file_type": "code",
       "norm_label": "lightbox",
       "source_file": "script.js",
-      "source_location": "L212"
-    },
-    {
-      "id": "script_phrases",
-      "label": "phrases",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "script.js",
-      "file_type": "code",
-      "norm_label": "phrases",
-      "source_file": "script.js",
-      "source_location": "L175"
+      "source_location": "L304"
     },
     {
       "id": "script_playbtn",
@@ -823,7 +930,7 @@
       "file_type": "code",
       "norm_label": "playbtn",
       "source_file": "script.js",
-      "source_location": "L130"
+      "source_location": "L215"
     },
     {
       "id": "script_projects",
@@ -834,7 +941,7 @@
       "file_type": "code",
       "norm_label": "projects",
       "source_file": "script.js",
-      "source_location": "L29"
+      "source_location": "L72"
     },
     {
       "id": "script_scenebody",
@@ -845,7 +952,7 @@
       "file_type": "code",
       "norm_label": "scenebody",
       "source_file": "script.js",
-      "source_location": "L69"
+      "source_location": "L115"
     },
     {
       "id": "script_scenetab",
@@ -856,7 +963,18 @@
       "file_type": "code",
       "norm_label": "scenetab",
       "source_file": "script.js",
-      "source_location": "L70"
+      "source_location": "L116"
+    },
+    {
+      "id": "script_str",
+      "label": "STR",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "script.js",
+      "file_type": "code",
+      "norm_label": "str",
+      "source_file": "script.js",
+      "source_location": "L10"
     },
     {
       "id": "script_themebtn",
@@ -867,7 +985,7 @@
       "file_type": "code",
       "norm_label": "themebtn",
       "source_file": "script.js",
-      "source_location": "L117"
+      "source_location": "L170"
     },
     {
       "id": "script_treeprojects",
@@ -878,7 +996,7 @@
       "file_type": "code",
       "norm_label": "treeprojects",
       "source_file": "script.js",
-      "source_location": "L33"
+      "source_location": "L79"
     },
     {
       "id": "script_typingtext",
@@ -889,7 +1007,7 @@
       "file_type": "code",
       "norm_label": "typingtext",
       "source_file": "script.js",
-      "source_location": "L174"
+      "source_location": "L259"
     },
     {
       "id": "script_views",
@@ -900,7 +1018,7 @@
       "file_type": "code",
       "norm_label": "views",
       "source_file": "script.js",
-      "source_location": "L28"
+      "source_location": "L71"
     },
     {
       "id": "claude",
@@ -936,7 +1054,7 @@
       "node_kind": "heading",
       "norm_label": "development",
       "source_file": "CLAUDE.md",
-      "source_location": "L13"
+      "source_location": "L14"
     },
     {
       "id": "claude_graphify",
@@ -948,19 +1066,7 @@
       "node_kind": "heading",
       "norm_label": "graphify",
       "source_file": "CLAUDE.md",
-      "source_location": "L27"
-    },
-    {
-      "id": "claude_repository_overview",
-      "label": "Repository overview",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "repository overview",
-      "source_file": "CLAUDE.md",
-      "source_location": "L5"
+      "source_location": "L29"
     },
     {
       "id": "claude_working_conventions",
@@ -972,7 +1078,19 @@
       "node_kind": "heading",
       "norm_label": "working conventions",
       "source_file": "CLAUDE.md",
-      "source_location": "L17"
+      "source_location": "L18"
+    },
+    {
+      "id": "claude_repository_overview",
+      "label": "Repository overview",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "t",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "repository overview",
+      "source_file": "CLAUDE.md",
+      "source_location": "L5"
     }
   ],
   "links": [
@@ -985,7 +1103,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L861",
+      "source_location": "L961",
       "weight": 1.0
     },
     {
@@ -997,7 +1115,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L803",
+      "source_location": "L901",
       "weight": 1.0
     },
     {
@@ -1009,7 +1127,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L818",
+      "source_location": "L916",
+      "weight": 1.0
+    },
+    {
+      "source": "script_agrodemo_draw",
+      "target": "script_pick",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L918",
+      "weight": 1.0
+    },
+    {
+      "source": "script_agrodemo_draw",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L923",
+      "weight": 1.0
+    },
+    {
+      "source": "script_agrodemo_drawlegend",
+      "target": "script_pick",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L931",
       "weight": 1.0
     },
     {
@@ -1021,7 +1175,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L850",
+      "source_location": "L949",
       "weight": 1.0
     },
     {
@@ -1033,7 +1187,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L851",
+      "source_location": "L950",
       "weight": 1.0
     },
     {
@@ -1045,7 +1199,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L841",
+      "source_location": "L940",
       "weight": 1.0
     },
     {
@@ -1057,7 +1211,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L756",
+      "source_location": "L854",
       "weight": 1.0
     },
     {
@@ -1069,7 +1223,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L767",
+      "source_location": "L865",
       "weight": 1.0
     },
     {
@@ -1081,7 +1235,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L771",
+      "source_location": "L869",
       "weight": 1.0
     },
     {
@@ -1093,7 +1247,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L773",
+      "source_location": "L871",
       "weight": 1.0
     },
     {
@@ -1105,7 +1259,67 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L737",
+      "source_location": "L835",
+      "weight": 1.0
+    },
+    {
+      "source": "script_applylang",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "script_applylang",
+      "target": "script_updatethemebtn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L200",
+      "weight": 1.0
+    },
+    {
+      "source": "script_applylang",
+      "target": "script_showtitles",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L201",
+      "weight": 1.0
+    },
+    {
+      "source": "script_applylang",
+      "target": "script_resettyping",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "script_ballisticsdemo",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L717",
       "weight": 1.0
     },
     {
@@ -1117,7 +1331,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L589",
+      "source_location": "L684",
       "weight": 1.0
     },
     {
@@ -1129,7 +1343,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L629",
+      "source_location": "L724",
       "weight": 1.0
     },
     {
@@ -1141,7 +1355,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L629",
+      "source_location": "L724",
+      "weight": 1.0
+    },
+    {
+      "source": "script_ballisticsdemo_render",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L753",
       "weight": 1.0
     },
     {
@@ -1153,7 +1379,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L614",
+      "source_location": "L709",
       "weight": 1.0
     },
     {
@@ -1165,7 +1391,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L293",
+      "source_location": "L385",
       "weight": 1.0
     },
     {
@@ -1177,7 +1403,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L302",
+      "source_location": "L394",
       "weight": 1.0
     },
     {
@@ -1189,7 +1415,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L241",
+      "source_location": "L333",
+      "weight": 1.0
+    },
+    {
+      "source": "script_monarchmigration",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L333",
       "weight": 1.0
     },
     {
@@ -1201,7 +1439,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L542",
+      "source_location": "L637",
+      "weight": 1.0
+    },
+    {
+      "source": "script_neurodemo",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L637",
       "weight": 1.0
     },
     {
@@ -1213,7 +1463,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L450",
+      "source_location": "L545",
       "weight": 1.0
     },
     {
@@ -1225,7 +1475,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L535",
+      "source_location": "L630",
       "weight": 1.0
     },
     {
@@ -1237,7 +1487,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L536",
+      "source_location": "L631",
       "weight": 1.0
     },
     {
@@ -1249,7 +1499,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L475",
+      "source_location": "L570",
       "weight": 1.0
     },
     {
@@ -1261,7 +1511,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L487",
+      "source_location": "L582",
       "weight": 1.0
     },
     {
@@ -1273,7 +1523,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L148",
+      "source_location": "L233",
+      "weight": 1.0
+    },
+    {
+      "source": "script_openview",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -1285,7 +1547,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L342",
+      "source_location": "L434",
+      "weight": 1.0
+    },
+    {
+      "source": "script_perceptiondemo",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L446",
       "weight": 1.0
     },
     {
@@ -1297,7 +1571,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L378",
+      "source_location": "L473",
+      "weight": 1.0
+    },
+    {
+      "source": "script_resettyping",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L266",
+      "weight": 1.0
+    },
+    {
+      "source": "script_route",
+      "target": "script_showtitles",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -1309,7 +1607,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L89",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -1321,7 +1619,79 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L91",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "script_route",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "script_route",
+      "target": "script_titleof",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "script_showtitles",
+      "target": "script_titleof",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "script_showtitles",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "script_t",
+      "target": "script_pick",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "script_type",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L272",
       "weight": 1.0
     },
     {
@@ -1333,7 +1703,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L120",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "script_updatethemebtn",
+      "target": "script_t",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
@@ -1345,7 +1727,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L100",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -1357,7 +1739,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L118",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -1369,19 +1751,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L120",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
       "source": "script",
-      "target": "script_setconsoleopen",
+      "target": "script_applylang",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L19",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -1393,7 +1775,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L240",
+      "source_location": "L332",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_t",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_log",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_setconsoleopen",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "script.js",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -1405,12 +1823,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L30",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
       "source": "script",
-      "target": "script_log",
+      "target": "script_pair",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1429,7 +1847,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L761",
+      "source_location": "L859",
       "weight": 1.0
     },
     {
@@ -1441,7 +1859,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L794",
+      "source_location": "L892",
       "weight": 1.0
     },
     {
@@ -1453,7 +1871,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L829",
+      "source_location": "L927",
       "weight": 1.0
     },
     {
@@ -1465,7 +1883,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L308",
+      "source_location": "L400",
       "weight": 1.0
     },
     {
@@ -1477,7 +1895,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "script.js",
-      "source_location": "L457",
+      "source_location": "L552",
       "weight": 1.0
     },
     {
@@ -1499,7 +1917,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -1510,7 +1928,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -1521,7 +1939,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L27",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -1537,277 +1955,13 @@
     },
     {
       "source": "script",
-      "target": "script_themebtn",
+      "target": "script_str",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L117",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_playbtn",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L130",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_consoleform",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L140",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_consoleinput",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L141",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_openview",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L143",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_commands",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L151",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_typingtext",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L174",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_phrases",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L175",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_emailbtn",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L198",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_emailstatus",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L199",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_lightbox",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L212",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_konami",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L227",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_svgpoint",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L255",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_views",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L28",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_projects",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L29",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_folders",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L31",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_treeprojects",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L33",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_assetgrid",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L46",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_consolelog",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_g7_mach",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L553",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_g7_cd",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L556",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_g7cd",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L561",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_consoletoggle",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_months",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L678",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_month_names",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L679",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -1818,29 +1972,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L68",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agroday",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L680",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_weather",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L685",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -1851,40 +1983,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L69",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_soy",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L694",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_crops",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L695",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_consolelast",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L7",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -1895,40 +1994,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L70",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_rotation",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L701",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_stages",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L702",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_agro_colors",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": "L703",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -1939,7 +2005,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L71",
+      "source_location": "L117",
       "weight": 1.0
     },
     {
@@ -1950,7 +2016,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L72",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -1961,7 +2027,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L73",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_showtitles",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -1972,7 +2049,425 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L98",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_themebtn",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_langbtn",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_lang_attrs",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L185",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_playbtn",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_consoleform",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L224",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_consoleinput",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L225",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_openview",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L227",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_commands",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L236",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_typingtext",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L259",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_resettyping",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_emailbtn",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L290",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_emailstatus",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L291",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_lightbox",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L304",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_konami",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L319",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_svgpoint",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L347",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_consolelog",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_consoletoggle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_consolelast",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_g7_mach",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L648",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_g7_cd",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L651",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_g7cd",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L656",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_views",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_projects",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_folders",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_titleof",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_kindof",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_months",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L774",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_month_names",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L775",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agroday",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L777",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_weather",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L782",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_treeprojects",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_soy",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L791",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_crops",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L792",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_rotation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L798",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_stages",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L799",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_pick",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_agro_colors",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L801",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_assetgrid",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -1983,7 +2478,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L736",
+      "source_location": "L834",
       "weight": 1.0
     },
     {
@@ -1994,7 +2489,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L747",
+      "source_location": "L845",
       "weight": 1.0
     },
     {
@@ -2005,7 +2500,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L753",
+      "source_location": "L851",
       "weight": 1.0
     },
     {
@@ -2016,7 +2511,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L786",
+      "source_location": "L884",
       "weight": 1.0
     },
     {
@@ -2027,7 +2522,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L585",
+      "source_location": "L680",
       "weight": 1.0
     },
     {
@@ -2038,7 +2533,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L610",
+      "source_location": "L705",
       "weight": 1.0
     },
     {
@@ -2049,7 +2544,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L276",
+      "source_location": "L368",
       "weight": 1.0
     },
     {
@@ -2060,7 +2555,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L438",
+      "source_location": "L533",
       "weight": 1.0
     },
     {
@@ -2071,7 +2566,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L447",
+      "source_location": "L542",
       "weight": 1.0
     },
     {
@@ -2082,7 +2577,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L464",
+      "source_location": "L559",
       "weight": 1.0
     },
     {
@@ -2093,7 +2588,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L471",
+      "source_location": "L566",
       "weight": 1.0
     },
     {
@@ -2104,7 +2599,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L493",
+      "source_location": "L588",
       "weight": 1.0
     },
     {
@@ -2115,7 +2610,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L532",
+      "source_location": "L627",
       "weight": 1.0
     },
     {
@@ -2126,7 +2621,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L347",
+      "source_location": "L439",
       "weight": 1.0
     },
     {
@@ -2137,19 +2632,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "script.js",
-      "source_location": "L355",
-      "weight": 1.0
-    },
-    {
-      "source": "script",
-      "target": "script_type",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "argument",
-      "source_file": "script.js",
-      "source_location": "L881",
+      "source_location": "L450",
       "weight": 1.0
     },
     {
@@ -2161,7 +2644,19 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L95",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "script",
+      "target": "script_type",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "script.js",
+      "source_location": "L981",
       "weight": 1.0
     },
     {
@@ -2173,7 +2668,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L856",
+      "source_location": "L955",
       "weight": 1.0
     },
     {
@@ -2185,7 +2680,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L865",
+      "source_location": "L965",
       "weight": 1.0
     },
     {
@@ -2197,7 +2692,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L671",
+      "source_location": "L766",
       "weight": 1.0
     },
     {
@@ -2209,7 +2704,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L547",
+      "source_location": "L642",
       "weight": 1.0
     },
     {
@@ -2221,7 +2716,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L537",
+      "source_location": "L632",
       "weight": 1.0
     },
     {
@@ -2233,7 +2728,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L402",
+      "source_location": "L497",
       "weight": 1.0
     },
     {
@@ -2245,7 +2740,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "script.js",
-      "source_location": "L398",
+      "source_location": "L493",
       "weight": 1.0
     },
     {
@@ -2257,7 +2752,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "script.js",
-      "source_location": "L73",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -2269,7 +2764,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "script.js",
-      "source_location": "L73",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -2281,7 +2776,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "script.js",
-      "source_location": "L73",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -2293,7 +2788,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "script.js",
-      "source_location": "L73",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -2305,10 +2800,34 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "script.js",
-      "source_location": "L73",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_repository_overview",
+      "target": "script_applylang",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "applyLang()",
+      "source_file": "CLAUDE.md",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_repository_overview",
+      "target": "script_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "t()",
+      "source_file": "CLAUDE.md",
+      "source_location": "L12",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "27bb39567b1c27085fb5d8b70e0dfe8cc4082fcd"
+  "built_at_commit": "32f3ca738028f5bb27c5d482d12a0ba0ce8e6115"
 }

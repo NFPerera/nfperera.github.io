@@ -1,6 +1,49 @@
 const root = document.documentElement;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// ---------- Language ----------
+// Translated page text is a pair of <span lang="en|es"> (the CSS shows one). STR covers the text this script writes itself.
+// ponytail: two languages hard-wired as [en, es] pairs; a third would need a lookup by language code.
+let lang = root.dataset.lang === 'es' ? 'es' : 'en';
+const pick = ([en, es]) => (lang === 'es' ? es : en);
+const pair = (en, es) => `<span lang="en">${en}</span><span lang="es">${es}</span>`;
+const STR = {
+    siteTitle: ['NFPerera · Game & Software Developer', 'NFPerera · Desarrollador de videojuegos y software'],
+    opened: [title => `Opened ${title}`, title => `Abierto: ${title}`],
+    loaded: ["Editor loaded. Type 'help' in the console or pick something from the Hierarchy.", "Editor cargado. Escribe 'help' en la consola o elige algo de la Jerarquía."],
+    tip: ['Tip: some old-school cheat codes still work around here.', 'Consejo: por aquí todavía funcionan algunos trucos de la vieja escuela.'],
+    langSet: ['Language set to English.', 'Idioma configurado: español.'],
+    langSwitch: ['Switch to Spanish', 'Cambiar a inglés'],
+    themeDay: ['☀ Day', '☀ Día'],
+    themeNight: ['☾ Night', '☾ Noche'],
+    lighting: [theme => `Lighting set to ${theme}.`, theme => `Iluminación: ${theme === 'day' ? 'día' : 'noche'}.`],
+    playOn: ['Entering play mode... no game in this scene. Maybe try an old cheat code?', 'Entrando en modo Play... no hay ningún juego en esta escena. ¿Y si pruebas un truco clásico?'],
+    playOff: ['Exited play mode.', 'Saliste del modo Play.'],
+    help: ['Commands: help, ls, open <name|number>, theme, clear, contact', 'Comandos: help, ls, open <nombre|número>, theme, clear, contact'],
+    usage: ['Usage: open <name|number>', 'Uso: open <nombre|número>'],
+    nothing: [q => `Nothing called '${q}'. Try 'ls'.`, q => `No hay nada llamado '${q}'. Prueba con 'ls'.`],
+    unknown: [c => `Unknown command '${c}'. Type 'help'.`, c => `Comando desconocido '${c}'. Escribe 'help'.`],
+    emailHint: ['Click to copy', 'Haz clic para copiar'],
+    emailCopied: ['Copied to clipboard!', '¡Copiado al portapapeles!'],
+    emailLog: ['Email copied to clipboard.', 'Correo copiado al portapapeles.'],
+    konami: ['Cheat code accepted: monarch migration unlocked 🦋', 'Truco aceptado: migración de monarcas desbloqueada 🦋'],
+    neuroReset: ['Neuroevolution demo reset to generation 1.', 'Demo de neuroevolución reiniciada en la generación 1.'],
+    phrases: [['Software Developer', 'Gameplay Programmer', 'Unity Expert'], ['Desarrollador de software', 'Programador de gameplay', 'Experto en Unity']],
+    unaware: ['Unaware', 'Desprevenido'],
+    suspicious: ['Suspicious...', 'Sospechoso...'],
+    aware: ['Aware!', '¡Alerta!'],
+    drop: ['drop', 'caída'],
+    drift: ['wind drift', 'deriva por viento'],
+    clicks: ['clicks', 'clics'],
+    agroPoint: ['Point at a lot', 'Apunta a un lote'],
+    agroBare: ['bare soil', 'suelo desnudo'],
+    agroLot: [(id, ha, ip, what) => `Lot ${id} · ${ha} ha · IP ${ip} · ${what}`, (id, ha, ip, what) => `Lote ${id} · ${ha} ha · IP ${ip} · ${what}`],
+};
+const t = (key, ...args) => {
+    const v = pick(STR[key]);
+    return typeof v === 'function' ? v(...args) : v;
+};
+
 // ---------- Console ----------
 const consoleLog = document.getElementById('console-log');
 const consoleToggle = document.getElementById('console-toggle');
@@ -28,14 +71,17 @@ consoleToggle.addEventListener('click', () => setConsoleOpen(!document.body.clas
 const views = [...document.querySelectorAll('.view')];
 const projects = views.filter(v => v.classList.contains('project'));
 const accentOf = el => [...el.classList].find(c => c.startsWith('accent-')) || '';
-const folders = { game: 'Games', tool: 'Tools', ai: 'AI', sim: 'Simulation' };
+const folders = { game: ['Games', 'Juegos'], tool: ['Tools', 'Herramientas'], ai: ['AI', 'IA'], sim: ['Simulation', 'Simulación'] };
+// Project names are proper nouns; the page titles and project kinds carry a data-*-es twin
+const titleOf = v => (lang === 'es' && v.dataset.titleEs) || v.dataset.title;
+const kindOf = p => (lang === 'es' && p.dataset.kindEs) || p.dataset.kind;
 
 const treeProjects = document.getElementById('tree-projects');
 Object.entries(folders).forEach(([category, label]) => {
     const items = projects.filter(p => p.dataset.category === category);
     if (!items.length) return;
     const li = document.createElement('li');
-    li.innerHTML = `<details open><summary>${label}</summary><ul></ul></details>`;
+    li.innerHTML = `<details open><summary>${pair(...label)}</summary><ul></ul></details>`;
     items.forEach(p => {
         li.querySelector('ul').insertAdjacentHTML('beforeend',
             `<li><a href="#/${p.dataset.route}" class="${accentOf(p)}">${p.dataset.title}</a></li>`);
@@ -54,14 +100,14 @@ projects.forEach((p, i) => {
         `<a class="asset ${accentOf(p)}" href="#/${p.dataset.route}">
             <span class="asset-icon">${thumb}</span>
             <span class="asset-name">${p.dataset.title}</span>
-            <span class="asset-kind">${p.dataset.kind}</span>
+            <span class="asset-kind">${pair(p.dataset.kind, p.dataset.kindEs || p.dataset.kind)}</span>
         </a>`);
 
     const prev = projects[(i - 1 + projects.length) % projects.length];
     const next = projects[(i + 1) % projects.length];
     p.querySelector('.pager').innerHTML =
-        `<a href="#/${prev.dataset.route}" class="prev"><small>← Previous</small>${prev.dataset.title}</a>
-         <a href="#/${next.dataset.route}" class="next"><small>Next →</small>${next.dataset.title}</a>`;
+        `<a href="#/${prev.dataset.route}" class="prev"><small>${pair('← Previous', '← Anterior')}</small>${prev.dataset.title}</a>
+         <a href="#/${next.dataset.route}" class="next"><small>${pair('Next →', 'Siguiente →')}</small>${next.dataset.title}</a>`;
 });
 
 // ---------- Router: "#/route" shows the matching .view ----------
@@ -72,23 +118,30 @@ const inspectorBody = document.getElementById('inspector-body');
 const defaultInspector = document.getElementById('inspector-default');
 const demos = { fsm: fsmDemo, perception: perceptionDemo, neuro: neuroDemo, ballistics: ballisticsDemo, agro: agroDemo };
 let firstRoute = true;
+let currentView;
+
+function showTitles() {
+    const title = titleOf(currentView);
+    sceneTab.textContent = title;
+    document.title = currentView.dataset.route ? `${title} · NFPerera` : t('siteTitle');
+}
 
 function route() {
     const path = location.hash.replace(/^#\/?/, '');
     const view = views.find(v => v.dataset.route === path) || views[0];
+    currentView = view;
 
     views.forEach(v => { v.hidden = v !== view; });
     hierLinks.forEach(a => a.classList.toggle('is-selected', a.getAttribute('href') === '#/' + view.dataset.route));
     const inspector = view.querySelector('template.inspector') || defaultInspector;
     inspectorBody.replaceChildren(inspector.content.cloneNode(true));
-    sceneTab.textContent = view.dataset.title;
-    document.title = view.dataset.route ? `${view.dataset.title} · NFPerera` : 'NFPerera · Game & Software Developer';
+    showTitles();
 
     sceneBody.scrollTop = 0;
     if (!firstRoute) window.scrollTo(0, 0);
     closeHierarchy();
     view.querySelectorAll('[data-demo]').forEach(el => demos[el.dataset.demo](el));
-    if (!firstRoute) log(`Opened ${view.dataset.title}`);
+    if (!firstRoute) log(t('opened', titleOf(view)));
     firstRoute = false;
 }
 
@@ -117,13 +170,45 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHierarc
 const themeBtn = document.getElementById('theme-toggle');
 const currentTheme = () => root.dataset.theme ||
     (window.matchMedia('(prefers-color-scheme: light)').matches ? 'day' : 'night');
-const updateThemeBtn = () => { themeBtn.textContent = currentTheme() === 'day' ? '☀ Day' : '☾ Night'; };
+const updateThemeBtn = () => { themeBtn.textContent = t(currentTheme() === 'day' ? 'themeDay' : 'themeNight'); };
 
 themeBtn.addEventListener('click', () => {
     root.dataset.theme = currentTheme() === 'day' ? 'night' : 'day';
     try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
     updateThemeBtn();
-    log(`Lighting set to ${root.dataset.theme}.`);
+    log(t('lighting', root.dataset.theme));
+});
+
+// ---------- English / Spanish toggle ----------
+// A saved choice wins, otherwise the <head> script picked the browser's language; only a click is saved.
+const langBtn = document.getElementById('lang-toggle');
+const LANG_ATTRS = ['aria-label', 'placeholder', 'content']; // attributes with a data-es-* twin
+
+function applyLang() {
+    root.dataset.lang = lang;
+    root.lang = lang;
+    LANG_ATTRS.forEach(attr => document.querySelectorAll(`[data-es-${attr}]`).forEach(el => {
+        if (!el.hasAttribute(`data-en-${attr}`)) el.setAttribute(`data-en-${attr}`, el.getAttribute(attr));
+        el.setAttribute(attr, el.getAttribute(`data-${lang}-${attr}`));
+    }));
+    document.querySelectorAll('option[data-es]').forEach(o => { // <option> can't hold the span pairs
+        o.dataset.en = o.dataset.en || o.textContent;
+        o.textContent = o.dataset[lang];
+    });
+    langBtn.setAttribute('aria-label', t('langSwitch'));
+    langBtn.title = t('langSwitch');
+    updateThemeBtn();
+    showTitles();
+    emailStatus.textContent = t('emailHint');
+    resetTyping();
+    window.dispatchEvent(new Event('langchange')); // demos that draw their own text redraw it
+}
+
+langBtn.addEventListener('click', () => {
+    lang = lang === 'es' ? 'en' : 'es';
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    applyLang();
+    log(t('langSet'));
 });
 
 // ---------- Play button ----------
@@ -132,8 +217,7 @@ const playBtn = document.getElementById('play-btn');
 playBtn.addEventListener('click', () => {
     const playing = document.body.classList.toggle('play-mode');
     playBtn.setAttribute('aria-pressed', playing);
-    log(playing ? 'Entering play mode... no game in this scene. Maybe try an old cheat code?' : 'Exited play mode.',
-        playing ? 'warn' : '');
+    log(t(playing ? 'playOn' : 'playOff'), playing ? 'warn' : '');
 });
 
 // ---------- Console commands ----------
@@ -143,15 +227,16 @@ const consoleInput = document.getElementById('console-input');
 function openView(query) {
     const q = query.toLowerCase();
     const view = projects[Number(q) - 1] ||
-        views.find(v => v.dataset.title.toLowerCase().includes(q) || (q && v.dataset.route.includes(q)));
+        views.find(v => v.dataset.title.toLowerCase().includes(q) || (v.dataset.titleEs || '').toLowerCase().includes(q) ||
+            (q && v.dataset.route.includes(q)));
     if (view) location.hash = '#/' + view.dataset.route;
-    else log(`Nothing called '${query}'. Try 'ls'.`, 'warn');
+    else log(t('nothing', query), 'warn');
 }
 
 const commands = {
-    help: () => log('Commands: help, ls, open <name|number>, theme, clear, contact'),
-    ls: () => projects.forEach((p, i) => log(`${i + 1}. ${p.dataset.title} (${p.dataset.kind})`)),
-    open: arg => arg ? openView(arg) : log('Usage: open <name|number>', 'warn'),
+    help: () => log(t('help')),
+    ls: () => projects.forEach((p, i) => log(`${i + 1}. ${p.dataset.title} (${kindOf(p)})`)),
+    open: arg => arg ? openView(arg) : log(t('usage'), 'warn'),
     theme: () => themeBtn.click(),
     clear: () => consoleLog.replaceChildren(),
     contact: () => { location.hash = '#/contact'; },
@@ -167,17 +252,24 @@ consoleForm.addEventListener('submit', e => {
     const [cmd, ...args] = input.split(/\s+/);
     const run = commands[cmd.toLowerCase()];
     if (run) run(args.join(' '));
-    else log(`Unknown command '${cmd}'. Type 'help'.`, 'warn');
+    else log(t('unknown', cmd), 'warn');
 });
 
 // ---------- Typewriter ----------
 const typingText = document.getElementById('typing-text');
-const phrases = ["Software Developer", "Gameplay Programmer", "Unity Expert"];
 let phraseIndex = 0;
-let charIndex = phrases[0].length;
+let charIndex = t('phrases')[0].length;
 let isDeleting = true;
 
+function resetTyping() { // a language change restarts the loop on the new language's first phrase
+    phraseIndex = 0;
+    charIndex = t('phrases')[0].length;
+    isDeleting = true;
+    typingText.textContent = t('phrases')[0];
+}
+
 function type() {
+    const phrases = t('phrases');
     const currentPhrase = phrases[phraseIndex];
     charIndex += isDeleting ? -1 : 1;
     typingText.textContent = currentPhrase.substring(0, charIndex);
@@ -201,11 +293,11 @@ const emailStatus = document.getElementById('email-status');
 emailBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(emailBtn.dataset.email)
         .then(() => {
-            emailStatus.textContent = 'Copied to clipboard!';
-            log('Email copied to clipboard.', 'success');
+            emailStatus.textContent = t('emailCopied');
+            log(t('emailLog'), 'success');
         })
         .catch(() => { location.href = 'mailto:' + emailBtn.dataset.email; });
-    setTimeout(() => { emailStatus.textContent = 'Click to copy'; }, 2000);
+    setTimeout(() => { emailStatus.textContent = t('emailHint'); }, 2000);
 });
 
 // ---------- Gallery lightbox (only kicks in once real images are added) ----------
@@ -238,7 +330,7 @@ document.addEventListener('keydown', e => {
 });
 
 function monarchMigration() {
-    log('Cheat code accepted: monarch migration unlocked 🦋', 'success');
+    log(t('konami'), 'success');
     for (let i = 0; i < 24; i++) {
         const b = document.createElement('span');
         b.className = 'butterfly';
@@ -349,8 +441,11 @@ function perceptionDemo(svg) {
         awareness = level;
         svg.classList.toggle('suspicious', level === 'suspicious');
         svg.classList.toggle('aware', level === 'aware');
-        status.textContent = { unaware: 'Unaware', suspicious: 'Suspicious...', aware: 'Aware!' }[level];
+        showStatus();
     }
+    const showStatus = () => { status.textContent = t(awareness); };
+    showStatus();
+    window.addEventListener('langchange', showStatus);
 
     function frame(now) {
         if (svg.closest('[hidden]')) { running = false; return; }
@@ -539,7 +634,7 @@ function neuroDemo(canvas) {
 
     root.querySelector('[data-control="reset"]')?.addEventListener('click', () => {
         reset();
-        log('Neuroevolution demo reset to generation 1.');
+        log(t('neuroReset'));
     });
 
     reset();
@@ -619,7 +714,7 @@ function ballisticsDemo(root) {
 
     const fmtMil = (meters, range) => {
         const mil = meters / range * 1000;
-        return `${Math.abs(mil).toFixed(1)} mil <small>${Math.round(Math.abs(mil) / 0.1)} clicks</small>`;
+        return `${Math.abs(mil).toFixed(1)} mil <small>${Math.round(Math.abs(mil) / 0.1)} ${t('clicks')}</small>`;
     };
 
     function render() {
@@ -655,8 +750,8 @@ function ballisticsDemo(root) {
             `<line class="los" x1="${left}" y1="${py(0)}" x2="${right}" y2="${py(0)}"/>` +
             `<path class="drift" d="${line('z')}"/><path class="drop" d="${line('y')}"/>` +
             `<circle class="zero-mark" cx="${px(zero)}" cy="${py(0)}" r="4"/>` +
-            `<text class="drop-label" x="${left + 12}" y="${bottom - 26}">— drop</text>` +
-            `<text class="drift-label" x="${left + 12}" y="${bottom - 10}">- - wind drift</text>`;
+            `<text class="drop-label" x="${left + 12}" y="${bottom - 26}">— ${t('drop')}</text>` +
+            `<text class="drift-label" x="${left + 12}" y="${bottom - 10}">- - ${t('drift')}</text>`;
 
         tbody.innerHTML = ROWS.map(range => {
             const p = samples.find(s => s.x >= range);
@@ -670,13 +765,15 @@ function ballisticsDemo(root) {
 
     Object.values(inputs).forEach(el => el.addEventListener('input', render));
     new ResizeObserver(render).observe(svg);
+    window.addEventListener('langchange', render);
 }
 
 // AgroLife demo: real Pergamino lots farmed the way the game farms its neighbours. On 1 May every idle lot
 // gets the next crop of the rotation on its typical sowing date; crops advance by growing degree-days under
 // weather from the generator's monthly parameters, and are coloured like the map's Status layer.
 const AGRO_MONTHS = [31, 30, 31, 31, 30, 31, 30, 31, 31, 28, 31, 30]; // the campaign year runs May → April
-const AGRO_MONTH_NAMES = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'];
+const AGRO_MONTH_NAMES = [['May', 'May'], ['Jun', 'Jun'], ['Jul', 'Jul'], ['Aug', 'Ago'], ['Sep', 'Sep'], ['Oct', 'Oct'],
+    ['Nov', 'Nov'], ['Dec', 'Dic'], ['Jan', 'Ene'], ['Feb', 'Feb'], ['Mar', 'Mar'], ['Apr', 'Abr']];
 const agroDay = dayMonth => { // "15/6" → day of the campaign
     const [d, m] = dayMonth.split('/').map(Number);
     return AGRO_MONTHS.slice(0, (m + 7) % 12).reduce((a, b) => a + b, 0) + d - 1;
@@ -693,13 +790,14 @@ const AGRO_WEATHER = [
 // crops.json, long-cycle genetics: base temperature, degree-days to emergence/vegetative/flowering/grain fill/maturity
 const AGRO_SOY = { base: 10, gd: [80, 130, 500, 750, 1450], harvestDays: 10, sow: '15/11', light: '#a8e0b0', dark: '#2f7f4f', photoperiod: true };
 const AGRO_CROPS = {
-    trigo: { name: 'Wheat', base: 0, gd: [150, 250, 1500, 1650, 2200], harvestDays: 7, sow: '15/6', light: '#b9d67a', dark: '#4e7a2a' },
-    maiz: { name: 'Maize', base: 8, gd: [70, 120, 700, 1100, 1850], harvestDays: 15, sow: '1/10', light: '#8fd18a', dark: '#1f6b2e' },
-    soja1: { ...AGRO_SOY, name: 'Soybean' },
-    soja2: { ...AGRO_SOY, name: 'Second soybean' },
+    trigo: { name: ['Wheat', 'Trigo'], base: 0, gd: [150, 250, 1500, 1650, 2200], harvestDays: 7, sow: '15/6', light: '#b9d67a', dark: '#4e7a2a' },
+    maiz: { name: ['Maize', 'Maíz'], base: 8, gd: [70, 120, 700, 1100, 1850], harvestDays: 15, sow: '1/10', light: '#8fd18a', dark: '#1f6b2e' },
+    soja1: { ...AGRO_SOY, name: ['Soybean', 'Soja'] },
+    soja2: { ...AGRO_SOY, name: ['Second soybean', 'Soja de segunda'] },
 };
 const AGRO_ROTATION = ['maiz', 'soja1', 'trigo']; // wheat is always followed by second soybean
-const AGRO_STAGES = ['sown', 'emerged', 'vegetative', 'flowering', 'grain fill', 'mature'];
+const AGRO_STAGES = [['sown', 'sembrado'], ['emerged', 'emergido'], ['vegetative', 'vegetativo'], ['flowering', 'floración'],
+    ['grain fill', 'llenado de grano'], ['mature', 'maduro']];
 const AGRO_COLORS = { bare: '#8c7a5b', mature: '#e3c04b', red: '#b5452f', yellow: '#e3c04b', green: '#3e8e41' };
 
 function agroDemo(canvas) {
@@ -817,21 +915,22 @@ function agroDemo(canvas) {
 
         const m = monthOf(day);
         const dayOfMonth = day - AGRO_MONTHS.slice(0, m).reduce((a, b) => a + b, 0) + 1;
-        stat('date').textContent = `${dayOfMonth} ${AGRO_MONTH_NAMES[m]}`;
+        stat('date').textContent = `${dayOfMonth} ${pick(AGRO_MONTH_NAMES[m])}`;
         stat('year').textContent = campaign + (m >= 8 ? 1 : 0); // the game's "Year N" turns on 1 January
         stat('temp').textContent = `${tMean.toFixed(1)} °C`;
         const k = hover?.crop;
         stat('lot').textContent = hover
-            ? `Lot ${hover.id} · ${hover.ha} ha · IP ${hover.ip} · ${k ? `${k.c.name}, ${AGRO_STAGES[k.stage]}` : 'bare soil'}`
-            : 'Point at a lot';
+            ? t('agroLot', hover.id, hover.ha, hover.ip, k ? `${pick(k.c.name)}, ${pick(AGRO_STAGES[k.stage])}` : t('agroBare'))
+            : t('agroPoint');
     }
 
     function drawLegend() {
         if (!legend) return;
         const items = layerSelect?.value === 'ip'
             ? [['IP 0', AGRO_COLORS.red], ['50', AGRO_COLORS.yellow], ['100', AGRO_COLORS.green]]
-            : [['Bare soil', AGRO_COLORS.bare], ['Wheat', AGRO_CROPS.trigo.dark], ['Maize', AGRO_CROPS.maiz.dark],
-               ['Soybean', AGRO_SOY.dark], ['Mature', AGRO_COLORS.mature]];
+            : [[pick(['Bare soil', 'Suelo desnudo']), AGRO_COLORS.bare], [pick(AGRO_CROPS.trigo.name), AGRO_CROPS.trigo.dark],
+               [pick(AGRO_CROPS.maiz.name), AGRO_CROPS.maiz.dark], [pick(AGRO_CROPS.soja1.name), AGRO_SOY.dark],
+               [pick(['Mature', 'Maduro']), AGRO_COLORS.mature]];
         legend.innerHTML = items.map(([text, color]) => `<span><i class="swatch" style="background:${color}"></i>${text}</span>`).join('');
     }
 
@@ -857,6 +956,7 @@ function agroDemo(canvas) {
     canvas.addEventListener('pointerdown', pointAt);
     canvas.addEventListener('pointerleave', () => { hover = null; draw(); });
     layerSelect?.addEventListener('change', () => { drawLegend(); draw(); });
+    window.addEventListener('langchange', () => { drawLegend(); draw(); });
 
     while (day !== agroDay('25/11')) step(); // open on late spring, when every crop of the rotation is in the ground
     drawLegend();
@@ -874,8 +974,8 @@ const AGRO_ROADS = '37 164 35 166;-2 124 -3 126;-1 123 -2 124;0 121 -1 123;1 120
 const AGRO_STREAMS = '20 140 32 155;5 115 9 123 12 127 13 132 20 140;22 107 18 104 12 118 12 127;-5 108 5 115;26 103 24 107 22 107;30 89 31 94 27 97 28 101 26 103;133 278 131 281 129 281 128 283 125 283 123 285 122 285 122 287 119 288 118 291 115 290 112 294 111 298 114 301 114 309;139 270 135 273 134 276 133 276 130 278 129 281;32 155 34 161 40 169 41 174 44 180 47 190 47 195 50 199 50 202 52 205 52 209 55 216 55 220 57 224 59 238 65 245 66 253 70 257 71 261 76 269 76 276 79 279 85 292 88 293 90 297 93 300 95 304 105 317 113 324 123 330 129 332 134 335 144 336 150 335 153 335 156 338 161 337 169 337 181 340 183 342 187 342 190 347 195 347 196 351 199 353 204 359 213 365 215 368 216 372 222 376 227 376 236 386 238 392 242 396 243 400 253 410 257 415 259 421 265 428 268 436 267 442 271 444 277 443 279 446 286 452 291 453 294 452 297 455 302 455 306 456 312 453 319 456 323 454 335 456 343 456 347 457 351 455 368 451 373 456 379 457 382 459 387 458 390 460 397 461 404 464 411 471 417 471 419 473 425 474 429 480 439 484 442 487 452 488 456 494 461 493 466 497 470 497 476 502 485 502 494 508 500 510 508 521 515 520 524 527 531 528 537 531 544 532 553 531 571 525 574 526 584 523 588 524 598 521 620 509 630 508 637 499 641 497 649 489 658 488 664 485 673 483 681 483 696 480 705 477 712 477 718 473 727 472;276 247 272 252 270 260 267 263 262 270 260 276 252 289 253 291 248 294 248 297 242 299 242 303 238 304 236 309 232 311 233 313 231 315;276 247;210 184 195 196 194 197 194 195 188 196 188 198 187 197 187 199 184 202 184 204 182 207;186 176 180 193 184 198 182 208 174 216 174 218 175 218 175 219 173 219 171 222 168 222 165 226 166 228 163 227 163 229 161 231 163 233 162 239 160 239 160 240 162 242 160 244 163 247 160 251 158 251 158 253 155 253 154 256 153 255 152 256 152 254 150 254 149 256 148 256 148 258 146 258 146 262 144 263 141 268 139 268 140 271 137 275;59 115 52 121 52 123 44 132 43 146 37 151 32 153;59 115;60 115 59 115;60 114 60 115;76 101 72 102 72 104 67 105 64 108 61 109 60 114;77 101 76 101;83 92 77 101;84 92 83 92;87 88 87 89 84 92;465 302 465 313;588 181 587 175 592 141;592 141;592 141 592 105 594 97;594 97;594 97 597 54 601 40;601 40 613 12 627 -11;87 87 87 88;114 65 112 65 97 78 97 81 94 81 87 87;114 65;47 51 47 52;58 37 47 51;66 28 58 37;151 -8 136 18 131 24 130 31 128 35 121 44 117 60 114 65;70 25 66 28;70 24 70 25;73 21 70 24;88 -2 81 5 79 13 73 21;43 -1 43 0;44 -1 43 -1;49 -9 44 -1;411 48 414 42 420 40 423 37 433 23 442 15 447 7 455 2 455 -1 459 -4 465 -14 468 -15 470 -18 472 -21 472 -27 474 -28 474 -31 476 -32 479 -49 484 -51 484 -54 486 -54 485 -58 490 -66 490 -68 493 -70 499 -71 499 -74 503 -76 503 -78 505 -78 505 -80 509 -84 509 -86 512 -89 511 -93 513 -97 515 -107 519 -108 523 -119 528 -122 528 -125 531 -124 547 -149 550 -150 549 -152 550 -156 552 -158 553 -161 553 -164 555 -165 554 -168 559 -180 559 -184 560 -192 563 -197 562 -199 565 -200 565 -203 568 -205 568 -207 574 -213 577 -219 581 -220 583 -223 585 -232 588 -236 587 -241 588 -242 592 -247 597 -264 601 -284;33 70 34 72 29 84 31 85 30 89;39 61 35 64 33 70;39 61;43 56 39 61;30 37;30 30 30 37;30 30;36 16 33 20 30 30;36 16;38 4 35 8 34 12 36 16;39 4 38 4;42 0 39 4;43 0 42 0';
 
 // ---------- Init ----------
-updateThemeBtn();
 route();
-log('Editor loaded. Type \'help\' in the console or pick something from the Hierarchy.');
-log('Tip: some old-school cheat codes still work around here.');
+applyLang();
+log(t('loaded'));
+log(t('tip'));
 if (!reducedMotion) setTimeout(type, 2000);

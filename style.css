@@ -98,8 +98,18 @@ img { max-width: 100%; display: block; }
     padding: 0 0.75rem;
     background: var(--panel-header);
 }
-.toolbar-left { display: flex; align-items: center; gap: 0.5rem; }
+.toolbar-left { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.toolbar-center { position: relative; display: flex; align-items: center; }
 .toolbar-right { justify-self: end; }
+
+/* Language: every translated text is an EN/ES pair of <span lang> (code samples: <pre lang>); only the active one shows.
+   The attribute is set before first paint by the script in <head>. */
+html[data-lang="es"] :is(span, pre)[lang="en"], html:not([data-lang="es"]) :is(span, pre)[lang="es"] { display: none !important; }
+
+/* EN | ES toggle, sitting just left of Play without pushing it off-centre */
+.lang-btn { position: absolute; right: 100%; margin-right: 0.5rem; display: flex; gap: 0.1rem; padding: 0.15rem; font-family: var(--mono); font-weight: 700; }
+.lang-opt { padding: 0.1rem 0.4rem; border-radius: 4px; color: var(--text-muted); }
+html:not([data-lang="es"]) .lang-opt[data-opt="en"], html[data-lang="es"] .lang-opt[data-opt="es"] { background: var(--accent-blue); color: var(--panel); }
 
 .brand {
     display: flex;
@@ -267,7 +277,7 @@ body.play-mode::after {
 
 /* Project window (asset grid) */
 .path { font-family: var(--mono); font-size: 0.95rem !important; color: var(--text-muted); }
-.path span { opacity: 0.5; }
+.path > span:not([lang]) { opacity: 0.5; }
 .asset-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(180px, 45%), 1fr)); /* 3 + 3 on desktop, 2 per row on phones */
@@ -333,7 +343,7 @@ body.play-mode::after {
     border-radius: 6px;
 }
 .interest-list strong { color: var(--accent); }
-.interest-list span { font-size: 0.88rem; color: var(--text-muted); }
+.interest-list div > span { font-size: 0.88rem; color: var(--text-muted); }
 
 /* Inspector-style components (used in Inspector and About) */
 .component-list { display: grid; gap: 2px; }
@@ -449,6 +459,7 @@ body.play-mode::after {
     border-radius: var(--radius);
 }
 .steps strong { color: var(--text-color); }
+.steps li > span[lang] { display: block; } /* the visible half of each pair stays a flex item, like the text it replaces */
 
 /* Placeholders (.todo, .slot) stay in the source as reminders but are hidden from visitors,
    along with any section that has nothing else to show */
@@ -582,7 +593,7 @@ code { font-family: var(--mono); }
     font-size: 0.8125rem;
     color: var(--text-muted) !important;
 }
-.code-title + pre { margin-top: 0.4rem; }
+.code-title ~ pre { margin-top: 0.4rem; } /* ~ because the first of the two language copies may be hidden */
 
 /* ---------- Inspector & Console ---------- */
 #inspector-body { font-size: 0.9rem; }
@@ -679,8 +690,10 @@ body.console-open #console-log { display: block; }
     body.hier-open::before { content: ""; position: fixed; inset: 48px 0 0; z-index: 1300; background: rgba(0, 0, 0, 0.5); }
     .tree a, .tree summary { padding-block: 0.55rem; } /* thumb-sized targets */
 
-    /* Play and day/night sit together on the right so the brand never runs under them */
+    /* Language and Play sit together before day/night so the brand never runs under them */
     .toolbar { grid-template-columns: 1fr auto auto; gap: 0.5rem; }
+    .lang-btn { position: static; margin: 0 0.5rem 0 0; }
+    .toolbar-center { gap: 0; }
 
     #scene .panel-body, #inspector .panel-body { overflow: visible; }
     #inspector, #console { margin-top: 2px; }
@@ -690,6 +703,9 @@ body.console-open #console-log { display: block; }
     /* iOS zooms into any focused field under 16px */
     .console-input input, .demo-controls select { font-size: 16px; }
     .dope th, .dope td { padding-inline: 0.4rem; }
+}
+@media (max-width: 380px) {
+    .brand span { display: none; } /* the logo alone leaves room for the EN | ES toggle */
 }
 
 /* Narrow demo (phones, or the scene column on small laptops): the dope table keeps
