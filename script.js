@@ -182,7 +182,7 @@ themeBtn.addEventListener('click', () => {
 // ---------- English / Spanish toggle ----------
 // A saved choice wins, otherwise the <head> script picked the browser's language; only a click is saved.
 const langBtn = document.getElementById('lang-toggle');
-const LANG_ATTRS = ['aria-label', 'placeholder', 'content']; // attributes with a data-es-* twin
+const LANG_ATTRS = ['aria-label', 'placeholder', 'content', 'alt']; // attributes with a data-es-* twin
 
 function applyLang() {
     root.dataset.lang = lang;
