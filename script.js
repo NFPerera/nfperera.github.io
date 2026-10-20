@@ -38,11 +38,23 @@ const STR = {
     agroPoint: ['Point at a lot', 'Apunta a un lote'],
     agroBare: ['bare soil', 'suelo desnudo'],
     agroLot: [(id, ha, ip, what) => `Lot ${id} · ${ha} ha · IP ${ip} · ${what}`, (id, ha, ip, what) => `Lote ${id} · ${ha} ha · IP ${ip} · ${what}`],
+    cmStock: ['Pick a cable from the stock', 'Elige un cable del stock'],
+    cmPick: ['Click a cable end to pick it up', 'Haz clic en la punta de un cable para tomarla'],
+    cmHeld: ['Click a clip to hang it, a port to plug it, or the floor to drop it', 'Clic en un clip para colgarlo, en un puerto para enchufarlo o en el piso para soltarlo'],
+    cmShort: [gap => gap ? `Too short, ${num(gap)} m missing` : 'Too short', gap => gap ? `No alcanza, faltan ${num(gap)} m` : 'No alcanza'],
+    cmWrong: ['Wrong connector', 'Conector incorrecto'],
+    cmBusy: ['Already taken', 'Ya está ocupado'],
+    cmWin: ['ALL PERFECT, VICTORY', 'TODO PERFECTO, VICTORIA'],
+    cmErr: [id => `ERROR AT CONNECTOR ${id}`, id => `ERROR EN CONECTOR ${id}`],
+    cmTidy: ['Tidy seal: the long cables hang from clips', 'Sello prolijo: los cables largos van colgados de clips'],
+    cmMess: ['No tidy seal: hang the long cables from clips', 'Sin sello prolijo: cuelga los cables largos de clips'],
+    cmCable: [len => `Cable ${num(len)} m`, len => `Cable ${num(len)} m`],
 };
 const t = (key, ...args) => {
     const v = pick(STR[key]);
     return typeof v === 'function' ? v(...args) : v;
 };
+const num = x => String(Math.round(x * 10) / 10).replace('.', lang === 'es' ? ',' : '.');
 
 // ---------- Console ----------
 const consoleLog = document.getElementById('console-log');
@@ -116,7 +128,7 @@ const sceneBody = document.getElementById('scene-body');
 const sceneTab = document.getElementById('scene-tab');
 const inspectorBody = document.getElementById('inspector-body');
 const defaultInspector = document.getElementById('inspector-default');
-const demos = { fsm: fsmDemo, perception: perceptionDemo, neuro: neuroDemo, ballistics: ballisticsDemo, agro: agroDemo };
+const demos = { fsm: fsmDemo, perception: perceptionDemo, neuro: neuroDemo, ballistics: ballisticsDemo, agro: agroDemo, cablemess: cableMessDemo };
 let firstRoute = true;
 let currentView;
 
@@ -970,6 +982,365 @@ function agroDemo(canvas) {
     draw();
     canvas.startDemo = () => {
         if (!running) { running = true; prevTime = 0; requestAnimationFrame(frame); }
+    };
+    canvas.startDemo();
+}
+
+// CableMess demo: a top-down 2D take on the game's cable rules (CableRoute.EvaluatePort / EvaluateRoutePoint, Port.Satisfied,
+// VerifyButton.Check). A cable is a chain of 0.1 m links that can't stretch, pinned to ports and wall clips, dragged around as
+// if on a high-friction floor. ponytail: no gravity, momentum or collisions with the furniture (the game's Verlet solver has them);
+// upgrade by porting that solver. The plans are schematic. Units are px, 75 to the metre; ports are
+// [id, device, type, u, v, faceU, faceV, to] with u, v in metres, and `to` is what the tape says the port must be plugged into.
+const CM = { S: 75, SEG: 7.5, W: 600, H: 450, OX: 20, OY: 15, TENSION: 1.05, REACH: 22, GLIDE: 5 };
+const CM_KITCHEN = [0.3, 5.4, 2.4, 0.6, ['Kitchen', 'Cocina']];
+const CM_JACK = ['Boca', ['Wall jack', 'Boca'], 0, 0.1, 0.12, 0.4];
+const CM_JACK_PORT = ['Boca-1', 'Boca', 'eth', 0.12, 0.3, 1, 0, 'Router-1'];
+const CM_LEVELS = [
+    { // Studio flat: one long cable, five wall clips
+        furniture: [CM_KITCHEN, [6, 5, 2, 1, ['Bed', 'Cama']]],
+        clips: [[1.5, 0], [3.5, 0], [5.5, 0], [8, 1.2], [8, 2.6]],
+        stock: [['eth', 14]],
+        devices: [CM_JACK, ['Router', ['Router', 'Router'], 6.3, 3.2, 1.7, 1.4]],
+        ports: [CM_JACK_PORT, ['Router-1', 'Router', 'eth', 6.3, 3.7, -1, 0, 'Boca'], ['Router-2', 'Router', 'eth', 6.3, 4.3, -1, 0, '']],
+    },
+    { // Apartment: pick each cable's length from the stock; the router only works once it has power
+        furniture: [CM_KITCHEN, [4.2, 5, 2, 1, ['Bed', 'Cama']], [6.3, 2.7, 1.7, 1.8, ['Desk', 'Escritorio']]],
+        clips: [[3.95, 0], [6.6, 0], [8, 1.3]],
+        stock: [['eth', 1], ['eth', 2], ['eth', 3], ['eth', 5], ['eth', 10], ['pwr', 1.5], ['pwr', 3]],
+        devices: [CM_JACK, ['Router', ['Router', 'Router'], 1.3, 0.1, 2.2, 0.7, 'Router-P1'],
+            ['Regleta', ['Power strip', 'Regleta'], 4.4, 0.1, 1.9, 0.5], ['Switch', ['Switch', 'Switch'], 6.6, 3, 1.4, 1.2]],
+        ports: [CM_JACK_PORT,
+            ['Router-1', 'Router', 'eth', 1.7, 0.8, 0, 1, 'Boca'], ['Router-2', 'Router', 'eth', 2.2, 0.8, 0, 1, ''],
+            ['Router-3', 'Router', 'eth', 2.7, 0.8, 0, 1, ''], ['Router-4', 'Router', 'eth', 3.2, 0.8, 0, 1, 'Switch-1'],
+            ['Router-P1', 'Router', 'pwr', 3.5, 0.3, 1, 0, 'Regleta'],
+            ['Regleta-1', 'Regleta', 'pwr', 4.8, 0.6, 0, 1, ''], ['Regleta-2', 'Regleta', 'pwr', 5.35, 0.6, 0, 1, ''],
+            ['Regleta-3', 'Regleta', 'pwr', 5.9, 0.6, 0, 1, 'Router-P1'],
+            ['Switch-1', 'Switch', 'eth', 6.6, 3.35, -1, 0, 'Router-4'], ['Switch-2', 'Switch', 'eth', 6.6, 3.95, -1, 0, '']],
+    },
+];
+
+function cableMessDemo(canvas) {
+    if (canvas.startDemo) return canvas.startDemo();
+
+    const { S, SEG, W, H, OX, OY, TENSION, REACH, GLIDE } = CM;
+    const ctx = canvas.getContext('2d');
+    const root = canvas.closest('.demo');
+    const stat = name => root.querySelector(`[data-stat="${name}"]`);
+    const control = name => root.querySelector(`[data-control="${name}"]`);
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    const cableColor = (type, len) => type === 'pwr' ? '#d9822b' : { 1: '#4a90d9', 2: '#e3c04b', 3: '#3e8e41' }[len] || '#9aa0a6';
+
+    let level, devices, ports, clips, cables, held, hand = { x: 0, y: 0 }, mouse = { x: -99, y: -99 };
+    let flash = null, shown = '', asleep = false, calm = 0, dirty = true, running = false;
+
+    // ----- The game's rules -----
+    const plugged = c => !!(c.pin[0]?.port && c.pin[c.x.length - 1]?.port);
+    const peerOf = p => {
+        const c = p.cable;
+        if (!c) return null;
+        const a = c.pin[0]?.port, b = c.pin[c.x.length - 1]?.port;
+        return (a === p ? b : a) || null;
+    };
+    const satisfied = p => { const peer = peerOf(p); return !p.to || (!!peer && (peer.id === p.to || peer.dev === p.to)); };
+    const powered = dev => !dev.power || !!ports.find(p => p.id === dev.power).cable;
+    // The nearest pin on the cable side of an end: the cable can't reach farther than its links from there
+    const anchorOf = (c, i) => {
+        const d = i ? -1 : 1;
+        for (let k = i + d; k >= 0 && k < c.x.length; k += d) if (c.pin[k]) return k;
+        return -1;
+    };
+
+    // Whether the held end can go to a port or a clip, and which particle a clip would pin
+    function judge(c, i, target) {
+        const a = anchorOf(c, i), reach = a < 0 ? Infinity : Math.abs(i - a) * SEG;
+        if (target.id) {
+            if (target.type !== c.type) return { v: 'cmWrong' };
+            if (target.cable) return { v: 'cmBusy' };
+            const gap = a < 0 ? 0 : dist(c.pin[a], target.at) - reach;
+            return gap > 0 ? { v: 'cmShort', gap: gap / S } : { v: 'ok' };
+        }
+        if (c.pin.some(p => p?.clip === target)) return { v: 'cmBusy' };
+        if (a >= 0) {
+            const steps = Math.max(1, Math.ceil(dist(c.pin[a], target) * TENSION / SEG)), avail = Math.abs(i - a);
+            const gap = steps * SEG + dist(target, hand) - avail * SEG;
+            return gap > 0 ? { v: 'cmShort', gap: gap / S } : { v: 'ok', index: a + (i > a ? steps : -steps) };
+        }
+        let best = -1, bestDist = Infinity; // loose cable: the particle nearest the clip that still leaves enough cable to reach the hand
+        for (let k = 0; k < c.x.length; k++) {
+            const d = Math.hypot(c.x[k] - target.x, c.y[k] - target.y);
+            if (k !== i && Math.abs(i - k) * SEG >= dist(target, hand) && d < bestDist) { bestDist = d; best = k; }
+        }
+        return best >= 0 ? { v: 'ok', index: best } : { v: 'cmShort', gap: 0 };
+    }
+
+    function verify() {
+        const wrong = ports.find(p => !satisfied(p));
+        if (wrong) { flash = { text: t('cmErr', wrong.id), until: performance.now() + 5000, tone: 'bad' }; return; }
+        // The seal is optional: a cable whose ends are more than 3 m apart should hang from at least two clips
+        const tidy = cables.every(c => !plugged(c) || dist(c.pin[0], c.pin[c.x.length - 1]) <= 3 * S || c.pin.filter(p => p?.clip).length >= 2);
+        flash = { text: `${t('cmWin')} · ${t(tidy ? 'cmTidy' : 'cmMess')}`, until: performance.now() + 7000, tone: 'good' };
+    }
+
+    // ----- Cables -----
+    function discard(c) {
+        c.pin.forEach(p => { if (p?.port) p.port.cable = null; });
+        cables.splice(cables.indexOf(c), 1);
+        if (held?.c === c) held = null;
+    }
+
+    function spawn(type, len) { // one loose cable at a time, like the one in hand: a new pick returns the old one to the stock
+        cables.filter(c => !plugged(c)).forEach(discard);
+        const n = Math.round(len * 10) + 1, perRow = 28;
+        const c = { type, len, color: cableColor(type, len), x: [], y: [], ox: new Array(n).fill(0), oy: new Array(n).fill(0), pin: new Array(n).fill(null) };
+        for (let i = 0; i < n; i++) { // asleep in the middle of the room, folded in rows
+            const row = Math.floor(i / perRow), col = row % 2 ? perRow - 1 - i % perRow : i % perRow;
+            c.x.push(W / 2 - perRow * SEG / 2 + col * SEG);
+            c.y.push(H / 2 - 30 + row * SEG);
+        }
+        cables.push(c);
+        wake();
+    }
+
+    function stepCable(c, h) {
+        const { x, y, ox, oy, pin } = c, n = x.length;
+        const fixed = i => pin[i] || i === h;
+        for (let i = 0; i < n; i++) {
+            ox[i] = x[i]; oy[i] = y[i];
+            const target = pin[i] || (i === h && hand);
+            if (!target) continue;
+            const dx = target.x - x[i], dy = target.y - y[i], d = Math.hypot(dx, dy) || 1e-9;
+            const k = pin[i] ? Math.min(1, GLIDE / d) : 0.4; // pins glide into place at 4 m/s, the hand follows loosely
+            x[i] += dx * k; y[i] += dy * k;
+        }
+        for (let it = 0; it < 12; it++) {
+            for (let i = 0; i < n - 1; i++) {
+                const dx = x[i + 1] - x[i], dy = y[i + 1] - y[i], d = Math.hypot(dx, dy);
+                if (d <= SEG) continue;
+                const a = fixed(i), b = fixed(i + 1);
+                if (a && b) continue;
+                const s = (d - SEG) / d, wa = a ? 0 : b ? 1 : 0.5;
+                x[i] += dx * s * wa; y[i] += dy * s * wa;
+                x[i + 1] -= dx * s * (1 - wa); y[i + 1] -= dy * s * (1 - wa);
+            }
+        }
+        let moved = 0;
+        for (let i = 0; i < n; i++) {
+            if (!fixed(i)) { x[i] = Math.min(Math.max(x[i], 0), W); y[i] = Math.min(Math.max(y[i], 0), H); }
+            moved = Math.max(moved, Math.abs(x[i] - ox[i]), Math.abs(y[i] - oy[i]));
+        }
+        return moved;
+    }
+
+    // ----- Level and controls -----
+    function buildStock() {
+        const box = control('stock');
+        box.hidden = level.stock.length < 2;
+        box.innerHTML = level.stock.map(([type, len], k) =>
+            `<button type="button" class="tool-btn" data-k="${k}"><i class="swatch" style="background:${cableColor(type, len)}"></i>${pick(type === 'eth' ? ['Ethernet', 'Ethernet'] : ['Power', 'Alimentación'])} ${num(len)} m</button>`).join('');
+    }
+
+    function loadLevel(index) {
+        level = CM_LEVELS[index];
+        devices = level.devices.map(([id, name, u, v, w, h, power]) => ({ id, name, x: u * S, y: v * S, w: w * S, h: h * S, power }));
+        ports = level.ports.map(([id, dev, type, u, v, fx, fy, to]) =>
+            ({ id, dev, type, to, fx, fy, x: u * S, y: v * S, at: { x: (u + fx * 0.15) * S, y: (v + fy * 0.15) * S }, cable: null }));
+        clips = level.clips.map(([u, v]) => ({ x: u * S, y: v * S, clip: true }));
+        cables = []; held = null; flash = null;
+        buildStock();
+        if (level.stock.length === 1) spawn(...level.stock[0]);
+        wake();
+    }
+
+    function wake() { asleep = false; calm = 0; dirty = true; }
+
+    // ----- Pointer: click to pick up, click to hang or plug, click the floor to drop -----
+    const ends = () => cables.flatMap(c => [0, c.x.length - 1].map(i => ({ c, i, x: c.x[i], y: c.y[i] })));
+    function aim(...lists) { // the pick radius grows on a small screen so a fingertip still lands on it
+        let best = null, bestDist = Math.max(REACH, 20 / (canvas.clientWidth / 640 || 1));
+        for (const list of lists) for (const o of list) {
+            const d = Math.hypot(o.x - mouse.x, o.y - mouse.y);
+            if (d < bestDist) { bestDist = d; best = o; }
+        }
+        return best;
+    }
+
+    function updateHand() { // the hand can't go farther than the cable left beyond the anchor
+        const { c, i } = held, a = anchorOf(c, i);
+        hand = { x: Math.min(Math.max(mouse.x, 0), W), y: Math.min(Math.max(mouse.y, 0), H) };
+        if (a < 0) return;
+        const reach = Math.abs(i - a) * SEG, d = dist(c.pin[a], hand);
+        if (d > reach) hand = { x: c.pin[a].x + (hand.x - c.pin[a].x) * reach / d, y: c.pin[a].y + (hand.y - c.pin[a].y) * reach / d };
+    }
+
+    function say(key, gap) {
+        flash = { text: t(key, gap), until: performance.now() + 3000, tone: 'bad' };
+    }
+
+    function click() {
+        wake();
+        if (!held) {
+            const end = aim(ends());
+            if (!end) {
+                const port = aim(ports);
+                if (port) flash = { text: port.id + (port.to ? ' → ' + port.to : ''), until: performance.now() + 3000, tone: '' };
+                return;
+            }
+            const pinned = end.c.pin[end.i];
+            if (pinned?.port) pinned.port.cable = null; // lifting a plugged end unplugs it
+            end.c.pin[end.i] = null;
+            held = { c: end.c, i: end.i };
+            updateHand();
+            return;
+        }
+        updateHand();
+        const target = aim(ports, clips);
+        if (!target) { held = null; return; } // dropped where it is
+        const verdict = judge(held.c, held.i, target);
+        if (verdict.v !== 'ok') return say(verdict.v, verdict.gap);
+        if (target.id) {
+            held.c.pin[held.i] = { x: target.at.x, y: target.at.y, port: target };
+            target.cable = held.c;
+            held = null;
+        } else {
+            held.c.pin[verdict.index] = { x: target.x, y: target.y, clip: target };
+        }
+    }
+
+    const setMouse = e => {
+        mouse = { x: e.offsetX * 640 / canvas.clientWidth - OX, y: e.offsetY * 480 / canvas.clientHeight - OY };
+        dirty = true;
+        if (held) wake();
+    };
+    canvas.addEventListener('pointermove', setMouse);
+    canvas.addEventListener('pointerdown', e => { setMouse(e); click(); });
+    canvas.addEventListener('pointerleave', () => { if (!held) { mouse = { x: -99, y: -99 }; dirty = true; } });
+    control('stock').addEventListener('click', e => {
+        const button = e.target.closest('button');
+        if (button) spawn(...level.stock[button.dataset.k]);
+    });
+    control('level').addEventListener('change', e => loadLevel(Number(e.target.value)));
+    control('reset').addEventListener('click', () => loadLevel(Number(control('level').value)));
+    control('verify').addEventListener('click', () => { verify(); dirty = true; });
+    window.addEventListener('langchange', () => { flash = null; buildStock(); dirty = true; });
+    window.addEventListener('resize', () => { dirty = true; });
+
+    // ----- Drawing -----
+    function draw() {
+        const css = getComputedStyle(canvas), v = name => css.getPropertyValue(name).trim();
+        const scale = canvas.clientWidth / 640 || 1;
+        const fs = Math.round(13 / scale); // labels stay 13 px on screen
+        const k = 1 / Math.min(1, scale);   // and the small parts (cable, plugs, ports, clips) never shrink below a fingertip-friendly size
+        ctx.setTransform(2, 0, 0, 2, 0, 0);
+        ctx.clearRect(0, 0, 640, 480);
+        ctx.translate(OX, OY);
+        ctx.font = `${fs}px system-ui, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.lineJoin = ctx.lineCap = 'round';
+
+        ctx.fillStyle = v('--panel');
+        ctx.fillRect(0, 0, W, H);
+        level.furniture.forEach(([u, vv, w, h, name]) => {
+            ctx.fillStyle = v('--panel-header'); ctx.strokeStyle = v('--border'); ctx.lineWidth = 1.5;
+            ctx.fillRect(u * S, vv * S, w * S, h * S); ctx.strokeRect(u * S, vv * S, w * S, h * S);
+            ctx.fillStyle = v('--text-muted');
+            ctx.fillText(pick(name), (u + w / 2) * S, (vv + h / 2) * S);
+        });
+        ctx.strokeStyle = v('--text-muted'); ctx.lineWidth = 4;
+        ctx.strokeRect(0, 0, W, H);
+        clips.forEach(c => {
+            ctx.fillStyle = v('--text-color'); ctx.beginPath(); ctx.arc(c.x, c.y, 5 * k, 0, 7); ctx.fill();
+        });
+
+        devices.forEach(d => {
+            ctx.fillStyle = v('--scene'); ctx.strokeStyle = v('--text-muted'); ctx.lineWidth = 1.5;
+            ctx.fillRect(d.x, d.y, d.w, d.h); ctx.strokeRect(d.x, d.y, d.w, d.h);
+        });
+        ports.forEach(p => {
+            ctx.fillStyle = v('--field'); ctx.strokeStyle = v('--text-muted'); ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            if (p.type === 'eth') ctx.rect(p.x - 5 * k, p.y - 5 * k, 10 * k, 10 * k); else ctx.arc(p.x, p.y, 5.5 * k, 0, 7);
+            ctx.fill(); ctx.stroke();
+            const dev = devices.find(d => d.id === p.dev);
+            ctx.fillStyle = !p.cable || !powered(dev) ? '#4a4f54' : satisfied(p) ? '#33ff4d' : '#ff2a1f'; // Port.Update's LED
+            ctx.beginPath(); ctx.arc(p.x - p.fx * (7 + 3 * k), p.y - p.fy * (7 + 3 * k), 2.6 * k, 0, 7); ctx.fill();
+        });
+
+        cables.forEach(c => {
+            const n = c.x.length;
+            ctx.beginPath(); ctx.moveTo(c.x[0], c.y[0]);
+            for (let i = 1; i < n - 1; i++) ctx.quadraticCurveTo(c.x[i], c.y[i], (c.x[i] + c.x[i + 1]) / 2, (c.y[i] + c.y[i + 1]) / 2);
+            ctx.lineTo(c.x[n - 1], c.y[n - 1]);
+            ctx.strokeStyle = 'rgba(0,0,0,.6)'; ctx.lineWidth = 5.5 * k; ctx.stroke();
+            ctx.strokeStyle = c.color; ctx.lineWidth = 3.2 * k; ctx.stroke();
+            [0, n - 1].forEach(i => {
+                const j = i ? i - 1 : 1;
+                ctx.save(); ctx.translate(c.x[i], c.y[i]); ctx.rotate(Math.atan2(c.y[i] - c.y[j], c.x[i] - c.x[j])); ctx.scale(k, k);
+                ctx.fillStyle = '#e6e6e6'; ctx.strokeStyle = 'rgba(0,0,0,.75)'; ctx.lineWidth = 1.2;
+                ctx.beginPath();
+                if (c.type === 'eth') ctx.rect(-3, -4.5, 9, 9); else ctx.arc(2, 0, 5, 0, 7);
+                ctx.fill(); ctx.stroke(); ctx.restore();
+            });
+        });
+        clips.forEach(c => { // the cable passes through the clip, so the clip draws over it
+            if (cables.some(o => o.pin.some(p => p?.clip === c))) { ctx.fillStyle = v('--accent-green'); ctx.beginPath(); ctx.arc(c.x, c.y, 3 * k, 0, 7); ctx.fill(); }
+        });
+        devices.forEach((d, i) => { // names go over the cables, with a halo; the wall jack is a plate, so its name sits underneath
+            ctx.lineWidth = 4; ctx.strokeStyle = v('--scene'); ctx.fillStyle = v(i ? '--text-color' : '--text-muted');
+            ctx.textAlign = i ? 'center' : 'left';
+            const x = i ? d.x + d.w / 2 : 4, y = i ? d.y + d.h / 2 : d.y + d.h + fs;
+            ctx.strokeText(pick(d.name), x, y); ctx.fillText(pick(d.name), x, y);
+        });
+        ctx.textAlign = 'center';
+
+        if (!held) { // loose ends invite a click
+            ctx.strokeStyle = v('--accent-terracotta'); ctx.lineWidth = 1.5; ctx.setLineDash([3, 3]);
+            ends().filter(e => !e.c.pin[e.i]).forEach(e => { ctx.beginPath(); ctx.arc(e.x, e.y, 11 * k, 0, 7); ctx.stroke(); });
+            ctx.setLineDash([]);
+        }
+        const near = held ? aim(ports, clips) : aim(ends(), ports);
+        if (near) {
+            ctx.strokeStyle = held ? (judge(held.c, held.i, near).v === 'ok' ? v('--accent-green') : v('--accent-terracotta')) : v('--text-color');
+            ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(near.x, near.y, 13 * k, 0, 7); ctx.stroke();
+        }
+        canvas.style.cursor = near ? 'pointer' : 'default';
+    }
+
+    function status() {
+        const f = flash && performance.now() < flash.until ? flash : null;
+        const port = !f && !held && aim(ports);
+        const text = f ? f.text : port ? port.id + (port.to ? ' → ' + port.to : '') : t(held ? 'cmHeld' : cables.length ? 'cmPick' : 'cmStock');
+        const a = held ? anchorOf(held.c, held.i) : -1;
+        const tension = a >= 0 ? Math.min(1, dist(held.c.pin[a], hand) / (Math.abs(held.i - a) * SEG)) : 0;
+        const cable = held ? t('cmCable', held.c.len) : '';
+        const key = [text, f?.tone, cable, tension.toFixed(2)].join('|');
+        if (key === shown) return;
+        shown = key;
+        stat('msg').textContent = text;
+        stat('msg').dataset.tone = f?.tone || '';
+        stat('cable').textContent = cable;
+        const bar = root.querySelector('.meter span');
+        bar.style.width = tension * 100 + '%';
+        bar.classList.toggle('hot', tension > 0.95);
+    }
+
+    function frame() {
+        if (canvas.closest('[hidden]')) { running = false; return; }
+        if (held) updateHand();
+        if (!asleep) {
+            const moved = cables.reduce((m, c) => Math.max(m, stepCable(c, held?.c === c ? held.i : -1)), 0);
+            calm = moved < 0.05 && !held ? calm + 1 : 0;
+            if (calm > 20) { asleep = true; dirty = true; }
+        }
+        if (!asleep || dirty) draw();
+        dirty = false;
+        status();
+        requestAnimationFrame(frame);
+    }
+
+    loadLevel(0);
+    canvas.startDemo = () => {
+        if (!running) { running = true; dirty = true; requestAnimationFrame(frame); }
     };
     canvas.startDemo();
 }

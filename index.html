@@ -248,6 +248,91 @@
                 </template>
             </article>
 
+            <article class="view project accent-terracotta" data-route="projects/cablemess" data-title="CableMess" data-kind="Puzzle Game" data-kind-es="Juego de puzles" data-category="game" hidden>
+                <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="6" y="12" width="24" height="24" rx="4"/>
+<rect class="fill" x="14" y="20" width="8" height="8" rx="1"/>
+<rect x="70" y="64" width="24" height="24" rx="4"/>
+<rect class="fill" x="78" y="72" width="8" height="8" rx="1"/>
+<path d="M30 24 H48 C64 24 40 76 70 76"/>
+<circle class="fill muted" cx="48" cy="50" r="4"/></svg></template>
+                <header class="banner">
+                    <p class="banner-kind"><span lang="en">Puzzle Game · Unity 6 · In development</span><span lang="es">Juego de puzles · Unity 6 · En desarrollo</span></p>
+                    <h1>CableMess</h1>
+                    <p class="banner-pitch"><span lang="en">A cozy first-person puzzle about untangling your clients' cables: every connector fits only its own port, and every cable is only so long.</span><span lang="es">Un puzle cozy en primera persona sobre ordenar los cables de tus clientes: cada conector entra solo en su puerto y cada cable tiene un largo limitado.</span></p>
+                </header>
+                <section>
+                    <h2><span lang="en">Try it</span><span lang="es">Pruébalo</span></h2>
+                    <div class="demo">
+                        <canvas class="cablemess-demo" data-demo="cablemess" width="1280" height="960" role="img" aria-label="Interactive floor plan: pick up a cable, hang it from the wall clips and plug it into the right ports" data-es-aria-label="Plano interactivo: toma un cable, cuélgalo de los clips de la pared y enchúfalo en los puertos correctos"></canvas>
+                        <div class="demo-controls">
+                            <label><span lang="en">Level</span><span lang="es">Nivel</span> <select data-control="level"><option value="0" data-es="1 · Monoambiente">1 · Studio flat</option><option value="1" data-es="2 · Departamento">2 · Apartment</option></select></label>
+                            <span class="stock" data-control="stock"></span>
+                            <button type="button" class="tool-btn" data-control="verify"><span lang="en">Verify</span><span lang="es">Verificar</span></button>
+                            <button type="button" class="tool-btn" data-control="reset"><span lang="en">Reset</span><span lang="es">Reiniciar</span></button>
+                        </div>
+                        <div class="demo-controls">
+                            <span class="demo-msg" data-stat="msg" aria-live="polite"></span>
+                            <span data-stat="cable"></span>
+                            <span class="meter" aria-hidden="true"><span></span></span>
+                        </div>
+                        <p class="demo-caption"><span lang="en">A top-down 2D take on the game's cable rules, on schematic plans of its first two levels. Click a cable end to pick it up, then a clip to hang it, a port to plug it, or the floor to drop it. As in the game, a cable is only so long ("Too short"), a connector only fits its own port, and a clip pins the cable at its distance × 1.05 from the last pin. Point at a port (or tap it) to read its tape; the LED says whether it is plugged where the tape says, and the router in the apartment only lights up once it has power. Press Verify when you think every port is right. The tidy seal is optional: hang the long cables from clips.</span><span lang="es">Una versión 2D cenital de las reglas de cables del juego, sobre planos esquemáticos de sus dos primeros niveles. Haz clic en la punta de un cable para tomarla, y luego en un clip para colgarlo, en un puerto para enchufarlo o en el piso para soltarlo. Como en el juego, un cable tiene un largo limitado («No alcanza»), un conector entra solo en su puerto y un clip fija el cable a su distancia × 1,05 desde el último punto fijo. Apunta a un puerto (o tócalo) para leer su etiqueta; el LED indica si está enchufado donde dice la etiqueta, y el router del departamento solo se enciende cuando tiene alimentación. Pulsa Verificar cuando creas que todos los puertos están bien. El sello prolijo es opcional: cuelga los cables largos de los clips.</span></p>
+                    </div>
+                </section>
+                <section>
+                    <h2><span lang="en">The problem</span><span lang="es">El problema</span></h2>
+                    <p><span lang="en">Putting a mess in order is satisfying, but a game about it has to make handling cables feel good without turning into a fight with physics. Cables should move while you handle them, stay put when you let go, and always be solvable, however tidy the player decides to be.</span><span lang="es">Poner orden en el caos es satisfactorio, pero un juego sobre eso tiene que lograr que manipular cables se sienta bien sin convertirse en una pelea con la física. Los cables deben moverse mientras los manipulas, quedarse quietos cuando los sueltas y tener siempre solución, sin importar qué tan prolijo decida ser el jugador.</span></p>
+                </section>
+                <section>
+                    <h2><span lang="en">What I built</span><span lang="es">Qué construí</span></h2>
+                    <p><span lang="en">A first-person puzzle in Unity 6 (URP, Input System). You are an independent IT technician who takes contracts to tidy clients' cable chaos. Each level is a client, from a studio flat to a server room, and you win when every cable is plugged where its label says. Being tidy is optional: the game recognises it with seals but never asks for it, and there is no timer. So far there are five levels: studio flat, apartment, small office, small business and server room.</span><span lang="es">Un puzle en primera persona en Unity 6 (URP, Input System). Eres un técnico de IT independiente que acepta contratos para ordenar el caos de cables de sus clientes. Cada nivel es un cliente, desde un monoambiente hasta una sala de servidores, y ganas cuando todos los cables están enchufados donde dice su etiqueta. Ser prolijo es opcional: el juego lo reconoce con sellos pero nunca lo exige, y no hay ningún temporizador. Por ahora hay cinco niveles: monoambiente, departamento, oficina chica, PyME y sala de servidores.</span></p>
+                </section>
+                <section>
+                    <h2><span lang="en">How it works</span><span lang="es">Cómo funciona</span></h2>
+                    <ul class="steps">
+                        <li><strong><span lang="en">Cables</span><span lang="es">Cables</span></strong><span lang="en">Each cable is a chain of 10 cm links, simulated while you handle it and for a moment after you let go. Then it falls asleep and stays put, so a level full of cables costs almost nothing at rest.</span><span lang="es">Cada cable es una cadena de eslabones de 10 cm, que se simula mientras lo manipulas y un momento después de soltarlo. Después se duerme y queda quieto, así que un nivel lleno de cables casi no cuesta nada en reposo.</span></li>
+                        <li><strong><span lang="en">Pins and clips</span><span lang="es">Puntos fijos y clips</span></strong><span lang="en">A cable's ends and the clips it hangs from are pins. Clicking a clip pins the link at distance × 1.05 from the previous pin, so a cable can never be hung where it can't reach.</span><span lang="es">Las puntas de un cable y los clips de los que cuelga son puntos fijos. Al hacer clic en un clip se fija el eslabón a una distancia × 1,05 del punto fijo anterior, así que un cable nunca puede colgarse donde no alcanza.</span></li>
+                        <li><strong><span lang="en">Rules</span><span lang="es">Reglas</span></strong><span lang="en">Every connector has a type and every cable a maximum length. Aiming at a port or a clip gives a verdict (OK, too short, wrong type, taken) that the hand shows on screen before you commit.</span><span lang="es">Cada conector tiene un tipo y cada cable un largo máximo. Apuntar a un puerto o a un clip da un veredicto (OK, no alcanza, tipo incorrecto, ocupado) que la mano muestra en pantalla antes de que te comprometas.</span></li>
+                        <li><strong><span lang="en">Verification</span><span lang="es">Verificación</span></strong><span lang="en">Every port carries a label and where its cable must go. Its LED is green when it is plugged where the tape says, red when it is not and off without a cable or power. A Verify button checks the whole level at once.</span><span lang="es">Cada puerto lleva una etiqueta y el destino de su cable. Su LED es verde si está enchufado donde dice la cinta, rojo si no, y está apagado sin cable o sin alimentación. Un botón de verificar comprueba el nivel entero de una vez.</span></li>
+                        <li><strong><span lang="en">Levels as code</span><span lang="es">Niveles como código</span></strong><span lang="en">Each level is generated by an editor builder from prefabs, with a connection plan and a cable stock sized so every connection fits. After building one I plug everything through the game's own API in Play Mode until it reports victory.</span><span lang="es">Cada nivel lo genera un builder de editor a partir de prefabs, con un plan de conexiones y un stock de cables dimensionado para que cada conexión entre. Después de construir uno enchufo todo con la propia API del juego en Play Mode hasta que informa la victoria.</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
+                    <p><span lang="en">The placement rules live in plain C# classes with no scene dependency, so they have EditMode tests. This is the verdict for plugging a cable into a port, in the same order the demo above applies it: wrong type first, then taken, then whether the cable still reaches from its nearest pin.</span><span lang="es">Las reglas de colocación viven en clases de C# puro, sin depender de la escena, por eso tienen tests de EditMode. Este es el veredicto de enchufar un cable en un puerto, en el mismo orden que lo aplica la demo de arriba: primero el tipo incorrecto, después si está ocupado y por último si el cable todavía alcanza desde su punto fijo más cercano.</span></p>
+                    <p class="code-title">CableRoute.cs<span lang="es"> · código traducido</span></p>
+<pre lang="en"><code>public Verdict EvaluatePort(Vector3 attachPoint, ConnectorType cableType, ConnectorType portType, bool portFree)
+{
+    if (cableType != portType) return Verdict.WrongType;
+    if (!portFree) return Verdict.Occupied;
+    int anchor = Anchor;
+    if (anchor >= 0 &amp;&amp; Vector3.Distance(chain.PinTargets[anchor], attachPoint) &gt; RemainingLength) return Verdict.TooShort;
+    return Verdict.Ok;
+}</code></pre>
+<pre lang="es"><code>public Veredicto EvaluarPuerto(Vector3 puntoDeEnchufe, TipoConector tipoCable, TipoConector tipoPuerto, bool puertoLibre)
+{
+    if (tipoCable != tipoPuerto) return Veredicto.TipoIncorrecto;
+    if (!puertoLibre) return Veredicto.Ocupado;
+    int ancla = Ancla;
+    if (ancla &gt;= 0 &amp;&amp; Vector3.Distance(cadena.ObjetivosDePin[ancla], puntoDeEnchufe) &gt; LargoRestante) return Veredicto.NoAlcanza;
+    return Veredicto.Ok;
+}</code></pre>
+                </section>
+                <section>
+                    <h2><span lang="en">Media</span><span lang="es">Galería</span></h2>
+                    <div class="gallery"><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div><div class="slot">None (Texture2D)</div></div>
+                </section>
+                <section>
+                    <h2><span lang="en">What I learned</span><span lang="es">Qué aprendí</span></h2>
+                    <p class="todo">// TODO: what you learned and what you'd do differently</p>
+                </section>
+                <nav class="pager" aria-label="More projects" data-es-aria-label="Más proyectos"></nav>
+                <template class="inspector">
+                    <details class="component" open><summary><span lang="en">Project</span><span lang="es">Proyecto</span></summary>
+                        <dl class="fields"><dt><span lang="en">Type</span><span lang="es">Tipo</span></dt><dd><span lang="en">Puzzle · First person</span><span lang="es">Puzle · Primera persona</span></dd><dt><span lang="en">Engine</span><span lang="es">Motor</span></dt><dd>Unity 6.3 · URP</dd><dt><span lang="en">Input</span><span lang="es">Entrada</span></dt><dd>Input System</dd><dt><span lang="en">Language</span><span lang="es">Lenguaje</span></dt><dd>C#</dd><dt><span lang="en">Levels</span><span lang="es">Niveles</span></dt><dd>5</dd><dt><span lang="en">Status</span><span lang="es">Estado</span></dt><dd><span lang="en">In development</span><span lang="es">En desarrollo</span></dd><dt><span lang="en">Year</span><span lang="es">Año</span></dt><dd>2026</dd></dl>
+                    </details>
+                </template>
+            </article>
+
             <article class="view project accent-blue" data-route="projects/visual-fsm-editor" data-title="Visual FSM Editor" data-kind="Editor Tool" data-kind-es="Herramienta de editor" data-category="tool" hidden>
                 <template class="asset-icon"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="fill" x="6" y="41" width="28" height="16" rx="4"/>
 <rect x="64" y="14" width="30" height="16" rx="4"/>

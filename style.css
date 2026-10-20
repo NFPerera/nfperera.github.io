@@ -566,6 +566,15 @@ code { font-family: var(--mono); }
 .agro-legend { gap: 0.4rem 1rem; }
 .swatch { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 2px; margin-right: 0.4em; vertical-align: -0.05em; }
 
+/* CableMess: the canvas takes the touch so dragging a cable doesn't scroll the page */
+.cablemess-demo { display: block; width: 100%; height: auto; touch-action: none; }
+.stock { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; }
+.stock[hidden] { display: none; }
+.demo-msg { flex: 1 1 16rem; color: var(--text-color); }
+.demo-msg[data-tone="good"] { color: var(--accent-green); }
+.demo-msg[data-tone="bad"] { color: var(--accent-terracotta); }
+.meter span.hot { background: var(--accent-terracotta); }
+
 .sliders {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
