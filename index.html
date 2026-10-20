@@ -78,12 +78,13 @@
                     <div class="demo">
                         <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons" data-es-aria-label="Lotes agrícolas reales de Pergamino, Argentina, que cambian de color a medida que sus cultivos crecen a lo largo de las estaciones"></canvas>
                         <div class="demo-controls">
+                            <span class="zoom" role="group" aria-label="Map zoom" data-es-aria-label="Zoom del mapa"><button type="button" class="tool-btn" data-control="zoom-out" aria-label="Zoom out" data-es-aria-label="Alejar">−</button><button type="button" class="tool-btn" data-control="zoom-in" aria-label="Zoom in" data-es-aria-label="Acercar">+</button><button type="button" class="tool-btn" data-control="home" aria-label="Back to the start view" data-es-aria-label="Volver a la vista inicial">⌂</button></span>
                             <span><b data-stat="date">25 Nov</b> · <span lang="en">Year</span><span lang="es">Año</span> <b data-stat="year">1</b></span>
                             <span><span lang="en">Mean temp</span><span lang="es">Temp. media</span> <b data-stat="temp">–</b></span>
                             <span data-stat="lot">Point at a lot</span>
                         </div>
                         <div class="demo-controls agro-legend" data-legend></div>
-                        <p class="demo-caption"><span lang="en">What I'm building now: a farming game and simulator on real data. These are real lots from Pergamino, Argentina, going through the seasons. <a href="#/projects/agrolife">How it works</a></span><span lang="es">Lo que estoy construyendo ahora: un juego y simulador agropecuario con datos reales. Estos son lotes reales de Pergamino, Argentina, atravesando las estaciones. <a href="#/projects/agrolife">Cómo funciona</a></span></p>
+                        <p class="demo-caption"><span lang="en">What I'm building now: a farming game and simulator on real data. These are real lots from Pergamino, Argentina, going through the seasons: drag to move around the whole region and use + and − to zoom. <a href="#/projects/agrolife">How it works</a></span><span lang="es">Lo que estoy construyendo ahora: un juego y simulador agropecuario con datos reales. Estos son lotes reales de Pergamino, Argentina, atravesando las estaciones: arrastra para recorrer toda la región y usa + y − para el zoom. <a href="#/projects/agrolife">Cómo funciona</a></span></p>
                     </div>
                 </section>
                 <section>
@@ -166,6 +167,7 @@
                     <div class="demo">
                         <canvas class="agro-demo" data-demo="agro" width="1280" height="600" role="img" aria-label="Real farm lots in Pergamino, Argentina, changing colour as their crops grow through the seasons" data-es-aria-label="Lotes agrícolas reales de Pergamino, Argentina, que cambian de color a medida que sus cultivos crecen a lo largo de las estaciones"></canvas>
                         <div class="demo-controls">
+                            <span class="zoom" role="group" aria-label="Map zoom" data-es-aria-label="Zoom del mapa"><button type="button" class="tool-btn" data-control="zoom-out" aria-label="Zoom out" data-es-aria-label="Alejar">−</button><button type="button" class="tool-btn" data-control="zoom-in" aria-label="Zoom in" data-es-aria-label="Acercar">+</button><button type="button" class="tool-btn" data-control="home" aria-label="Back to the start view" data-es-aria-label="Volver a la vista inicial">⌂</button></span>
                             <span><b data-stat="date">25 Nov</b> · <span lang="en">Year</span><span lang="es">Año</span> <b data-stat="year">1</b></span>
                             <span><span lang="en">Mean temp</span><span lang="es">Temp. media</span> <b data-stat="temp">–</b></span>
                             <label><span lang="en">Speed</span><span lang="es">Velocidad</span> <select data-control="speed"><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option></select></label>
@@ -173,7 +175,7 @@
                             <span data-stat="lot">Point at a lot</span>
                         </div>
                         <div class="demo-controls agro-legend" data-legend></div>
-                        <p class="demo-caption"><span lang="en">Real lots from Pergamino, Buenos Aires: a slice of the 3,477 the game's data pipeline cut out of the road network. They're farmed the way the game farms your neighbours: on 1 May each lot takes the next crop of the rotation (maize, soybean, wheat followed by second soybean) on its typical sowing date, and crops develop by growing degree-days under weather drawn from the generator's parameters for Pergamino. The productivity index layer comes from INTA's soil charts.</span><span lang="es">Lotes reales de Pergamino, Buenos Aires: un recorte de los 3.477 que el pipeline de datos del juego sacó de la red de caminos. Se trabajan como el juego trabaja a tus vecinos: el 1 de mayo cada lote toma el siguiente cultivo de la rotación (maíz, soja, trigo seguido de soja de segunda) en su fecha de siembra típica, y los cultivos se desarrollan por grados-día con un clima sorteado a partir de los parámetros del generador para Pergamino. La capa de índice de productividad sale de las cartas de suelo del INTA.</span></p>
+                        <p class="demo-caption"><span lang="en">Real lots from Pergamino, Buenos Aires: all 3,477 of them, as the game's data pipeline cut them out of the road network (drag to move, + and − to zoom). They're farmed the way the game farms your neighbours: on 1 May each lot takes the next crop of the rotation (maize, soybean, wheat followed by second soybean) on its typical sowing date, and crops develop by growing degree-days under weather drawn from the generator's parameters for Pergamino. The productivity index layer comes from INTA's soil charts.</span><span lang="es">Lotes reales de Pergamino, Buenos Aires: los 3.477, tal como el pipeline de datos del juego los sacó de la red de caminos (arrastra para moverte, + y − para el zoom). Se trabajan como el juego trabaja a tus vecinos: el 1 de mayo cada lote toma el siguiente cultivo de la rotación (maíz, soja, trigo seguido de soja de segunda) en su fecha de siembra típica, y los cultivos se desarrollan por grados-día con un clima sorteado a partir de los parámetros del generador para Pergamino. La capa de índice de productividad sale de las cartas de suelo del INTA.</span></p>
                     </div>
                 </section>
                 <section>
@@ -1063,6 +1065,7 @@ public static string ARutaRelativaAlProyecto(string p_rutaAbsolutaCarpeta)
     <!-- Phones: opens the Inspector / Share drawer, which sits at the end of the page on a wide screen -->
     <button type="button" id="insp-toggle" class="tool-btn mobile-only insp-fab" aria-expanded="false" aria-controls="inspector">ⓘ Inspector</button>
 
+    <script src="agro-map.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

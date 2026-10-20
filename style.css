@@ -562,7 +562,11 @@ code { font-family: var(--mono); }
 .perception-demo.aware ~ .demo-controls .meter span { background: var(--accent-terracotta); }
 
 .neuro-demo, .agro-demo { display: block; width: 100%; height: auto; }
-.agro-demo { cursor: crosshair; }
+.agro-demo { cursor: grab; touch-action: none; } /* drag pans the map, so the canvas takes the touch */
+.agro-demo.dragging { cursor: grabbing; }
+.zoom { display: inline-flex; gap: 0.4rem; }
+.zoom .tool-btn { min-width: 2.2rem; font-size: 1rem; line-height: 1.2; }
+.zoom .tool-btn:disabled { opacity: 0.4; cursor: default; }
 .agro-legend { gap: 0.4rem 1rem; }
 .swatch { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 2px; margin-right: 0.4em; vertical-align: -0.05em; }
 
