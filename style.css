@@ -169,12 +169,18 @@ body.play-mode::after {
 }
 .tab {
     padding: 0.3rem 0.9rem;
-    background: var(--panel);
-    border-top: 2px solid var(--accent-blue);
-    border-radius: 4px 4px 0 0;
+    font: inherit;
     font-size: 0.8rem;
     font-weight: 600;
+    color: inherit;
+    background: var(--panel);
+    border: 0;
+    border-top: 2px solid var(--accent-blue);
+    border-radius: 4px 4px 0 0;
 }
+button.tab { cursor: pointer; }
+.tab[aria-selected="false"] { background: transparent; border-top-color: transparent; color: var(--text-muted); }
+.tab[aria-selected="false"]:hover { color: var(--text-color); }
 .panel-body { flex: 1; overflow: auto; min-height: 0; }
 
 /* ---------- Hierarchy ---------- */
@@ -598,6 +604,11 @@ code { font-family: var(--mono); }
 /* ---------- Inspector & Console ---------- */
 #inspector-body { font-size: 0.9rem; }
 #inspector-body .component > a { display: block; font-size: 0.85rem; }
+
+.share { display: grid; justify-items: center; gap: 0.8rem; padding: 1.2rem; text-align: center; }
+/* Always dark on white in both themes: some scanners can't read an inverted QR */
+.qr { width: min(100%, 220px); height: auto; background: #fff; fill: #000; border-radius: 6px; shape-rendering: crispEdges; }
+.share figcaption { display: grid; gap: 0.3rem; font-size: 0.9rem; color: var(--text-muted); }
 
 .console-bar {
     width: 100%;

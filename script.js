@@ -147,6 +147,13 @@ function route() {
 
 window.addEventListener('hashchange', route);
 
+// ---------- Inspector | Share tabs ----------
+const inspectorTabs = document.querySelectorAll('#inspector [role="tab"]');
+inspectorTabs.forEach(tab => tab.addEventListener('click', () => inspectorTabs.forEach(other => {
+    other.setAttribute('aria-selected', other === tab);
+    document.getElementById(other.getAttribute('aria-controls')).hidden = other !== tab;
+})));
+
 // ---------- Mobile hierarchy drawer ----------
 const hierToggle = document.getElementById('hier-toggle');
 
