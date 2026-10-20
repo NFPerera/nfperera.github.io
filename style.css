@@ -706,17 +706,33 @@ body.console-open #console-log { display: block; }
         transition: transform 0.25s;
         box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
     }
-    body.hier-open #hierarchy { transform: none; }
-    body.hier-open::before { content: ""; position: fixed; inset: 48px 0 0; z-index: 1300; background: rgba(0, 0, 0, 0.5); }
+    body.hier-open #hierarchy, body.insp-open #inspector { transform: none; }
+    body.hier-open::before, body.insp-open::before { content: ""; position: fixed; inset: 48px 0 0; z-index: 1300; background: rgba(0, 0, 0, 0.5); }
     .tree a, .tree summary { padding-block: 0.55rem; } /* thumb-sized targets */
 
-    /* Language and Play sit together before day/night so the brand never runs under them */
-    .toolbar { grid-template-columns: 1fr auto auto; gap: 0.5rem; }
-    .lang-btn { position: static; margin: 0 0.5rem 0 0; }
-    .toolbar-center { gap: 0; }
+    /* Inspector / Share: a drawer from the right, opened by the floating button (at the end of the page nobody finds it) */
+    #inspector {
+        position: fixed;
+        top: 48px;
+        bottom: 0;
+        right: 0;
+        width: min(320px, 88vw);
+        z-index: 1400;
+        transform: translateX(100%);
+        transition: transform 0.25s;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    #inspector .panel-body { overflow: auto; }
+    .insp-fab { position: fixed; right: 0.75rem; bottom: 0.75rem; z-index: 1250; padding: 0.5rem 0.9rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35); }
+    body { padding-bottom: 3.5rem; } /* the button never covers the console input */
 
-    #scene .panel-body, #inspector .panel-body { overflow: visible; }
-    #inspector, #console { margin-top: 2px; }
+    /* EN | ES and Play stay in the middle column, centred on the screen */
+    .toolbar { gap: 0.5rem; }
+    .lang-btn { position: static; margin: 0; }
+    .toolbar-center { gap: 0.5rem; }
+
+    #scene .panel-body { overflow: visible; }
+    #console { margin-top: 2px; }
     .view { padding: 1.5rem 1rem 3rem; }
     .pager { grid-template-columns: 1fr; }
 
@@ -724,8 +740,8 @@ body.console-open #console-log { display: block; }
     .console-input input, .demo-controls select { font-size: 16px; }
     .dope th, .dope td { padding-inline: 0.4rem; }
 }
-@media (max-width: 380px) {
-    .brand span { display: none; } /* the logo alone leaves room for the EN | ES toggle */
+@media (max-width: 480px) {
+    .brand span { display: none; } /* the logo alone leaves the centre column room, so it stays centred */
 }
 
 /* Narrow demo (phones, or the scene column on small laptops): the dope table keeps

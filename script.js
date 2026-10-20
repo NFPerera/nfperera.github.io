@@ -151,7 +151,7 @@ function route() {
 
     sceneBody.scrollTop = 0;
     if (!firstRoute) window.scrollTo(0, 0);
-    closeHierarchy();
+    closeDrawers();
     view.querySelectorAll('[data-demo]').forEach(el => demos[el.dataset.demo](el));
     if (!firstRoute) log(t('opened', titleOf(view)));
     firstRoute = false;
@@ -166,24 +166,28 @@ inspectorTabs.forEach(tab => tab.addEventListener('click', () => inspectorTabs.f
     document.getElementById(other.getAttribute('aria-controls')).hidden = other !== tab;
 })));
 
-// ---------- Mobile hierarchy drawer ----------
-const hierToggle = document.getElementById('hier-toggle');
+// ---------- Mobile drawers: Hierarchy on the left, Inspector / Share on the right (one open at a time) ----------
+const drawers = { 'hier-open': document.getElementById('hier-toggle'), 'insp-open': document.getElementById('insp-toggle') };
 
-function closeHierarchy() {
-    document.body.classList.remove('hier-open');
-    hierToggle.setAttribute('aria-expanded', 'false');
+function closeDrawers() {
+    Object.entries(drawers).forEach(([cls, btn]) => {
+        document.body.classList.remove(cls);
+        btn.setAttribute('aria-expanded', 'false');
+    });
 }
 
-hierToggle.addEventListener('click', () => {
-    const open = document.body.classList.toggle('hier-open');
-    hierToggle.setAttribute('aria-expanded', open);
-});
+Object.entries(drawers).forEach(([cls, btn]) => btn.addEventListener('click', () => {
+    const open = !document.body.classList.contains(cls);
+    closeDrawers();
+    document.body.classList.toggle(cls, open);
+    btn.setAttribute('aria-expanded', open);
+}));
 
 // Tapping outside the open drawer (on its scrim) or pressing Escape closes it
 document.addEventListener('click', e => {
-    if (document.body.classList.contains('hier-open') && !e.target.closest('#hierarchy, #hier-toggle')) closeHierarchy();
+    if (document.body.matches('.hier-open, .insp-open') && !e.target.closest('#hierarchy, #inspector, #hier-toggle, #insp-toggle')) closeDrawers();
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHierarchy(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawers(); });
 
 // ---------- Day / night theme ----------
 const themeBtn = document.getElementById('theme-toggle');
