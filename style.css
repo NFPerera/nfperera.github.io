@@ -571,6 +571,9 @@ code { font-family: var(--mono); }
 .swatch { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 2px; margin-right: 0.4em; vertical-align: -0.05em; }
 
 .demo .yt { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+/* the video breaks out of the 760px text column to the scene's width (2rem gutters, 1280px max) so YouTube serves HD */
+.scene-body { container-type: inline-size; }
+.demo:has(> .yt) { --w: clamp(100%, 100cqi - 4rem, 1280px); width: var(--w); margin-inline: calc((100% - var(--w)) / 2); }
 
 .sliders {
     display: grid;
