@@ -263,21 +263,9 @@
                     <p class="banner-pitch"><span lang="en">A cozy first-person puzzle about untangling your clients' cables: every connector fits only its own port, and every cable is only so long.</span><span lang="es">Un puzle cozy en primera persona sobre ordenar los cables de tus clientes: cada conector entra solo en su puerto y cada cable tiene un largo limitado.</span></p>
                 </header>
                 <section>
-                    <h2><span lang="en">Try it</span><span lang="es">Pruébalo</span></h2>
+                    <h2><span lang="en">Watch it</span><span lang="es">Míralo</span></h2>
                     <div class="demo">
-                        <canvas class="cablemess-demo" data-demo="cablemess" width="1280" height="960" role="img" aria-label="Interactive floor plan: pick up a cable, hang it from the wall clips and plug it into the right ports" data-es-aria-label="Plano interactivo: toma un cable, cuélgalo de los clips de la pared y enchúfalo en los puertos correctos"></canvas>
-                        <div class="demo-controls">
-                            <label><span lang="en">Level</span><span lang="es">Nivel</span> <select data-control="level"><option value="0" data-es="1 · Monoambiente">1 · Studio flat</option><option value="1" data-es="2 · Departamento">2 · Apartment</option></select></label>
-                            <span class="stock" data-control="stock"></span>
-                            <button type="button" class="tool-btn" data-control="verify"><span lang="en">Verify</span><span lang="es">Verificar</span></button>
-                            <button type="button" class="tool-btn" data-control="reset"><span lang="en">Reset</span><span lang="es">Reiniciar</span></button>
-                        </div>
-                        <div class="demo-controls">
-                            <span class="demo-msg" data-stat="msg" aria-live="polite"></span>
-                            <span data-stat="cable"></span>
-                            <span class="meter" aria-hidden="true"><span></span></span>
-                        </div>
-                        <p class="demo-caption"><span lang="en">A top-down 2D take on the game's cable rules, on schematic plans of its first two levels. Click a cable end to pick it up, then a clip to hang it, a port to plug it, or the floor to drop it. As in the game, a cable is only so long ("Too short"), a connector only fits its own port, and a clip pins the cable at its distance × 1.05 from the last pin. Point at a port (or tap it) to read its tape; the LED says whether it is plugged where the tape says, and the router in the apartment only lights up once it has power. Press Verify when you think every port is right. The tidy seal is optional: hang the long cables from clips.</span><span lang="es">Una versión 2D cenital de las reglas de cables del juego, sobre planos esquemáticos de sus dos primeros niveles. Haz clic en la punta de un cable para tomarla, y luego en un clip para colgarlo, en un puerto para enchufarlo o en el piso para soltarlo. Como en el juego, un cable tiene un largo limitado («No alcanza»), un conector entra solo en su puerto y un clip fija el cable a su distancia × 1,05 desde el último punto fijo. Apunta a un puerto (o tócalo) para leer su etiqueta; el LED indica si está enchufado donde dice la etiqueta, y el router del departamento solo se enciende cuando tiene alimentación. Pulsa Verificar cuando creas que todos los puertos están bien. El sello prolijo es opcional: cuelga los cables largos de los clips.</span></p>
+                        <iframe class="yt" src="https://www.youtube-nocookie.com/embed/3yNgnSrGV80?enablejsapi=1&amp;rel=0" title="CableMess gameplay video" data-es-title="Video de gameplay de CableMess" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     </div>
                 </section>
                 <section>
@@ -300,7 +288,7 @@
                 </section>
                 <section>
                     <h2><span lang="en">Technical highlights</span><span lang="es">Aspectos técnicos</span></h2>
-                    <p><span lang="en">The placement rules live in plain C# classes with no scene dependency, so they have EditMode tests. This is the verdict for plugging a cable into a port, in the same order the demo above applies it: wrong type first, then taken, then whether the cable still reaches from its nearest pin.</span><span lang="es">Las reglas de colocación viven en clases de C# puro, sin depender de la escena, por eso tienen tests de EditMode. Este es el veredicto de enchufar un cable en un puerto, en el mismo orden que lo aplica la demo de arriba: primero el tipo incorrecto, después si está ocupado y por último si el cable todavía alcanza desde su punto fijo más cercano.</span></p>
+                    <p><span lang="en">The placement rules live in plain C# classes with no scene dependency, so they have EditMode tests. This is the verdict for plugging a cable into a port: wrong type first, then taken, then whether the cable still reaches from its nearest pin.</span><span lang="es">Las reglas de colocación viven en clases de C# puro, sin depender de la escena, por eso tienen tests de EditMode. Este es el veredicto de enchufar un cable en un puerto: primero el tipo incorrecto, después si está ocupado y por último si el cable todavía alcanza desde su punto fijo más cercano.</span></p>
                     <p class="code-title">CableRoute.cs<span lang="es"> · código traducido</span></p>
 <pre lang="en"><code>public Verdict EvaluatePort(Vector3 attachPoint, ConnectorType cableType, ConnectorType portType, bool portFree)
 {
